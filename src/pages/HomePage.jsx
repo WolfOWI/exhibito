@@ -1,7 +1,16 @@
 // Home Page
 
+import NavigationBar from "../components/NavigationBar";
+
+// Import
+
 function HomePage() {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <NavigationBar />
+      Home Page
+    </div>
+  );
 }
 
 export default HomePage;
