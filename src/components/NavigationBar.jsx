@@ -16,11 +16,11 @@ function NavigationBar() {
           <Nav className="me-auto">
             <Nav.Link href="/signup">Sign Up</Nav.Link>
             <Nav.Link href="/login">Log In</Nav.Link>
-            <Nav.Link href="/login">Upcoming</Nav.Link>
-            <Nav.Link href="/login">EventInfo</Nav.Link>
-            <Nav.Link href="/login">Tickets</Nav.Link>
-            <Nav.Link href="/login">Profile</Nav.Link>
-            <Nav.Link href="/login">Admin</Nav.Link>
+            <Nav.Link href="/upcoming">Upcoming</Nav.Link>
+            <Nav.Link href="/eventinfo">EventInfo</Nav.Link>
+            <Nav.Link href="/tickets">Tickets</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="/admin">Admin</Nav.Link>
             <Button variant="primary">New Exhibition</Button>{" "}
           </Nav>
         </Navbar.Collapse>

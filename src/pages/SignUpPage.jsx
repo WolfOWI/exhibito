@@ -1,7 +1,15 @@
 // Sign Up Page
 
+// Import
+import NavigationBar from "../components/NavigationBar";
+
 function SignUpPage() {
-  return <div>Sign Up Page</div>;
+  return (
+    <div>
+      <NavigationBar />
+      Sign Up Page
+    </div>
+  );
 }
 
 export default SignUpPage;

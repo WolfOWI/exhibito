@@ -1,8 +1,7 @@
 // Home Page
 
-import NavigationBar from "../components/NavigationBar";
-
 // Import
+import NavigationBar from "../components/NavigationBar";
 
 function HomePage() {
   return (

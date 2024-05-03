@@ -1,7 +1,15 @@
 // Admin Dashboard Page
 
+// Import
+import NavigationBar from "../components/NavigationBar";
+
 function AdminDashPage() {
-  return <div>Admin Dashboard</div>;
+  return (
+    <div>
+      <NavigationBar />
+      Admin Dashboard
+    </div>
+  );
 }
 
 export default AdminDashPage;
