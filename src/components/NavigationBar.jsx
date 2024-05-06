@@ -22,7 +22,7 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="custom-nav">
-            <Nav className="align-items-center">
+            <Nav className="align-items-center font-body">
               <Nav.Link href="/signup">Sign Up</Nav.Link>
               <Nav.Link href="/login">Log In</Nav.Link>
               <Nav.Link href="/upcoming">Upcoming</Nav.Link>
@@ -36,7 +36,7 @@ function NavigationBar() {
               </Nav.Link>
             </Nav>
             <Nav className="align-items-center">
-              <Button className="bg-scarlet-melody-BASE border-none rounded-full px-4">
+              <Button className="bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-none rounded-full px-4 font-body">
                 Add Event
               </Button>
               <Nav.Link href="/tickets" className="md:hidden lg:block">
