@@ -7,7 +7,7 @@ function TicketsPage() {
   return (
     <div>
       <NavigationBar />
-      Tickets Page
+      <h1 className="font-display">Tickets Page</h1>
     </div>
   );
 }

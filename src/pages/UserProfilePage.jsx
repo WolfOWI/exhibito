@@ -7,7 +7,7 @@ function UserProfilePage() {
   return (
     <div>
       <NavigationBar />
-      User Profile Page
+      <h1 className="font-display">User Profile Page</h1>
     </div>
   );
 }

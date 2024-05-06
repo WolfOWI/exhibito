@@ -7,7 +7,7 @@ function UpcomingPage() {
   return (
     <div>
       <NavigationBar />
-      Upcoming Exhibitions Page
+      <h1 className="font-display">Upcoming Exhibitions Page</h1>
     </div>
   );
 }

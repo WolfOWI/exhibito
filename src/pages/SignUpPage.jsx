@@ -7,7 +7,7 @@ function SignUpPage() {
   return (
     <div>
       <NavigationBar />
-      Sign Up Page
+      <h1 className="font-display">Sign up Page</h1>
     </div>
   );
 }

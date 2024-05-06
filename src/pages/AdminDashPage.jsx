@@ -7,7 +7,7 @@ function AdminDashPage() {
   return (
     <div>
       <NavigationBar />
-      Admin Dashboard
+      <h1 className="font-display">Admin Dashboard</h1>
     </div>
   );
 }

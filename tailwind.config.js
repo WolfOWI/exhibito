@@ -3,6 +3,10 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["DM Serif Display"],
+        body: ["DM Sans"],
+      },
       colors: {
         "scarlet-melody": {
           "10%": "#f7e7e4",

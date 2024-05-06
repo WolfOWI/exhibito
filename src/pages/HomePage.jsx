@@ -7,7 +7,8 @@ function HomePage() {
   return (
     <div>
       <NavigationBar />
-      Home Page
+
+      <h1 className="font-display">Home Page</h1>
     </div>
   );
 }

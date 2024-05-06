@@ -7,7 +7,7 @@ function EventInfoPage() {
   return (
     <div>
       <NavigationBar />
-      Event Info Page - Specific Event{" "}
+      <h1 className="font-display">Event Info Page - Specific Event</h1>
     </div>
   );
 }

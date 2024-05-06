@@ -7,7 +7,7 @@ function LogInPage() {
   return (
     <div>
       <NavigationBar />
-      Log In Page
+      <h1 className="font-display">Login Page</h1>
     </div>
   );
 }
