@@ -11,7 +11,6 @@ import Button from "react-bootstrap/Button";
 
 // Import Imagery
 import exhibitoLogo from "../assets/logos/logoV1.svg";
-import accountIcon from "../assets/icons/accountCircle.svg";
 
 function NavigationBar() {
   return (
@@ -29,12 +28,18 @@ function NavigationBar() {
               <Nav.Link href="/upcoming">Upcoming</Nav.Link>
               <Nav.Link href="/eventinfo">EventInfo</Nav.Link>
               <Nav.Link href="/admin">Admin</Nav.Link>
+              <Nav.Link href="/tickets" className="lg:hidden">
+                Tickets
+              </Nav.Link>
+              <Nav.Link href="/profile" className="lg:hidden">
+                Profile
+              </Nav.Link>
             </Nav>
             <Nav className="align-items-center">
               <Button className="bg-scarlet-melody-BASE border-none rounded-full px-4">
                 Add Event
               </Button>
-              <Nav.Link href="/tickets">
+              <Nav.Link href="/tickets" className="md:hidden lg:block">
                 {/* Ticket SVG */}
                 <svg
                   className="h-8 lg:ml-3 fill-ink-silhouette-BASE hover:fill-scarlet-melody-BASE"
@@ -44,10 +49,10 @@ function NavigationBar() {
                   <path d="m480-404 60 46q11 9 24 .5t8-22.5l-24-76 67-52q11-9 6-22.5T602-544h-78l-25-77q-5-14-19-14t-19 14l-25 77h-79q-14 0-18.5 13.5T345-508l65 52-24 77q-5 14 7 22.5t24-.5l63-47ZM160-160q-33 0-56.5-23.5T80-240v-135q0-11 7-19t18-10q24-8 39.5-29t15.5-47q0-26-15.5-47T105-556q-11-2-18-10t-7-19v-135q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v135q0 11-7 19t-18 10q-24 8-39.5 29T800-480q0 26 15.5 47t39.5 29q11 2 18 10t7 19v135q0 33-23.5 56.5T800-160H160Z" />
                 </svg>
               </Nav.Link>
-              <Nav.Link href="/profile">
+              <Nav.Link href="/profile" className="md:hidden lg:block">
                 {/* Account Circle SVG */}
                 <svg
-                  className="h-10 fill-ink-silhouette-BASE hover:fill-scarlet-melody-BASE"
+                  className=" h-10 fill-ink-silhouette-BASE hover:fill-scarlet-melody-BASE"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 -960 960 960"
                 >
