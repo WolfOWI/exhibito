@@ -5,6 +5,7 @@ import NavigationBar from "../components/NavigationBar";
 import '../styles/signup.css'
 import SignupImage from "../assets/Sign-up imagery.png"
 import React, { useState } from 'react';
+import PrimaryBtn from '../components/buttons/PrimaryBtn'
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -104,9 +105,7 @@ function SignUpPage() {
                   </label>
                 </li>
               </ul>
-              <button type="submit" className="btn btn-primary btn-lg px-4 me-md-2">
-                Sign Up
-              </button>
+              <PrimaryBtn label="Sign Up" />
             </form>
 
         </div>

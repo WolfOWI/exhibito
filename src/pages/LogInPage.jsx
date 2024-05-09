@@ -5,6 +5,7 @@ import NavigationBar from "../components/NavigationBar"
 import React, { useState } from 'react';
 import LoginImage from "../assets/Log-In imagery.png"
 import '../styles/signup.css'
+import PrimaryBtn from '../components/buttons/PrimaryBtn'
 
 function LogInPage() {
   const [formData, setFormData] = useState({
@@ -67,9 +68,7 @@ function LogInPage() {
                   </label>
                 </li>
               </ul>
-              <button type="submit" className="btn btn-primary btn-lg px-4 me-md-2">
-                Sign Up
-              </button>
+              <PrimaryBtn label="Log In" />
             </form>
             
           </div>
