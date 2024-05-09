@@ -7,9 +7,15 @@ import "../styles/HomePage.css";
 import NavigationBar from "../components/NavigationBar";
 import Button from "react-bootstrap/Button";
 
+import EventCard from "../components/cards/EventCard";
+
 
 // Import Imagery
 import HeroImage from "../assets/images/Placeholder.webp";
+
+// Import Bootstrap Components
+import { Carousel, Row, Col } from 'react-bootstrap';
+
 
 function HomePage() {
   return (
@@ -46,7 +52,7 @@ function HomePage() {
         }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean euismod elementum nisi quis eleifend quam.
         </h2>
-        <Button className="bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-none rounded-full px-4 py-2 font-body">
+        <Button       className="bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body">
           Browse Events
         </Button>
       </div>
@@ -58,28 +64,34 @@ function HomePage() {
           fontSize: '39px',
           marginTop: '40px',
           marginLeft: '162px',
-          
+
         }}>
           Highlighted Events
-          <Button
-            style={{
-              border: '2px solid #D88776',
-              backgroundColor: 'transparent', 
-              borderRadius: 'fully-rounded', 
-              padding: '10px 20px',
-              color: '#D88776', 
-              fontFamily: 'DM Sans', 
-              fontSize: '16px',
-              float: 'right',
-              marginRight: '162px'
-            }}
-            className="hover:bg-opacity-20 hover:bg-[#D88776]" 
-          >
+          <Button className="bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE" style={{ float: 'right', marginRight: '162px' }}>
             Browse Events
           </Button>
         </h1>
 
-        
+        {/* Carousel */}
+        <Row style={{ marginTop: '45px', marginLeft: '150px' }}>
+          <Col xs={16} md={6} lg={9}>
+            <Carousel interval={3000} pause='hover'>
+              <Carousel.Item>
+                <Row>
+                  <Col xs={12} lg={6} xl={4}>
+                    <EventCard />
+                  </Col>
+                  <Col xs={12} lg={6} xl={4}>
+                    <EventCard />
+                  </Col>
+                  <Col xs={12} lg={6} xl={4}>
+                    <EventCard />
+                  </Col>
+                </Row>
+              </Carousel.Item>
+            </Carousel>
+          </Col>
+        </Row>
 
       </div>
 
