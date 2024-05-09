@@ -11,6 +11,14 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+// TESTING MONGO GET REQUEST
+fetch("http://localhost:3001/users")
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => console.error("Error:", err));
+
 function UpcomingPage() {
   return (
     <div>
