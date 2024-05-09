@@ -4,11 +4,11 @@
 import PrimaryBtn from '../buttons/PrimaryBtn'
 import SecondaryBtn from '../buttons/SecondaryBtn';
 
-function PendingEventPage() {
+function PendingEventCard() {
   return (
     <div>
-        <h3 className="font-body mt-4">Pending Event Submissions</h3>
-        <p className="font-body">Below are the events awaiting your review. You can decide whether to approve or reject each event submission.</p>
+        <h3 className="font-body mt-4">Flagged Comments</h3>
+        <p className="font-body">Below are the comments that have been flagged by users. Review each comment and take appropriate action as needed.</p>
         <div className="card-rectangle">
             <div className="row">
                  <div className="col-2">
@@ -36,4 +36,4 @@ function PendingEventPage() {
   );
 }
 
-export default PendingEventPage;
+export default PendingEventCard;
