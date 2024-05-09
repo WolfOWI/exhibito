@@ -4,6 +4,7 @@
 import NavigationBar from "../components/NavigationBar";
 import SortDropdown from "../components/dropdowns/SortDropdown";
 import EventCard from "../components/cards/EventCard";
+import FilterCard from "../components/cards/FilterCard";
 
 // Import Bootstrap Components
 import Container from "react-bootstrap/Container";
@@ -15,7 +16,8 @@ function UpcomingPage() {
     <div>
       <NavigationBar />
       <Container className="mt-6">
-        <Row>
+        {/* Heading Section */}
+        <Row className="mb-3">
           <Col xs={9}>
             <h1 className="font-display text-ink-silhouette-BASE">Upcoming Exhibitions</h1>
           </Col>
@@ -23,10 +25,13 @@ function UpcomingPage() {
             <SortDropdown />
           </Col>
         </Row>
+        {/* Content Section */}
         <Row>
-          <Col xs={12} md={6} lg={3}>
-            Filter
+          {/* Filter Card */}
+          <Col xs={12} md={6} lg={3} className="mt-3">
+            <FilterCard />
           </Col>
+          {/* Event Exhibition Cards */}
           <Col xs={12} md={6} lg={9}>
             <Row>
               <Col xs={12} lg={6} xl={4}>

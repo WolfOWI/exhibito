@@ -24,8 +24,10 @@ function EventCard() {
         src="https://www.saic.edu/sites/default/files/styles/16_9_768x432/public/2023-06/030223_2234_0.jpg.jpeg?itok=kNLCWZjv"
       />
       <Card.Body>
-        <Card.Title className="font-display">Exhibition Title</Card.Title>
-        <Card.Text className="font-body italic h-12 multi-line-truncation">
+        <Card.Title className="font-display fs-4 text-ink-silhouette-BASE group-hover:text-scarlet-melody-BASE">
+          Exhibition Title
+        </Card.Title>
+        <Card.Text className="font-body italic h-12 multi-line-truncation text-ink-silhouette-BASE">
           Some quick example text to build on the card title and make up the bulk of the card's
           content.
         </Card.Text>
@@ -81,7 +83,7 @@ function EventCard() {
               >
                 <path d="M520-496v-144q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640v159q0 8 3 15.5t9 13.5l132 132q11 11 28 11t28-11q11-11 11-28t-11-28L520-496ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
               </svg>
-              <p className="font-body">18:00 - 20:00</p>
+              <p className="font-body text-ink-silhouette-BASE">18:00 - 20:00</p>
             </div>
             {/* Date Detail */}
             <div className="flex ml-4 xl:ml-0">
@@ -95,7 +97,7 @@ function EventCard() {
               >
                 <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-40q0-17 11.5-28.5T280-880q17 0 28.5 11.5T320-840v40h320v-40q0-17 11.5-28.5T680-880q17 0 28.5 11.5T720-840v40h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm280-240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
               </svg>
-              <p className="font-body">12-15 May</p>
+              <p className="font-body text-ink-silhouette-BASE">12-15 May</p>
             </div>
           </div>
           {/* Location Detail */}
@@ -110,7 +112,7 @@ function EventCard() {
             >
               <path d="M480-107q-14 0-28-5t-25-15q-65-60-115-117t-83.5-110.5q-33.5-53.5-51-103T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 45-17.5 94.5t-51 103Q698-301 648-244T533-127q-11 10-25 15t-28 5Zm0-373q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Z" />
             </svg>
-            <p className="font-body">Rosebank, Johannesburg</p>
+            <p className="font-body text-ink-silhouette-BASE">Rosebank, Johannesburg</p>
           </div>
         </div>
       </Card.Body>
