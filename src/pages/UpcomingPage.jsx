@@ -11,15 +11,26 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-// TESTING MONGO GET REQUEST
-fetch("http://localhost:3001/users")
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => console.error("Error:", err));
+// Import Functions
+import { getAllUsers, getAllEvents } from "../services/getExhibitoData";
 
 function UpcomingPage() {
+  getAllUsers()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  getAllEvents()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
   return (
     <div>
       <NavigationBar />
