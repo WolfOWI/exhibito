@@ -40,7 +40,9 @@ async function connectToMongoDB() {
 }
 connectToMongoDB();
 
-// Users API endpoint
+// API ENDPOINTS
+// - - - - - - - - - - - - - - - - - - - - - -
+// Users
 app.get("/users", async (req, res) => {
   try {
     await client.connect();
@@ -49,10 +51,39 @@ app.get("/users", async (req, res) => {
     const users = await collection.find({}).toArray();
     res.json(users);
   } catch (error) {
-    console.error("Failed to fetch data", error);
-    res.status(500).send("Failed to fetch data");
+    console.error("Failed to fetch users data", error);
+    res.status(500).send("Failed to fetch users data");
   }
 });
+
+// Houses
+app.get("/houses", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db("exhibito");
+    const collection = db.collection("houses");
+    const houses = await collection.find({}).toArray();
+    res.json(houses);
+  } catch (error) {
+    console.error("Failed to fetch houses data", error);
+    res.status(500).send("Failed to fetch houses data");
+  }
+});
+
+// Events
+app.get("/events", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db("exhibito");
+    const collection = db.collection("events");
+    const events = await collection.find({}).toArray();
+    res.json(events);
+  } catch (error) {
+    console.error("Failed to fetch events data", error);
+    res.status(500).send("Failed to fetch events data");
+  }
+});
+// - - - - - - - - - - - - - - - - - - - - - -
 
 // Start the Express server & listens to any requests from the "3001" port.
 app.listen(PORT, () => {

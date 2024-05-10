@@ -20,7 +20,7 @@ function EventCard() {
         `}
       </style>
       <Card.Img
-        className="rounded-3xl rounded-bl-none border-4 border-sapphire-whisper-BASE group-hover:border-scarlet-melody-BASE"
+        className="h-40 object-cover rounded-3xl rounded-bl-none border-4 border-sapphire-whisper-BASE group-hover:border-scarlet-melody-BASE"
         src="https://www.saic.edu/sites/default/files/styles/16_9_768x432/public/2023-06/030223_2234_0.jpg.jpeg?itok=kNLCWZjv"
       />
       <Card.Body>
