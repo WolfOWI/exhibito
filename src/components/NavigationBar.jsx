@@ -14,19 +14,18 @@ import Navbar from "react-bootstrap/Navbar";
 // Import Custom Components
 import PrimaryBtn from "./buttons/PrimaryBtn";
 import AddEventModalA from "./AddEventModalA";
+import AddEventModalB from "./AddEventModalB";
 
 // Import Imagery
 import exhibitoLogo from "../assets/logos/logoV1.svg";
 
 function NavigationBar() {
   // Modal State (Open/close)
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalAOpen, setModalAOpen] = useState(false);
 
   // Functions for handling modalState
-  const handleModalClose = () => setModalOpen(false);
-  const handleModalOpen = () => setModalOpen(true);
-
-  const alertHey = () => alert("hey");
+  const handleModalAClose = () => setModalAOpen(false);
+  const handleModalAOpen = () => setModalAOpen(true);
 
   return (
     <>
@@ -53,7 +52,7 @@ function NavigationBar() {
                 </Nav.Link>
               </Nav>
               <Nav className="align-items-center">
-                <PrimaryBtn label="Add Event" onClick={handleModalOpen} />
+                <PrimaryBtn label="Add Event" onClick={handleModalAOpen} />
                 <Nav.Link href="/tickets" className="md:hidden lg:block">
                   {/* Ticket SVG */}
                   <svg
@@ -79,7 +78,8 @@ function NavigationBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <AddEventModalA show={modalOpen} onHide={handleModalClose} />
+      {/* <AddEventModalA show={modalOpen} onHide={handleModalClose} /> */}
+      <AddEventModalB show={modalAOpen} onHide={handleModalAClose} />
     </>
   );
 }
