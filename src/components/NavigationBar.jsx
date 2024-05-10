@@ -22,10 +22,15 @@ import exhibitoLogo from "../assets/logos/logoV1.svg";
 function NavigationBar() {
   // Modal State (Open/close)
   const [modalAOpen, setModalAOpen] = useState(false);
+  const [modalBOpen, setModalBOpen] = useState(false);
 
-  // Functions for handling modalState
+  // Functions for handling modal state of A
   const handleModalAClose = () => setModalAOpen(false);
   const handleModalAOpen = () => setModalAOpen(true);
+
+  // Functions for handling modal state of B
+  const handleModalBClose = () => setModalBOpen(false);
+  const handleModalBOpen = () => setModalBOpen(true);
 
   return (
     <>
@@ -78,8 +83,22 @@ function NavigationBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <AddEventModalA show={modalOpen} onHide={handleModalClose} /> */}
-      <AddEventModalB show={modalAOpen} onHide={handleModalAClose} />
+      <AddEventModalA
+        show={modalAOpen}
+        onHide={handleModalAClose}
+        onBtnClick={() => {
+          handleModalAClose();
+          handleModalBOpen();
+        }}
+      />
+      <AddEventModalB
+        show={modalBOpen}
+        onHide={handleModalBClose}
+        onBackBtnClick={() => {
+          handleModalBClose();
+          handleModalAOpen();
+        }}
+      />
     </>
   );
 }

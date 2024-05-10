@@ -11,7 +11,7 @@ function AddEventModalB(props) {
     <>
       <Modal show={props.show} onHide={props.onHide}>
         <Modal.Header closeButton className="bg-canvas-white-BASE border-none">
-          <SecondaryBtn label="Back" className="mr-12" />
+          <SecondaryBtn label="Back" className="mr-12" onClick={props.onBackBtnClick} />
           <Modal.Title className="font-display fs-1">New Event</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-canvas-white-BASE">
@@ -104,7 +104,7 @@ function AddEventModalB(props) {
         </Modal.Body>
         <Modal.Footer className="bg-canvas-white-BASE border-none">
           <div className="flex w-full">
-            <PrimaryBtn label="Submit" className="w-full" />
+            <PrimaryBtn label="Submit" className="w-full" onClick={props.onHide} />
           </div>
         </Modal.Footer>
       </Modal>

@@ -55,7 +55,7 @@ function AddEventModalA(props) {
         </Modal.Body>
         <Modal.Footer className="bg-canvas-white-BASE border-none">
           <div className="flex w-full">
-            <PrimaryBtn label="Next" className="w-full" />
+            <PrimaryBtn label="Next" className="w-full" onClick={props.onBtnClick} />
           </div>
         </Modal.Footer>
       </Modal>
