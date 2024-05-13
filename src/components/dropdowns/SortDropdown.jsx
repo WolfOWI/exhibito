@@ -13,10 +13,10 @@ function SortDropdown() {
         <Dropdown.Menu>
           <Dropdown.Item href="#">Price Ascending</Dropdown.Item>
           <Dropdown.Item href="#">Price Descending</Dropdown.Item>
-          <Dropdown.Item href="#">Bathrooms Ascending</Dropdown.Item>
-          <Dropdown.Item href="#">Bathrooms Descending</Dropdown.Item>
-          <Dropdown.Item href="#">Bedrooms Ascending</Dropdown.Item>
-          <Dropdown.Item href="#">Bedrooms Descending</Dropdown.Item>
+          <Dropdown.Item href="#">Date Ascending</Dropdown.Item>
+          <Dropdown.Item href="#">Date Descending</Dropdown.Item>
+          <Dropdown.Item href="#">Seats Available Ascending</Dropdown.Item>
+          <Dropdown.Item href="#">Seats Available Descending</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>
