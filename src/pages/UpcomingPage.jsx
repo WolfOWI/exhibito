@@ -1,5 +1,7 @@
 // Upcoming Exhibitions Page
 
+import { useState, useEffect } from "react";
+
 // Import Custom Components
 import NavigationBar from "../components/NavigationBar";
 import SortDropdown from "../components/dropdowns/SortDropdown";
@@ -12,24 +14,22 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 // Import Functions
-import { getAllUsers, getAllEvents } from "../services/getExhibitoData";
+import { getAllEvents } from "../services/getExhibitoData";
 
 function UpcomingPage() {
-  getAllUsers()
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // Exhibition Events Stored in State
+  const [events, setEvents] = useState([]);
 
-  getAllEvents()
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // On Page Load, get events data from MongoDB and set to state "events"
+  useEffect(() => {
+    getAllEvents()
+      .then((data) => {
+        setEvents(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div>
@@ -53,18 +53,25 @@ function UpcomingPage() {
           {/* Event Exhibition Cards */}
           <Col xs={12} md={6} lg={9}>
             <Row>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
+              {/* Generate (map) All events from MongoDB to an EventCard in a column (for styling) */}
+              {events.map((event) => (
+                <Col xs={12} lg={6} xl={4}>
+                  <EventCard
+                    key={event._id}
+                    thumbnail={event.thumbnail}
+                    title={event.title}
+                    desc={event.description}
+                    ticketPrice={event.ticketPrice}
+                    avSeats={event.availableSeats}
+                    maxSeats={event.maxSeats}
+                    startTime={event.startTime}
+                    endTime={event.endTime}
+                    startDate={event.startDate}
+                    endDate={event.endDate}
+                    location={event.location}
+                  />
+                </Col>
+              ))}
             </Row>
           </Col>
         </Row>
