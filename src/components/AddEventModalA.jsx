@@ -19,24 +19,25 @@ function AddEventModalA(props) {
             'next' to proceed to the rest of the details.
           </p>
           <Form className="font-body">
-            <Form.Label htmlFor="inputMinPrice">Event Title</Form.Label>
+            <Form.Label htmlFor="inputTitle">Event Title</Form.Label>
             <Form.Control
               type="text"
-              id="inputMinPrice"
+              id="inputTitle"
               className="border-2 border-canvas-white-60%"
             />
-            <Form.Label className="mt-3" htmlFor="inputMinPrice">
+            <Form.Label className="mt-3" htmlFor="inputDesc">
               Description
             </Form.Label>
             <Form.Control
               type="text"
-              id="inputMinPrice"
+              id="inputDesc"
               className="border-2 border-canvas-white-60% h-32"
             />
-            <Form.Label className="mt-3" htmlFor="inputMinPrice">
+            <Form.Label className="mt-3" htmlFor="inputLocation">
               Location
             </Form.Label>
             <Form.Select
+              id="inputLocation"
               className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
               aria-label="Default select example"
             >
