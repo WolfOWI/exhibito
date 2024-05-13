@@ -7,6 +7,7 @@ import NavigationBar from "../components/NavigationBar";
 import SortDropdown from "../components/dropdowns/SortDropdown";
 import EventCard from "../components/cards/EventCard";
 import FilterCard from "../components/cards/FilterCard";
+import Footer from "../components/Footer";
 
 // Import Bootstrap Components
 import Container from "react-bootstrap/Container";
@@ -76,6 +77,7 @@ function UpcomingPage() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 }
