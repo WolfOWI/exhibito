@@ -18,11 +18,11 @@ import Col from "react-bootstrap/Col";
 import { getAllEvents } from "../services/getExhibitoData";
 
 function UpcomingPage() {
-  // Exhibition Events Stored in State
-  const [events, setEvents] = useState([]);
-
-  // Default Order of all events
-  const [defaultAllEvents, setDefaultAllEvents] = useState([]);
+  // STATES
+  const [events, setEvents] = useState([]); // Events
+  const [defaultAllEvents, setDefaultAllEvents] = useState([]); // Default Order of all events
+  const [minPrice, setMinPrice] = useState(""); // Minimum Price (Filtering)
+  const [maxPrice, setMaxPrice] = useState(""); // Maximum Price (Filtering)
 
   // On Page Load, get events data from MongoDB and set to state "events"
   useEffect(() => {
@@ -36,9 +36,14 @@ function UpcomingPage() {
       });
   }, []);
 
-  // Function for sorting events (based on sort dropdown)
-  const handleSortChange = (sortType) => {
+  // useEffect(() => {
+  //   filterSortEvents();
+  // }, [minPrice, maxPrice, events])
+
+  // Filtering & sorting events (based on sort dropdown & filters)
+  const filterSortEvents = (sortType) => {
     let sortedEvents = [...events];
+
     switch (sortType) {
       case "priceAsc":
         sortedEvents.sort((a, b) => Number(a.ticketPrice) - Number(b.ticketPrice));
@@ -77,7 +82,7 @@ function UpcomingPage() {
             <h1 className="font-display text-ink-silhouette-BASE">Upcoming Exhibitions</h1>
           </Col>
           <Col xs={3} className="flex justify-end pr-8">
-            <SortDropdown onSortSelected={handleSortChange} />
+            <SortDropdown onSortSelected={filterSortEvents} />
           </Col>
         </Row>
         {/* Content Section */}
