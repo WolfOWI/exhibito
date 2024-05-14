@@ -54,57 +54,70 @@ function HomePage() {
         }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean euismod elementum nisi quis eleifend quam.
         </h2>
-        <Button
-          
-          className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
-        >
+        <Button className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}>
           Browse Events
         </Button>
       </div>
 
-      {/* Heading Section */}
+
+{/* Highlighted Events Section */}
+    <div className="container mt-4">
+        {/* Heading Section */}
       <div className='Highlighted-Events-Section'>
         <h1 style={{
           color: 'black',
           fontFamily: 'DM Serif Display',
           fontSize: '39px',
-          marginTop: '40px',
-          marginLeft: '70px',
-
         }}>
+
           Highlighted Events
-          <Button
-      
-      className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE `} style={{float: 'right',  marginRight: '90px'}}
-    >
-      Browse Events
-    </Button>
+          <Button className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE `} style={{float: 'right'}}>
+            Browse Events
+          </Button>
         </h1>
 
         {/* Carousel with Scroller */}
-        <Row style={{ marginTop: '45px', marginLeft: '70px' }}>
-          <Col xs={16} md={6} lg={9}>
-            <Carousel interval={3000} pause='hover'>
+            <Carousel>
               <Carousel.Item>
                 <Row>
-                  <Col xs={12} lg={6} xl={4}>
+                  <Col xs={12} lg={6} xl={3}>
                     <EventCard />
                   </Col>
-                  <Col xs={12} lg={6} xl={4}>
+                  <Col xs={12} lg={6} xl={3}>
                     <EventCard />
                   </Col>
-                  <Col xs={12} lg={6} xl={4}>
+                  <Col xs={12} lg={6} xl={3}>
+                    <EventCard />
+                  </Col>
+                  <Col xs={12} lg={6} xl={3}>
+                    <EventCard />
+                  </Col>
+                </Row>
+              </Carousel.Item>
+
+              <Carousel.Item>
+                <Row>
+                  <Col xs={12} lg={6} xl={3}>
+                    <EventCard />
+                  </Col>
+                  <Col xs={12} lg={6} xl={3}>
+                    <EventCard />
+                  </Col>
+                  <Col xs={12} lg={6} xl={3}>
+                    <EventCard />
+                  </Col>
+                  <Col xs={12} lg={6} xl={3}>
                     <EventCard />
                   </Col>
                 </Row>
               </Carousel.Item>
             </Carousel>
-          </Col>
-        </Row>
       </div>
+    </div>
+      
 
       {/* Heading Section */}
-      <div className='Art-Houses-Section'>
+      <div className='container Art-Houses-Section'>
         <h1 style={{
           color: 'black',
           fontFamily: 'DM Serif Display',
