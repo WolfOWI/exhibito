@@ -21,16 +21,51 @@ function UpcomingPage() {
   // Exhibition Events Stored in State
   const [events, setEvents] = useState([]);
 
+  // Default Order of all events
+  const [defaultAllEvents, setDefaultAllEvents] = useState([]);
+
   // On Page Load, get events data from MongoDB and set to state "events"
   useEffect(() => {
     getAllEvents()
       .then((data) => {
         setEvents(data);
+        setDefaultAllEvents(data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  // Function for sorting events (based on sort dropdown)
+  const handleSortChange = (sortType) => {
+    let sortedEvents = [...events];
+    switch (sortType) {
+      case "priceAsc":
+        sortedEvents.sort((a, b) => Number(a.ticketPrice) - Number(b.ticketPrice));
+        break;
+      case "priceDesc":
+        sortedEvents.sort((a, b) => Number(b.ticketPrice) - Number(a.ticketPrice));
+        break;
+      case "dateAsc":
+        sortedEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+        break;
+      case "dateDesc":
+        sortedEvents.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+        break;
+      case "seatsAsc":
+        sortedEvents.sort((a, b) => a.availableSeats - b.availableSeats);
+        break;
+      case "seatsDesc":
+        sortedEvents.sort((a, b) => b.availableSeats - a.availableSeats);
+        break;
+      case "clear":
+        sortedEvents = [...defaultAllEvents];
+        break;
+      default:
+        sortedEvents = [...events];
+    }
+    setEvents(sortedEvents);
+  };
 
   return (
     <div>
@@ -42,7 +77,7 @@ function UpcomingPage() {
             <h1 className="font-display text-ink-silhouette-BASE">Upcoming Exhibitions</h1>
           </Col>
           <Col xs={3} className="flex justify-end pr-8">
-            <SortDropdown />
+            <SortDropdown onSortSelected={handleSortChange} />
           </Col>
         </Row>
         {/* Content Section */}
