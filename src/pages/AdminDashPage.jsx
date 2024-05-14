@@ -14,23 +14,15 @@ function AdminDashPage() {
     <div>
       <NavigationBar />
       <AdminNav />
+      <div className="container mt-4">
+        <h1>Admin Dashboard</h1>
+      </div>
       <Routes>
         <Route index element={<PendingEventPage />} />
         <Route path="events" element={<PendingEventPage />} />
         <Route path="comments" element={<FlaggedCommentPage />} />
       </Routes>
     </div>
-    // <div>
-
-    //   <div className="container">
-    //     <h1 className="font-display mt-3">Admin Dashboard</h1>
-
-    //     {/* Cards Display */}
-    //     <div>
-    //       <PendingEventPage />
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 
