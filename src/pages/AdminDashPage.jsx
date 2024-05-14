@@ -4,7 +4,7 @@ import "../styles/pendingEventCard.css"
 // Import
 import NavigationBar from "../components/NavigationBar";
 import AdminNav from "../components/AdminNavbar"
-import PendingEventPage from "../components/cards/PendingEventCards"
+import PendingEventPage from "../pages/PendingEventPage"
 
 function AdminDashPage() {
   return (
