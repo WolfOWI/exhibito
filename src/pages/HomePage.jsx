@@ -34,6 +34,7 @@ function HomePage() {
           alignItems: 'center',
           opacity: 1,
         }}>
+      
 
         {/* Hero Text */}
         <h2 style={{
@@ -46,7 +47,6 @@ function HomePage() {
           fontSize: '25px',
           // padding: '20px',  // 
           marginBottom: '40px',
-
         }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean euismod elementum nisi quis eleifend quam.
         </h2>
