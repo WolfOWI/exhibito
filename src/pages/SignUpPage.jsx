@@ -65,7 +65,7 @@ function SignUpPage() {
               <ul>
                 <li>
                   <label>
-                    Name and Surname:
+                    Username:
                     <input
                       type="text"
                       name="name"
@@ -109,10 +109,10 @@ function SignUpPage() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Select Occupancy</option>
-                      <option value="Student">Student</option>
-                      <option value="Professional">Professional</option>
-                      <option value="Other">Other</option>
+                      <option value="">Select Occupation</option>
+                      <option value="Student">Standard User</option>
+                      <option value="Professional">Admin User</option>
+                      <option value="Other">Art House Director</option>
                     </select>
                   </div>
                 </li>
