@@ -30,6 +30,12 @@ app.get("/", (req, res) => {
 const userRoutes = require("./routes/userRoutes");
 app.use("/users", userRoutes);
 
+const houseRoutes = require("./routes/houseRoutes");
+app.use("/houses", houseRoutes);
+
+const eventRoutes = require("./routes/eventRoutes");
+app.use("/events", eventRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
