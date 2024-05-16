@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Footer from "../components/Footer";
 
 // Import Imagery
-import HeroImage from "../assets/images/Placeholder.webp";
+import HeroImage from "../assets/images/Hero-img.png";
 
 // Import Bootstrap Components
 import { Carousel, Row, Col, } from 'react-bootstrap';
@@ -37,20 +37,9 @@ function HomePage() {
       
 
         {/* Hero Text */}
-        <h2 style={{
-          color: 'black',
-          // backgroundColor: 'rgba(255, 255, 255, 0.5)',  // 
-          borderRadius: '5px',
-          width: '1000px',
-          textAlign: 'center',
-          fontFamily: 'DM Serif Display',
-          fontSize: '25px',
-          // padding: '20px',  // 
-          marginBottom: '40px',
-        }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean euismod elementum nisi quis eleifend quam.
-        </h2>
-        <Button className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}>
+        <h1 className="font-display text-canvas-white-BASE">Exhibito</h1>
+        <h4 className="font-body text-canvas-white-BASE">Explore our different Art Houses and their amazing Exhibitions</h4>
+        <Button className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body mt-3`}>
           Browse Events
         </Button>
       </div>
