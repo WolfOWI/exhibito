@@ -93,7 +93,7 @@ function SignUpPage() {
                     <input
                       type="text"
                       name="mobile"
-                      value={formData.mobile}
+                      value={formData.mobile} 
                       onChange={handleChange}
                       required
                     />
@@ -103,7 +103,7 @@ function SignUpPage() {
                   <label>Choose Your Occupancy:</label>
                   <div className="dropdown    ">
                     <select
-                      className="form-select bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
+                      className="form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
                       name="occupancy"
                       value={formData.occupancy}
                       onChange={handleChange}

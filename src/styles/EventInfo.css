@@ -1,0 +1,11 @@
+.event-img{
+    width: auto;
+    height: 60vh;
+    border-radius: 40px;
+    margin: 0 auto;
+}
+
+.comment-input{
+    width: 100%;
+    height: 100px;
+}

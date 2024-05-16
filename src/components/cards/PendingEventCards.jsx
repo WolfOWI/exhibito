@@ -10,13 +10,17 @@ function PendingEventPage() {
         <div className="card-rectangle">
             <div className="row">
                  <div className="col-2">
-                    <h4 className="font-body">Event Name</h4>
+                    <h4 className="font-body mt-1">Event Name</h4>
                  </div>
                  <div className="col-2">
-                    <p>Location: Centurion</p>
+                    <p  className="font-body mt-2">Location: Centurion</p>
                 </div>
-                 <div className="col-2">Date: 00/00/0000</div>
-                 <div className="col-2">Submitted: Username</div>
+                 <div className="col-2">
+                    <p className="font-body mt-2">Date: 00/00/0000</p>
+                </div>
+                 <div className="col-2">
+                    <p className="font-body mt-2">Submitted: Username</p>
+                </div>
                  <div className="col-1"></div>
                  <div className="col-3">
                     <div className="row">
