@@ -1,5 +1,7 @@
 // Upcoming Exhibitions Page
 
+import { useState, useEffect } from "react";
+
 // Import Custom Components
 import NavigationBar from "../components/NavigationBar";
 import SortDropdown from "../components/dropdowns/SortDropdown";
@@ -13,24 +15,62 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 // Import Functions
-import { getAllUsers, getAllEvents } from "../services/getExhibitoData";
+import { getAllEvents } from "../services/getExhibitoData";
 
 function UpcomingPage() {
-  getAllUsers()
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // STATES
+  const [events, setEvents] = useState([]); // Events
+  const [defaultAllEvents, setDefaultAllEvents] = useState([]); // Default Order of all events
+  const [minPrice, setMinPrice] = useState(""); // Minimum Price (Filtering)
+  const [maxPrice, setMaxPrice] = useState(""); // Maximum Price (Filtering)
 
-  getAllEvents()
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // On Page Load, get events data from MongoDB and set to state "events"
+  useEffect(() => {
+    getAllEvents()
+      .then((data) => {
+        setEvents(data);
+        setDefaultAllEvents(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   filterSortEvents();
+  // }, [minPrice, maxPrice, events])
+
+  // Filtering & sorting events (based on sort dropdown & filters)
+  const filterSortEvents = (sortType) => {
+    let sortedEvents = [...events];
+
+    switch (sortType) {
+      case "priceAsc":
+        sortedEvents.sort((a, b) => Number(a.ticketPrice) - Number(b.ticketPrice));
+        break;
+      case "priceDesc":
+        sortedEvents.sort((a, b) => Number(b.ticketPrice) - Number(a.ticketPrice));
+        break;
+      case "dateAsc":
+        sortedEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+        break;
+      case "dateDesc":
+        sortedEvents.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+        break;
+      case "seatsAsc":
+        sortedEvents.sort((a, b) => a.availableSeats - b.availableSeats);
+        break;
+      case "seatsDesc":
+        sortedEvents.sort((a, b) => b.availableSeats - a.availableSeats);
+        break;
+      case "clear":
+        sortedEvents = [...defaultAllEvents];
+        break;
+      default:
+        sortedEvents = [...events];
+    }
+    setEvents(sortedEvents);
+  };
 
   return (
     <div>
@@ -42,7 +82,7 @@ function UpcomingPage() {
             <h1 className="font-display text-ink-silhouette-BASE">Upcoming Exhibitions</h1>
           </Col>
           <Col xs={3} className="flex justify-end pr-8">
-            <SortDropdown />
+            <SortDropdown onSortSelected={filterSortEvents} />
           </Col>
         </Row>
         {/* Content Section */}
@@ -54,18 +94,25 @@ function UpcomingPage() {
           {/* Event Exhibition Cards */}
           <Col xs={12} md={6} lg={9}>
             <Row>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
-              <Col xs={12} lg={6} xl={4}>
-                <EventCard />
-              </Col>
+              {/* Generate (map) All events from MongoDB to an EventCard in a column (for styling) */}
+              {events.map((event) => (
+                <Col xs={12} lg={6} xl={4}>
+                  <EventCard
+                    key={event._id}
+                    thumbnail={event.thumbnail}
+                    title={event.title}
+                    desc={event.description}
+                    ticketPrice={event.ticketPrice}
+                    avSeats={event.availableSeats}
+                    maxSeats={event.maxSeats}
+                    startTime={event.startTime}
+                    endTime={event.endTime}
+                    startDate={event.startDate}
+                    endDate={event.endDate}
+                    location={event.location}
+                  />
+                </Col>
+              ))}
             </Row>
           </Col>
         </Row>

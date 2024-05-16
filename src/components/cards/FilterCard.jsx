@@ -1,10 +1,29 @@
+// Filtering Component
+
+import { useState } from "react";
+
+// React Bootstrap Components
 import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 
+// Custom Components
 import SecondaryBtn from "../buttons/SecondaryBtn";
 import PrimaryBtn from "../buttons/PrimaryBtn";
 
 function FilterCard() {
+  // STATES
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  const handleClearFilters = () => {
+    setMinPrice(0);
+    setMaxPrice(0);
+    setStartDate("");
+    setEndDate("");
+  };
+
   return (
     <>
       {/* Filter Header */}
@@ -13,7 +32,7 @@ function FilterCard() {
         <div className="flex items-center justify-end">
           <PrimaryBtn label="Apply" />
           <div className="w-2">{/* Spacer */}</div>
-          <SecondaryBtn label="Clear" />
+          <SecondaryBtn label="Clear" onClick={handleClearFilters} />
         </div>
       </div>
       <Accordion defaultActiveKey="0">
@@ -22,11 +41,21 @@ function FilterCard() {
           <Accordion.Body>
             <Form className="font-body">
               <Form.Label htmlFor="inputMinPrice">Minimum (R)</Form.Label>
-              <Form.Control type="number" id="inputMinPrice" />
+              <Form.Control
+                type="number"
+                id="inputMinPrice"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+              />
               <Form.Label className="mt-3" htmlFor="inputMinPrice">
                 Maximum (R)
               </Form.Label>
-              <Form.Control type="number" id="inputMinPrice" />
+              <Form.Control
+                type="number"
+                id="inputMinPrice"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+              />
             </Form>
           </Accordion.Body>
         </Accordion.Item>
@@ -34,12 +63,22 @@ function FilterCard() {
           <Accordion.Header className="font-body">Date</Accordion.Header>
           <Accordion.Body>
             <Form className="font-body">
-              <Form.Label htmlFor="inputMinPrice">From</Form.Label>
-              <Form.Control type="date" id="inputMinPrice" />
-              <Form.Label className="mt-3" htmlFor="inputMinPrice">
+              <Form.Label htmlFor="inputStartDate">From</Form.Label>
+              <Form.Control
+                type="date"
+                id="inputStartDate"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              <Form.Label className="mt-3" htmlFor="inputEndDate">
                 To
               </Form.Label>
-              <Form.Control type="date" id="inputMinPrice" />
+              <Form.Control
+                type="date"
+                id="inputEndDate"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </Form>
           </Accordion.Body>
         </Accordion.Item>
@@ -47,7 +86,7 @@ function FilterCard() {
           <Accordion.Header className="font-body">Location</Accordion.Header>
           <Accordion.Body>
             <Form.Select aria-label="Default select example">
-              <option disabled>Select Province</option>
+              <option value="">All</option>
               <option value="Gauteng">Gauteng</option>
               <option value="FreeState">Free State</option>
               <option value="KwazuluNatal">KwaZulu-Natal</option>
@@ -64,16 +103,12 @@ function FilterCard() {
           <Accordion.Header className="font-body">Art House</Accordion.Header>
           <Accordion.Body>
             <Form>
-              {["radio"].map((type) => (
-                <div key={`default-radio`} className="mb-3 font-body">
-                  <Form.Check type="radio" id={`all`} label={"All"} />
-                  <Form.Check type="radio" id={`kayla`} label={"Kayla House"} />
-                  <Form.Check type="radio" id={`ine`} label={"Ine House"} />
-                  <Form.Check type="radio" id={`freddy`} label={"Freddy House"} />
-                  <Form.Check type="radio" id={`wolf`} label={"Wolf House"} />
-                  <Form.Check type="radio" id={`tsungai`} label={"Tsungai House"} />
-                </div>
-              ))}
+              <Form.Check type="radio" name="artHouse" id={`all`} label={"All"} />
+              <Form.Check type="radio" name="artHouse" id={`kayla`} label={"Kayla House"} />
+              <Form.Check type="radio" name="artHouse" id={`ine`} label={"Ine House"} />
+              <Form.Check type="radio" name="artHouse" id={`freddy`} label={"Freddy House"} />
+              <Form.Check type="radio" name="artHouse" id={`wolf`} label={"Wolf House"} />
+              <Form.Check type="radio" name="artHouse" id={`tsungai`} label={"Tsungai House"} />
             </Form>
           </Accordion.Body>
         </Accordion.Item>

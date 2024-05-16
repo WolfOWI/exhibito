@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 
 // Import Custom Components
 import PrimaryBtn from "./buttons/PrimaryBtn";
-import SecondaryBtn from "./buttons/SecondaryBtn";
 
 function AddEventModalA(props) {
   return (
