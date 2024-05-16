@@ -1,14 +1,13 @@
 // Admin Dashboard Page
 
 // Import css
-import PrimaryBtn from '../buttons/PrimaryBtn'
 import SecondaryBtn from '../buttons/SecondaryBtn';
 
-function PendingEventPage() {
+function EventTicket() {
   return (
     <div>
         <div className="card-rectangle">
-            <div className="row">
+        <div className="row">
                  <div className="col-2">
                     <h4 className="font-body">Event Name</h4>
                  </div>
@@ -17,16 +16,9 @@ function PendingEventPage() {
                 </div>
                  <div className="col-2">Date: 00/00/0000</div>
                  <div className="col-2">Submitted: Username</div>
-                 <div className="col-1"></div>
-                 <div className="col-3">
-                    <div className="row">
-                        <div className="col-6 btns">
-                            <PrimaryBtn label="Add Event" />
-                        </div>
-                        <div className="col-6 btns">
-                            <SecondaryBtn label="Decline" />
-                        </div>
-                    </div>
+                 <div className="col-2">Tickets Amount: 2</div>
+                 <div className="col-2">
+                    <SecondaryBtn label=" Event Info"/>
                  </div>
             </div>
         </div>
@@ -34,4 +26,4 @@ function PendingEventPage() {
   );
 }
 
-export default PendingEventPage;
+export default EventTicket;

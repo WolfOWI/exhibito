@@ -4,20 +4,19 @@
 import PrimaryBtn from '../buttons/PrimaryBtn'
 import SecondaryBtn from '../buttons/SecondaryBtn';
 
-function PendingEventPage() {
+function FlaggedCommentCard() {
   return (
     <div>
         <div className="card-rectangle">
             <div className="row">
                  <div className="col-2">
-                    <h4 className="font-body">Event Name</h4>
+                    <h5 className="font-body">Comment ID: 001</h5>
                  </div>
                  <div className="col-2">
-                    <p>Location: Centurion</p>
+                    <p>Event Name: Name</p>
                 </div>
-                 <div className="col-2">Date: 00/00/0000</div>
-                 <div className="col-2">Submitted: Username</div>
-                 <div className="col-1"></div>
+                 <div className="col-3">Comment Text: Comment Text</div>
+                 <div className="col-2">Flagged By: Username</div>
                  <div className="col-3">
                     <div className="row">
                         <div className="col-6 btns">
@@ -34,4 +33,4 @@ function PendingEventPage() {
   );
 }
 
-export default PendingEventPage;
+export default FlaggedCommentCard;
