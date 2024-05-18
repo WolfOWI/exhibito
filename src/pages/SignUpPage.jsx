@@ -30,7 +30,7 @@ function SignUpPage() {
       });
       setMessage('User created successfully!');
     } catch (error) {
-      setMessage(`Error creating user. Username: ${username} Email: ${email} Mobile: ${mobile} userType: ${userType} Password: ${password}`);
+      setMessage(`Error creating user.`);
     }
   };
 
