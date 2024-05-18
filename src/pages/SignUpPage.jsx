@@ -6,6 +6,7 @@ import "../styles/signup.css";
 import SignupImage from "../assets/Sign-up imagery.png";
 import React, { useState } from "react";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
+import SecondaryBtn from "../components/buttons/SecondaryBtn";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -141,7 +142,10 @@ function SignUpPage() {
                   </label>
                 </li>
               </ul>
-              <PrimaryBtn label="Sign Up" />
+              <div>
+                <PrimaryBtn label="Sign Up" />
+                <SecondaryBtn label="Log In " className="m-2" />
+              </div>
             </form>
           </div>
         </div>
