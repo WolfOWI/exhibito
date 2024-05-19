@@ -151,6 +151,7 @@ function UpcomingPage() {
                   <Col xs={12} lg={6} xl={4}>
                     <EventCard
                       key={event._id}
+                      eventIdNum={event._id}
                       thumbnail={event.thumbnail}
                       title={event.title}
                       desc={event.description}

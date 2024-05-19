@@ -26,4 +26,19 @@ export function getAllEvents() {
       throw err;
     });
 }
+
+// Get event details by ID
+export function getEventById(eventId) {
+  return fetch(`http://localhost:3001/events/${eventId}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Failed to fetch specific event details.");
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+
 // -------------------------------------

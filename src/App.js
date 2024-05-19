@@ -23,7 +23,7 @@ function App() {
         <Route path="/login" element={<LogInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/upcoming" element={<UpcomingPage />} />
-        <Route path="/eventinfo" element={<EventInfoPage />} />
+        <Route path="/eventinfo/:eventId" element={<EventInfoPage />} />
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/tickets" element={<TicketsPage />} />
         <Route path="/admin" element={<AdminDashPage />}>
