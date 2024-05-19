@@ -55,8 +55,13 @@ function HomePage() {
       >
         {/* Hero Text */}
         <h1 className="font-display text-canvas-white-BASE">Exhibito</h1>
-        <h4 className="font-body text-canvas-white-BASE">Explore our different Art Houses and their amazing Exhibitions</h4>
-        <Button className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body mt-3`}>
+        <h4 className="font-body text-canvas-white-BASE">
+          Explore our different Art Houses and their amazing Exhibitions
+        </h4>
+        <Button
+          href="/upcoming"
+          className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body mt-3`}
+        >
           Browse Events
         </Button>
       </div>
@@ -66,23 +71,25 @@ function HomePage() {
 
         {/* Heading Section */}
         <div className="Highlighted-Events-Section">
-          <h1
-            style={{
-              color: "black",
-              fontFamily: "DM Serif Display",
-              fontSize: "39px",
-              float: "left",
-              marginBottom: "45px",
-            }}
-          >
-            Highlighted Events
+          <div className="flex justify-between w-full">
+            <h1
+              style={{
+                color: "black",
+                fontFamily: "DM Serif Display",
+                fontSize: "39px",
+                float: "left",
+                marginBottom: "45px",
+              }}
+            >
+              Highlighted Events
+            </h1>
             <Button
-              className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE `}
-              style={{ marginLeft: "795px" }}
+              href="/upcoming"
+              className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE h-fit`}
             >
               Browse Events
             </Button>
-          </h1>
+          </div>
 
           {/* Carousel with Scroller */}
           <Carousel>
@@ -201,6 +208,7 @@ function HomePage() {
               incididunt ut labore et dolore magna aliqua.
             </p>
             <Button
+              href="/upcoming"
               className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
               style={{ marginLeft: "100px" }}
             >
@@ -241,6 +249,7 @@ function HomePage() {
               incididunt ut labore et dolore magna aliqua.
             </p>
             <Button
+              href="/upcoming"
               className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
             >
               Browse Events
@@ -323,6 +332,7 @@ function HomePage() {
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <Button
+              href="/upcoming"
               className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
               style={{ marginLeft: "100px" }}
             >
