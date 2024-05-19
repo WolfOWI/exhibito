@@ -36,35 +36,42 @@ function UpcomingPage() {
   }, []);
 
   // Filtering & Sorting
-  const applyFiltersAndSort = (newSortType) => {
+  const applyFiltersAndSort = (newSortType, clearFiltersRequest) => {
     // FILTERING
-    let filteredEvents = defaultAllEvents.filter((event) => {
-      return (
-        (minPrice ? parseFloat(event.ticketPrice) >= parseFloat(minPrice) : true) &&
-        (maxPrice ? parseFloat(event.ticketPrice) <= parseFloat(maxPrice) : true) &&
-        (startDate ? new Date(event.startDate) >= new Date(startDate) : true) &&
-        (endDate ? new Date(event.endDate) <= new Date(endDate) : true) &&
-        (location ? event.location === location : true)
-      );
-    });
+
+    let filteredEvents = [];
+    // If filters are not reset
+    if (!clearFiltersRequest) {
+      filteredEvents = defaultAllEvents.filter((event) => {
+        return (
+          (minPrice ? parseFloat(event.ticketPrice) >= parseFloat(minPrice) : true) &&
+          (maxPrice ? parseFloat(event.ticketPrice) <= parseFloat(maxPrice) : true) &&
+          (startDate ? new Date(event.startDate) >= new Date(startDate) : true) &&
+          (endDate ? new Date(event.endDate) <= new Date(endDate) : true) &&
+          (location ? event.location === location : true)
+        );
+      });
+    } else {
+      filteredEvents = defaultAllEvents;
+    }
+
     console.log(filteredEvents);
 
     // SORTING
-    // console.log(typeof newSortType);
-
     let sortType = "clear";
 
+    // If parameters for sorting exists & is not an object (which happens when filtering is activated)
     if (newSortType && typeof newSortType !== "object") {
       sortType = newSortType;
-      console.log("Set sortType to the new " + newSortType);
+      // console.log("Set sortType to the new " + newSortType);
       setLastSortType(newSortType);
-      console.log("Set Last Sort type to " + newSortType);
+      // console.log("Set Last Sort type to " + newSortType);
     } else {
       sortType = lastSortType;
-      console.log("Set sortType to " + lastSortType);
+      // console.log("Set sortType to " + lastSortType);
     }
 
-    console.log("Sorting by: " + sortType);
+    // console.log("Sorting by: " + sortType);
     switch (sortType) {
       case "priceAsc":
         filteredEvents.sort((a, b) => parseFloat(a.ticketPrice) - parseFloat(b.ticketPrice));
@@ -94,12 +101,13 @@ function UpcomingPage() {
   };
 
   const clearFilters = () => {
+    setEvents(defaultAllEvents);
     setMinPrice("");
     setMaxPrice("");
     setStartDate("");
     setEndDate("");
     setLocation("");
-    applyFiltersAndSort();
+    applyFiltersAndSort("", "clearFiltersRequest");
   };
 
   return (
