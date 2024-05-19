@@ -47,7 +47,7 @@ function NavigationBar() {
                 <Nav.Link href="/signup">Sign Up</Nav.Link>
                 <Nav.Link href="/login">Log In</Nav.Link>
                 <Nav.Link href="/upcoming">Upcoming</Nav.Link>
-                <Nav.Link href="/eventinfo">EventInfo</Nav.Link>
+                {/* <Nav.Link href="/eventinfo">EventInfo</Nav.Link> */}
                 <Nav.Link href="/admin">Admin</Nav.Link>
                 <Nav.Link href="/tickets" className="lg:hidden">
                   Tickets
