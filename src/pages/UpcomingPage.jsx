@@ -21,7 +21,7 @@ function UpcomingPage() {
   const [startDate, setStartDate] = useState(""); // Start Date (Filtering)
   const [endDate, setEndDate] = useState(""); // End Date (Filtering)
   const [location, setLocation] = useState(""); // Location (Filtering)
-  const [artHouse, setArtHouse] = useState(""); // ArtHouse (Filtering)
+  const [lastSortType, setLastSortType] = useState("clear"); // Tracking last sorting type (sort dropdown)
 
   // On Page Load, get events data from MongoDB and set to state "events"
   useEffect(() => {
@@ -35,18 +35,36 @@ function UpcomingPage() {
       });
   }, []);
 
-  const applyFiltersAndSort = (sortType) => {
+  // Filtering & Sorting
+  const applyFiltersAndSort = (newSortType) => {
+    // FILTERING
     let filteredEvents = defaultAllEvents.filter((event) => {
       return (
         (minPrice ? parseFloat(event.ticketPrice) >= parseFloat(minPrice) : true) &&
         (maxPrice ? parseFloat(event.ticketPrice) <= parseFloat(maxPrice) : true) &&
         (startDate ? new Date(event.startDate) >= new Date(startDate) : true) &&
         (endDate ? new Date(event.endDate) <= new Date(endDate) : true) &&
-        (location ? event.location === location : true) &&
-        (artHouse ? event.artHouse === artHouse : true)
+        (location ? event.location === location : true)
       );
     });
+    console.log(filteredEvents);
 
+    // SORTING
+    // console.log(typeof newSortType);
+
+    let sortType = "clear";
+
+    if (newSortType && typeof newSortType !== "object") {
+      sortType = newSortType;
+      console.log("Set sortType to the new " + newSortType);
+      setLastSortType(newSortType);
+      console.log("Set Last Sort type to " + newSortType);
+    } else {
+      sortType = lastSortType;
+      console.log("Set sortType to " + lastSortType);
+    }
+
+    console.log("Sorting by: " + sortType);
     switch (sortType) {
       case "priceAsc":
         filteredEvents.sort((a, b) => parseFloat(a.ticketPrice) - parseFloat(b.ticketPrice));
@@ -67,7 +85,6 @@ function UpcomingPage() {
         filteredEvents.sort((a, b) => b.availableSeats - a.availableSeats);
         break;
       case "clear":
-        filteredEvents = [...defaultAllEvents];
         break;
       default:
         break;
@@ -82,8 +99,7 @@ function UpcomingPage() {
     setStartDate("");
     setEndDate("");
     setLocation("");
-    setArtHouse("");
-    setEvents(defaultAllEvents);
+    applyFiltersAndSort();
   };
 
   return (
@@ -114,8 +130,6 @@ function UpcomingPage() {
               setEndDate={setEndDate}
               location={location}
               setLocation={setLocation}
-              artHouse={artHouse}
-              setArtHouse={setArtHouse}
               applyFilters={applyFiltersAndSort}
               clearFilters={clearFilters}
             />

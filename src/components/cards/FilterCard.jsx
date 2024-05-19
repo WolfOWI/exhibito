@@ -17,19 +17,9 @@ function FilterCard({
   setEndDate,
   location,
   setLocation,
-  artHouse,
-  setArtHouse,
   applyFilters,
   clearFilters,
 }) {
-  const handleLocationChange = (e) => {
-    setLocation(e.target.value);
-  };
-
-  const handleArtHouseChange = (e) => {
-    setArtHouse(e.target.value);
-  };
-
   return (
     <>
       {/* Filter Header */}
@@ -94,74 +84,19 @@ function FilterCard({
             <Form.Select
               aria-label="Default select example"
               value={location}
-              onChange={handleLocationChange}
+              onChange={(e) => setLocation(e.target.value)}
             >
               <option value="">All</option>
               <option value="Gauteng">Gauteng</option>
-              <option value="FreeState">Free State</option>
-              <option value="KwazuluNatal">KwaZulu-Natal</option>
-              <option value="EasternCape">Eastern Cape</option>
-              <option value="WesternCape">Western Cape</option>
-              <option value="NorthernCape">Northern Cape</option>
-              <option value="NorthWest">North West</option>
+              <option value="Free State">Free State</option>
+              <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+              <option value="Eastern Cape">Eastern Cape</option>
+              <option value="Western Cape">Western Cape</option>
+              <option value="Northern Cape">Northern Cape</option>
+              <option value="North West">North West</option>
               <option value="Mpumalanga">Mpumalanga</option>
               <option value="Limpopo">Limpopo</option>
             </Form.Select>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="3">
-          <Accordion.Header className="font-body">Art House</Accordion.Header>
-          <Accordion.Body>
-            <Form onChange={handleArtHouseChange}>
-              <Form.Check
-                type="radio"
-                name="artHouse"
-                id={`all`}
-                value=""
-                label={"All"}
-                checked={artHouse === ""}
-              />
-              <Form.Check
-                type="radio"
-                name="artHouse"
-                id={`kayla`}
-                value="Kayla House"
-                label={"Kayla House"}
-                checked={artHouse === "Kayla House"}
-              />
-              <Form.Check
-                type="radio"
-                name="artHouse"
-                id={`ine`}
-                value="Ine House"
-                label={"Ine House"}
-                checked={artHouse === "Ine House"}
-              />
-              <Form.Check
-                type="radio"
-                name="artHouse"
-                id={`freddy`}
-                value="Freddy House"
-                label={"Freddy House"}
-                checked={artHouse === "Freddy House"}
-              />
-              <Form.Check
-                type="radio"
-                name="artHouse"
-                id={`wolf`}
-                value="Wolf House"
-                label={"Wolf House"}
-                checked={artHouse === "Wolf House"}
-              />
-              <Form.Check
-                type="radio"
-                name="artHouse"
-                id={`tsungai`}
-                value="Tsungai House"
-                label={"Tsungai House"}
-                checked={artHouse === "Tsungai House"}
-              />
-            </Form>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
