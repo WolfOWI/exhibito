@@ -23,9 +23,9 @@ function PendingEventCard(props) {
       </div>
 
       <div className="sm:flex lg:block">
-        <PrimaryBtn label="Add Event" onClick={props.onApprove} />
+        <PrimaryBtn label="Approve" onClick={props.onApprove} />
         <div className="w-2 h-2">{/* Spacer */}</div>
-        <SecondaryBtn label="Decline Event" />
+        <SecondaryBtn label="Decline" />
       </div>
     </div>
   );

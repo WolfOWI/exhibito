@@ -28,6 +28,7 @@ function PendingEventPage() {
       });
   };
 
+  // Approving events (Approve Button)
   const handleApprove = (eventId) => {
     approveEventById(eventId)
       .then(() => {

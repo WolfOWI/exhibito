@@ -12,3 +12,16 @@ export function approveEventById(eventId) {
     .catch((error) => console.error("Error:", error));
 }
 // -------------------------------------
+
+// COMMENTS
+// -------------------------------------
+// Unflag a comment (Update isFlagged to false)
+export function unflagCommentById(commentId) {
+  return fetch(`/comments/${commentId}/unflag`, {
+    method: "PUT",
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
+}
+// -------------------------------------

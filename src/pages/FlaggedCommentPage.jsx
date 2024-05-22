@@ -4,13 +4,19 @@
 import FlaggedCommentCard from "../components/cards/FlaggedCommentsCard";
 import { useState, useEffect } from "react";
 import { getAllComments } from "../services/getExhibitoData";
+import { unflagCommentById } from "../services/updateExhibitoData";
 
 function FlaggedCommentPage() {
   // STATES
   const [flaggedComments, setFlaggedComments] = useState([]); // Flagged Comments
 
-  // On Page Load, get all comments data from MongoDB, filter by flagged status, and store in flaggedComments state
+  // On Page Load
   useEffect(() => {
+    fetchFlaggedComments();
+  }, []);
+
+  // Get all comments data from MongoDB, filter by flagged status, and store in flaggedComments state
+  const fetchFlaggedComments = () => {
     getAllComments()
       .then((data) => {
         // Filter Pending events
@@ -21,7 +27,18 @@ function FlaggedCommentPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  const handleUnflag = (commentId) => {
+    unflagCommentById(commentId)
+      .then(() => {
+        fetchFlaggedComments(); // Refresh List
+        console.log("Comment: " + commentId + " marked as safe.");
+      })
+      .catch((error) => {
+        console.error("Error unflagging comment:", error);
+      });
+  };
 
   return (
     <div className="container">
@@ -38,6 +55,7 @@ function FlaggedCommentPage() {
               text={fCom.text}
               createdDate={fCom.createdDate}
               createdTime={fCom.createdTime}
+              onUnflag={() => handleUnflag(fCom._id)}
             />
           ))
         : ""}
