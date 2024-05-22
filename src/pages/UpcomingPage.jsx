@@ -38,7 +38,6 @@ function UpcomingPage() {
   // Filtering & Sorting
   const applyFiltersAndSort = (newSortType, clearFiltersRequest) => {
     // FILTERING
-
     let filteredEvents = [];
     // If filters are not reset
     if (!clearFiltersRequest) {
@@ -100,6 +99,7 @@ function UpcomingPage() {
     setEvents(filteredEvents);
   };
 
+  // Clear Filters
   const clearFilters = () => {
     setEvents(defaultAllEvents);
     setMinPrice("");
@@ -148,7 +148,7 @@ function UpcomingPage() {
               {/* Generate (map) All events from MongoDB to an EventCard in a column (for styling) */}
               {events ? (
                 events.map((event) => (
-                  <Col xs={12} lg={6} xl={4}>
+                  <Col xs={12} lg={6} xl={4} key={event._id}>
                     <EventCard
                       key={event._id}
                       eventIdNum={event._id}

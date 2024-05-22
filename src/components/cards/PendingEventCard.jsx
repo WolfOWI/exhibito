@@ -4,7 +4,7 @@
 import PrimaryBtn from "../buttons/PrimaryBtn";
 import SecondaryBtn from "../buttons/SecondaryBtn";
 
-function PendingEventPage(props) {
+function PendingEventCard(props) {
   return (
     <div className="card-rectangle lg:flex justify-between items-start">
       <div className="sm:w-full lg:w-[30%]">
@@ -23,12 +23,12 @@ function PendingEventPage(props) {
       </div>
 
       <div className="sm:flex lg:block">
-        <PrimaryBtn label="Approve" />
+        <PrimaryBtn label="Add Event" onClick={props.onApprove} />
         <div className="w-2 h-2">{/* Spacer */}</div>
-        <SecondaryBtn label="Decline" />
+        <SecondaryBtn label="Decline Event" />
       </div>
     </div>
   );
 }
 
-export default PendingEventPage;
+export default PendingEventCard;

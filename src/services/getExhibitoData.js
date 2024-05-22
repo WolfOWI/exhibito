@@ -1,4 +1,4 @@
-// Get Data from Exhibito Database on MongoDB Atlas
+// GET Data from Exhibito Database on MongoDB Atlas
 
 // USERS
 // -------------------------------------
