@@ -28,7 +28,7 @@ function FlaggedCommentCard(props) {
         <p className="font-body">Event Name</p>
       </div>
       <div className="flex">
-        <PrimaryBtn label="Safe" />
+        <PrimaryBtn label="Safe" onClick={props.onUnflag} />
         <div className="w-2">{/* Spacer */}</div>
         <SecondaryBtn label="Delete" />
       </div>
