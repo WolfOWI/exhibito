@@ -26,4 +26,23 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Approve an event (Update event.status to "Approved")
+router.put("/:id/approve", async (req, res) => {
+  try {
+    const event = await Event.findByIdAndUpdate(
+      req.params.id,
+      { $set: { status: "Approved" } },
+      { new: true }
+    );
+
+    if (event) {
+      res.json(event);
+    } else {
+      res.status(404).send("Event not found");
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

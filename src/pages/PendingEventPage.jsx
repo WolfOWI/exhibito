@@ -1,27 +1,44 @@
 // Pending Events Page (Admin Dashboard Tab)
 
 // Import
-import PendingEventCards from "../components/cards/PendingEventCards";
+import PendingEventCard from "../components/cards/PendingEventCard";
 import { useState, useEffect } from "react";
 import { getAllEvents } from "../services/getExhibitoData";
+import { approveEventById } from "../services/updateExhibitoData";
 
 function PendingEventPage() {
   // STATES
   const [pendingEvents, setPendingEvents] = useState([]); // Pending Events
 
-  // On Page Load, get events data from MongoDB, filter pending events, and set to pendingEvents state
+  // On Page Load
   useEffect(() => {
+    fetchPendingEvents();
+  }, []);
+
+  // Get events data from MongoDB, filter pending events, and set to pendingEvents state
+  const fetchPendingEvents = () => {
     getAllEvents()
       .then((data) => {
         // Filter Pending events
-        let filteredEvents = [];
-        filteredEvents = data.filter((event) => event.status === "Pending");
+        const filteredEvents = data.filter((event) => event.status === "Pending");
         setPendingEvents(filteredEvents);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  const handleApprove = (eventId) => {
+    approveEventById(eventId)
+      .then(() => {
+        // Refresh the list of pending events after approval
+        fetchPendingEvents();
+        console.log("Approving event: " + eventId);
+      })
+      .catch((error) => {
+        console.error("Error approving event:", error);
+      });
+  };
 
   return (
     <div className="container">
@@ -33,7 +50,7 @@ function PendingEventPage() {
       {/* Populate List by mapping all in pendingEvents (when it exists) */}
       {pendingEvents
         ? pendingEvents.map((pEvent) => (
-            <PendingEventCards
+            <PendingEventCard
               key={pEvent._id}
               eventIdNum={pEvent._id}
               title={pEvent.title}
@@ -46,6 +63,7 @@ function PendingEventPage() {
               endDate={pEvent.endDate}
               location={pEvent.location}
               artHouseId={pEvent.artHouseId}
+              onApprove={() => handleApprove(pEvent._id)}
             />
           ))
         : ""}

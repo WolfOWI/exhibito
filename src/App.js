@@ -26,7 +26,7 @@ function App() {
         <Route path="/eventinfo/:eventId" element={<EventInfoPage />} />
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/tickets" element={<TicketsPage />} />
-        <Route path="/admin" element={<AdminDashPage />}>
+        <Route path="/admin/*" element={<AdminDashPage />}>
           <Route index element={<PendingEventPage />} />
           <Route path="events" element={<PendingEventPage />} />
           <Route path="comments" element={<FlaggedCommentPage />} />

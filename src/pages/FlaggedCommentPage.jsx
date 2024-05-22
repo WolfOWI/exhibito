@@ -34,6 +34,7 @@ function FlaggedCommentPage() {
       {flaggedComments
         ? flaggedComments.map((fCom) => (
             <FlaggedCommentCard
+              key={fCom._id}
               text={fCom.text}
               createdDate={fCom.createdDate}
               createdTime={fCom.createdTime}
