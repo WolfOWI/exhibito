@@ -40,5 +40,18 @@ export function getEventById(eventId) {
       throw err;
     });
 }
+// -------------------------------------
 
+// COMMENTS
+// -------------------------------------
+// Get array of all comments
+export function getAllComments() {
+  return fetch("http://localhost:3001/comments")
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
 // -------------------------------------

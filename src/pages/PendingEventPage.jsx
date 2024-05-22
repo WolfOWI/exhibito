@@ -1,16 +1,15 @@
-// Admin Dashboard Page
+// Pending Events Page (Admin Dashboard Tab)
 
 // Import
 import PendingEventCards from "../components/cards/PendingEventCards";
 import { useState, useEffect } from "react";
-
 import { getAllEvents } from "../services/getExhibitoData";
 
 function PendingEventPage() {
   // STATES
   const [pendingEvents, setPendingEvents] = useState([]); // Pending Events
 
-  // On Page Load, get events data from MongoDB and set to state "events"
+  // On Page Load, get events data from MongoDB, filter pending events, and set to pendingEvents state
   useEffect(() => {
     getAllEvents()
       .then((data) => {
