@@ -1,6 +1,7 @@
-.card-rectangle{
-    height: 70px;
-    border-bottom: 1px solid black;
-    padding-top: 15px;
-    padding-left: 30px;
+.card-rectangle {
+  height: fit-content;
+  border-bottom: 1px solid black;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 100%;
 }
