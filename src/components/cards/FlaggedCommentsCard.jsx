@@ -1,39 +1,24 @@
 // Admin Dashboard Page
 
 // Import css
-import PrimaryBtn from '../buttons/PrimaryBtn'
-import SecondaryBtn from '../buttons/SecondaryBtn';
+import PrimaryBtn from "../buttons/PrimaryBtn";
+import SecondaryBtn from "../buttons/SecondaryBtn";
 
 function FlaggedCommentCard() {
   return (
-    <div>
-        <div className="card-rectangle align-items-center">
-            <div className="row">
-                 <div className="col-2 mt-1">
-                    <h5 className="font-body">Comment ID: 001</h5>
-                 </div>
-                 <div className="col-2  mt-2">
-                    <p  className="font-body">Event Name: Name</p>
-                </div>
-                 <div className="col-3  mt-2">
-                    <p  className="font-body">Comment Text: Comment Text</p>
-                </div>
-                 <div className="col-2 mt-2">
-                    <p  className="font-body">Flagged By: Username</p>
-                </div>
-                 <div className="col-3">
-                    <div className="row">
-                        <div className="col-6 btns">
-                            <PrimaryBtn label="Add Event" />
-                        </div>
-                        <div className="col-6 btns">
-                            <SecondaryBtn label="Decline" />
-                        </div>
-                    </div>
-                 </div>
-            </div>
-        </div>
-    </div> 
+    <div className="card-rectangle lg:flex justify-between items-start">
+      <h4 className="font-body">Comment ID</h4>
+      <p className="font-body">Event Name</p>
+      <p className="font-body lg:w-[30%]">
+        Comment Text comment text comment text comment text comment text comment text
+      </p>
+      <p className="font-body">By Username</p>
+      <div className="flex">
+        <PrimaryBtn label="Safe" />
+        <div className="w-2">{/* Spacer */}</div>
+        <SecondaryBtn label="Delete" />
+      </div>
+    </div>
   );
 }
 
