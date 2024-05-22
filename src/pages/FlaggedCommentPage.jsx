@@ -42,23 +42,27 @@ function FlaggedCommentPage() {
 
   return (
     <div className="container">
-      <h3 className="font-body mt-4">Flagged Comments</h3>
+      <h3 className="font-body mt-4 text-sapphire-whisper-BASE">Flagged Comments</h3>
       <p className="font-body">
         Below are the comments that have been flagged by users. Review each comment and take
         appropriate action as needed.
       </p>
       {/* Populate list by mapping each flagged comment to the flagged comment card */}
-      {flaggedComments
-        ? flaggedComments.map((fCom) => (
-            <FlaggedCommentCard
-              key={fCom._id}
-              text={fCom.text}
-              createdDate={fCom.createdDate}
-              createdTime={fCom.createdTime}
-              onUnflag={() => handleUnflag(fCom._id)}
-            />
-          ))
-        : ""}
+      {flaggedComments.length > 0 ? (
+        flaggedComments.map((fCom) => (
+          <FlaggedCommentCard
+            key={fCom._id}
+            text={fCom.text}
+            createdDate={fCom.createdDate}
+            createdTime={fCom.createdTime}
+            onUnflag={() => handleUnflag(fCom._id)} // Safe button
+          />
+        ))
+      ) : (
+        <div className="w-full flex justify-center mt-32">
+          <h4 className="font-body">There are no flagged comments.</h4>
+        </div>
+      )}
     </div>
   );
 }

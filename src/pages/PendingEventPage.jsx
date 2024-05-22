@@ -43,31 +43,35 @@ function PendingEventPage() {
 
   return (
     <div className="container">
-      <h3 className="font-body mt-4">Pending Event Submissions</h3>
+      <h3 className="font-body mt-4 text-sapphire-whisper-BASE">Pending Event Submissions</h3>
       <p className="font-body">
         Below are the events awaiting your review. You can decide whether to approve or reject each
         event submission.
       </p>
-      {/* Populate List by mapping all in pendingEvents (when it exists) */}
-      {pendingEvents
-        ? pendingEvents.map((pEvent) => (
-            <PendingEventCard
-              key={pEvent._id}
-              eventIdNum={pEvent._id}
-              title={pEvent.title}
-              desc={pEvent.description}
-              ticketPrice={pEvent.ticketPrice}
-              maxSeats={pEvent.maxSeats}
-              startTime={pEvent.startTime}
-              endTime={pEvent.endTime}
-              startDate={pEvent.startDate}
-              endDate={pEvent.endDate}
-              location={pEvent.location}
-              artHouseId={pEvent.artHouseId}
-              onApprove={() => handleApprove(pEvent._id)}
-            />
-          ))
-        : ""}
+      {/* Populate List by mapping all in pendingEvents */}
+      {pendingEvents.length > 0 ? (
+        pendingEvents.map((pEvent) => (
+          <PendingEventCard
+            key={pEvent._id}
+            eventIdNum={pEvent._id}
+            title={pEvent.title}
+            desc={pEvent.description}
+            ticketPrice={pEvent.ticketPrice}
+            maxSeats={pEvent.maxSeats}
+            startTime={pEvent.startTime}
+            endTime={pEvent.endTime}
+            startDate={pEvent.startDate}
+            endDate={pEvent.endDate}
+            location={pEvent.location}
+            artHouseId={pEvent.artHouseId}
+            onApprove={() => handleApprove(pEvent._id)} // Approve Button
+          />
+        ))
+      ) : (
+        <div className="w-full flex justify-center mt-32">
+          <h4 className="font-body">There are no pending events.</h4>
+        </div>
+      )}
     </div>
   );
 }

@@ -15,7 +15,7 @@ function AdminDashPage() {
       <NavigationBar />
       <AdminNav />
       <div className="container mt-4">
-        <h1>Admin Dashboard</h1>
+        <h1 className="font-display">Admin Dashboard</h1>
       </div>
       <Routes>
         <Route index element={<PendingEventPage />} />
