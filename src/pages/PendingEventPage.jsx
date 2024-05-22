@@ -8,30 +8,21 @@ import { getAllEvents } from "../services/getExhibitoData";
 
 function PendingEventPage() {
   // STATES
-  const [events, setEvents] = useState([]); // Events
   const [pendingEvents, setPendingEvents] = useState([]); // Pending Events
 
   // On Page Load, get events data from MongoDB and set to state "events"
   useEffect(() => {
     getAllEvents()
       .then((data) => {
-        setEvents(data);
-        setPendingEvents(data); // TEMPORARY!
+        // Filter Pending events
+        let filteredEvents = [];
+        filteredEvents = data.filter((event) => event.status === "Pending");
+        setPendingEvents(filteredEvents);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  // Filtering by "Pending" status of events
-  // const filterPendingEvents = () => {
-
-  //   let filteredEvents = [];
-
-  //   filteredEvents = events.filter((event) => {
-
-  //   })
-  // }
 
   return (
     <div className="container">
@@ -40,21 +31,22 @@ function PendingEventPage() {
         Below are the events awaiting your review. You can decide whether to approve or reject each
         event submission.
       </p>
-      {events
-        ? events.map((event) => (
+      {/* Populate List by mapping all in pendingEvents (when it exists) */}
+      {pendingEvents
+        ? pendingEvents.map((pEvent) => (
             <PendingEventCards
-              key={event._id}
-              eventIdNum={event._id}
-              title={event.title}
-              desc={event.description}
-              ticketPrice={event.ticketPrice}
-              maxSeats={event.maxSeats}
-              startTime={event.startTime}
-              endTime={event.endTime}
-              startDate={event.startDate}
-              endDate={event.endDate}
-              location={event.location}
-              artHouseId={event.artHouseId}
+              key={pEvent._id}
+              eventIdNum={pEvent._id}
+              title={pEvent.title}
+              desc={pEvent.description}
+              ticketPrice={pEvent.ticketPrice}
+              maxSeats={pEvent.maxSeats}
+              startTime={pEvent.startTime}
+              endTime={pEvent.endTime}
+              startDate={pEvent.startDate}
+              endDate={pEvent.endDate}
+              location={pEvent.location}
+              artHouseId={pEvent.artHouseId}
             />
           ))
         : ""}
