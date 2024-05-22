@@ -45,4 +45,45 @@ router.put("/:id/approve", async (req, res) => {
   }
 });
 
+// Create a new event
+router.post("/addEvent", async (req, res) => {
+  const {
+    artHouseId,
+    title,
+    description,
+    location,
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+    ticketPrice,
+    maxSeats,
+    availableSeats,
+    thumbnail,
+    status,
+  } = req.body;
+
+  try {
+    const event = new Event({
+      artHouseId,
+      title,
+      description,
+      location,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      ticketPrice,
+      maxSeats,
+      availableSeats,
+      thumbnail,
+      status,
+    });
+    await event.save();
+    res.status(201).json(event);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;

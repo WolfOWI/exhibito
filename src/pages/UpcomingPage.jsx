@@ -168,7 +168,7 @@ function UpcomingPage() {
                   </Col>
                 ))
               ) : (
-                <div class="w-full flex flex-col justify-center items-center mt-12 ">
+                <div className="w-full flex flex-col justify-center items-center mt-12 ">
                   <h4 className="font-body mb-2">No events match your filters.</h4>
                   <PrimaryBtn label="Clear Filters" onClick={clearFilters} />
                 </div>
