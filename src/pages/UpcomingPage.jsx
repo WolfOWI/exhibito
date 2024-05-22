@@ -11,6 +11,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { getAllEvents } from "../services/getExhibitoData";
+import PrimaryBtn from "../components/buttons/PrimaryBtn";
 
 function UpcomingPage() {
   // STATES
@@ -146,7 +147,7 @@ function UpcomingPage() {
           <Col xs={12} md={6} lg={9}>
             <Row>
               {/* Generate (map) All events from MongoDB to an EventCard in a column (for styling) */}
-              {events ? (
+              {events.length > 0 ? (
                 events.map((event) => (
                   <Col xs={12} lg={6} xl={4} key={event._id}>
                     <EventCard
@@ -167,10 +168,10 @@ function UpcomingPage() {
                   </Col>
                 ))
               ) : (
-                <Col>
-                  <p>No events match your filters.</p>
-                  <button onClick={clearFilters}>Clear Filters</button>
-                </Col>
+                <div class="w-full flex flex-col justify-center items-center mt-12 ">
+                  <h4 className="font-body mb-2">No events match your filters.</h4>
+                  <PrimaryBtn label="Clear Filters" onClick={clearFilters} />
+                </div>
               )}
             </Row>
           </Col>
