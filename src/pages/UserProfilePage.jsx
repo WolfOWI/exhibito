@@ -2,10 +2,10 @@
 
 // Import
 import NavigationBar from "../components/NavigationBar";
-import '../styles/UserProfile.css'
+import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import EventTicket from "../components/cards/TicketsCard";
-import UserImage from "../assets/images/User-image.png"
+import UserImage from "../assets/images/User-image.png";
 
 function UserProfilePage() {
   return (
@@ -17,14 +17,14 @@ function UserProfilePage() {
         <div className="row mt-5">
           <div className="col-3">
             <div>
-            <img src={UserImage} alt="blackandwhite" className="user-profile-img"></img>
+              <img src={UserImage} alt="blackandwhite" className="user-profile-img"></img>
             </div>
           </div>
           <div className="col-9">
             <h2 className="font-body mt-3"> Name and Surname</h2>
             <p className="font-body mt-3">useremail@gmail.com</p>
             <p className="font-body number">+27 82 123 1234</p>
-            <PrimaryBtn label="Edit Profile" />
+            <PrimaryBtn label="Log Out" />
           </div>
         </div>
       </div>

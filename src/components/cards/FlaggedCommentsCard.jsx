@@ -1,39 +1,38 @@
 // Admin Dashboard Page
 
 // Import css
-import PrimaryBtn from '../buttons/PrimaryBtn'
-import SecondaryBtn from '../buttons/SecondaryBtn';
+import PrimaryBtn from "../buttons/PrimaryBtn";
+import SecondaryBtn from "../buttons/SecondaryBtn";
 
-function FlaggedCommentCard() {
+function FlaggedCommentCard(props) {
   return (
-    <div>
-        <div className="card-rectangle align-items-center">
-            <div className="row">
-                 <div className="col-2 mt-1">
-                    <h5 className="font-body">Comment ID: 001</h5>
-                 </div>
-                 <div className="col-2  mt-2">
-                    <p  className="font-body">Event Name: Name</p>
-                </div>
-                 <div className="col-3  mt-2">
-                    <p  className="font-body">Comment Text: Comment Text</p>
-                </div>
-                 <div className="col-2 mt-2">
-                    <p  className="font-body">Flagged By: Username</p>
-                </div>
-                 <div className="col-3">
-                    <div className="row">
-                        <div className="col-6 btns">
-                            <PrimaryBtn label="Add Event" />
-                        </div>
-                        <div className="col-6 btns">
-                            <SecondaryBtn label="Decline" />
-                        </div>
-                    </div>
-                 </div>
-            </div>
+    <div className="card-rectangle lg:flex justify-between items-start">
+      <div className="lg:w-[50%]">
+        <p className="font-body">{props.text}</p>
+        <p className="font-body hidden lg:block">By Username</p>
+        <div className="flex lg:hidden">
+          <p className="font-body">By Username</p>
+          <div className="w-4"></div>
+          <p className="font-body">{props.createdTime}</p>
+          <div className="w-4"></div>
+          <p className="font-body">{props.createdDate}</p>
         </div>
-    </div> 
+      </div>
+      <div className="hidden lg:block">
+        <p className="font-body">{props.createdTime}</p>
+        <div className="w-4"></div>
+        <p className="font-body">{props.createdDate}</p>
+      </div>
+      <div className="hidden lg:block">
+        <p className="font-body ">Listed under</p>
+        <p className="font-body">Event Name</p>
+      </div>
+      <div className="flex">
+        <PrimaryBtn label="Safe" onClick={props.onUnflag} />
+        <div className="w-2">{/* Spacer */}</div>
+        <SecondaryBtn label="Delete" />
+      </div>
+    </div>
   );
 }
 

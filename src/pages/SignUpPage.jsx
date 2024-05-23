@@ -1,67 +1,53 @@
-// Sign Up Page
-
-// Import
+import React, { useState } from "react";
+import axios from 'axios';
 import NavigationBar from "../components/NavigationBar";
 import "../styles/signup.css";
 import SignupImage from "../assets/Sign-up imagery.png";
-import React, { useState } from "react";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import SecondaryBtn from "../components/buttons/SecondaryBtn";
 
 function SignUpPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    location: "",
-    price: "",
-    bedrooms: "",
-    bathrooms: "",
-    image: null,
-  });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [userType, setUserType] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: file });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can handle form submission (e.g., send data to backend)
-    console.log(formData);
-    // Reset form after submission
-    setFormData({
-      name: "",
-      description: "",
-      location: "",
-      price: "",
-      bedrooms: "",
-      bathrooms: "",
-      image: null,
-    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+      return;
+    }
+    try {
+      const response = await axios.post('http://localhost:3001/users/register', {
+        username,
+        email,
+        mobile,
+        userType,
+        password,
+      });
+      setMessage('User created successfully!');
+    } catch (error) {
+      setMessage(`Error creating user.`);
+    }
   };
 
   return (
     <div className="background">
       <NavigationBar />
-      {/* <h1 className="font-display">Sign up Page</h1> */}
       <div className="content">
         <div className="row">
           <div className="col-7">
-            <img src={SignupImage} alt="blackandwhite" className="signupImage"></img>
+            <img src={SignupImage} alt="Signup" className="signupImage" />
           </div>
-          <div className="col-4 ">
-            {/* Sign Up Form */}
-
-            <form onSubmit={handleSubmit} className="form1 py-5">
+          <div className="col-4">
+            <form className="form1 py-5" onSubmit={handleSubmit}>
               <h1 className="font-display">Sign Up</h1>
               <p>
-                Join our community of art enthusiasts and gain access to exclusive exhibitions and
-                events.
+                Join our community of art enthusiasts and gain access to exclusive exhibitions and events.
               </p>
               <ul>
                 <li>
@@ -70,8 +56,7 @@ function SignUpPage() {
                     <input
                       type="text"
                       name="name"
-                      value={formData.name}
-                      onChange={handleChange}
+                      onChange={(e) => setUsername(e.target.value)}
                       required
                     />
                   </label>
@@ -82,8 +67,7 @@ function SignUpPage() {
                     <input
                       type="email"
                       name="email"
-                      value={formData.email}
-                      onChange={handleChange}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </label>
@@ -94,26 +78,24 @@ function SignUpPage() {
                     <input
                       type="text"
                       name="mobile"
-                      value={formData.mobile} 
-                      onChange={handleChange}
+                      onChange={(e) => setMobile(e.target.value)}
                       required
                     />
                   </label>
                 </li>
                 <li>
                   <label>Choose Your Occupancy:</label>
-                  <div className="dropdown    ">
+                  <div className="dropdown">
                     <select
                       className="form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
                       name="occupancy"
-                      value={formData.occupancy}
-                      onChange={handleChange}
+                      onChange={(e) => setUserType(e.target.value)}
                       required
                     >
                       <option value="">Select Occupation</option>
-                      <option value="Student">Standard User</option>
-                      <option value="Professional">Admin User</option>
-                      <option value="Other">Art House Director</option>
+                      <option value="standard">Standard User</option>
+                      <option value="admin">Admin User</option>
+                      <option value="house">Art House Director</option>
                     </select>
                   </div>
                 </li>
@@ -123,8 +105,7 @@ function SignUpPage() {
                     <input
                       type="password"
                       name="password"
-                      value={formData.password}
-                      onChange={handleChange}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                   </label>
@@ -135,8 +116,7 @@ function SignUpPage() {
                     <input
                       type="password"
                       name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                       required
                     />
                   </label>
@@ -147,6 +127,7 @@ function SignUpPage() {
                 <SecondaryBtn label="Log In " className="m-2" />
               </div>
             </form>
+            {message && <p>{message}</p>}
           </div>
         </div>
       </div>
