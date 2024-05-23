@@ -1,4 +1,4 @@
-// Get Data from Exhibito Database on MongoDB Atlas
+// GET Data from Exhibito Database on MongoDB Atlas
 
 // USERS
 // -------------------------------------
@@ -19,6 +19,34 @@ export function getAllUsers() {
 // Get array of all events
 export function getAllEvents() {
   return fetch("http://localhost:3001/events")
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+
+// Get event details by ID
+export function getEventById(eventId) {
+  return fetch(`http://localhost:3001/events/${eventId}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Failed to fetch specific event details.");
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+// -------------------------------------
+
+// COMMENTS
+// -------------------------------------
+// Get array of all comments
+export function getAllComments() {
+  return fetch("http://localhost:3001/comments")
     .then((res) => {
       return res.json();
     })

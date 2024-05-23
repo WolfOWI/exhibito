@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
+  artHouseId: { type: mongoose.Schema.Types.ObjectId, ref: "House", required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
   location: { type: String, required: true },

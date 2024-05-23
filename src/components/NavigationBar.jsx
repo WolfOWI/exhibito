@@ -1,22 +1,15 @@
 // Top Navigation Bar
 
-// Import useState
+// Import
 import { useState } from "react";
-
-// Import custom CSS
+import { addNewEvent } from "../services/createExhibitoData";
 import "../styles/navbar.css";
-
-// Import Bootstrap React Elements
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-
-// Import Custom Components
 import PrimaryBtn from "./buttons/PrimaryBtn";
 import AddEventModalA from "./AddEventModalA";
 import AddEventModalB from "./AddEventModalB";
-
-// Import Imagery
 import exhibitoLogo from "../assets/logos/logoV1.svg";
 
 function NavigationBar() {
@@ -24,13 +17,55 @@ function NavigationBar() {
   const [modalAOpen, setModalAOpen] = useState(false);
   const [modalBOpen, setModalBOpen] = useState(false);
 
-  // Functions for handling modal state of A
+  // Modal New Event Form State (Details)
+  const [newEvent, setNewEvent] = useState([]);
+
+  // Modal A Handlers
   const handleModalAClose = () => setModalAOpen(false);
   const handleModalAOpen = () => setModalAOpen(true);
+  const handleNextBtn = () => {
+    // Next Button
+    handleModalAClose();
+    handleModalBOpen();
+  };
 
-  // Functions for handling modal state of B
+  // Modal B Handlers
   const handleModalBClose = () => setModalBOpen(false);
   const handleModalBOpen = () => setModalBOpen(true);
+  const handleBackBtn = () => {
+    // Back Button
+    handleModalBClose();
+    handleModalAOpen();
+  };
+  const handleSubmitBtn = () => {
+    // Submit Button
+    handleModalBClose();
+    // Create new event in backend
+    createNewEvent();
+  };
+
+  // Adding the new event
+  function createNewEvent() {
+    const newEventData = {
+      artHouseId: "663de7cebb036aad91e8c5fb",
+      title: newEvent.title,
+      description: newEvent.description,
+      location: newEvent.location,
+      startDate: newEvent.startDate,
+      endDate: newEvent.endDate,
+      startTime: newEvent.startTime,
+      endTime: newEvent.endTime,
+      ticketPrice: newEvent.ticketPrice,
+      maxSeats: newEvent.maxSeats,
+      availableSeats: newEvent.maxSeats,
+      thumbnail: newEvent.thumbnail,
+      status: "Pending",
+    };
+
+    console.log("Creating new event: " + newEventData.title);
+    console.log(newEventData);
+    addNewEvent(newEventData);
+  }
 
   return (
     <>
@@ -47,7 +82,7 @@ function NavigationBar() {
                 <Nav.Link href="/signup">Sign Up</Nav.Link>
                 <Nav.Link href="/login">Log In</Nav.Link>
                 <Nav.Link href="/upcoming">Upcoming</Nav.Link>
-                <Nav.Link href="/eventinfo">EventInfo</Nav.Link>
+                {/* <Nav.Link href="/eventinfo">EventInfo</Nav.Link> */}
                 <Nav.Link href="/admin">Admin</Nav.Link>
                 <Nav.Link href="/tickets" className="lg:hidden">
                   Tickets
@@ -86,18 +121,17 @@ function NavigationBar() {
       <AddEventModalA
         show={modalAOpen}
         onHide={handleModalAClose}
-        onBtnClick={() => {
-          handleModalAClose();
-          handleModalBOpen();
-        }}
+        onNextClick={handleNextBtn}
+        newEvent={newEvent}
+        setNewEvent={setNewEvent}
       />
       <AddEventModalB
         show={modalBOpen}
         onHide={handleModalBClose}
-        onBackBtnClick={() => {
-          handleModalBClose();
-          handleModalAOpen();
-        }}
+        onBackClick={handleBackBtn}
+        onSubmitClick={handleSubmitBtn}
+        newEvent={newEvent}
+        setNewEvent={setNewEvent}
       />
     </>
   );

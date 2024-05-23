@@ -2,14 +2,24 @@
 
 // Converts "2024/10/21" + "2024/10/25" to "21 - 25 October" or
 export function eventCardDateFormat(startDate, endDate) {
+  // Date Arrays
+  let sDateArr = [];
+  let eDateArr = [];
+
+  // Split by / or - (depending on date format)
+  if (startDate.includes("/")) {
+    sDateArr = startDate.split("/");
+    eDateArr = endDate.split("/");
+  } else if (startDate.includes("-")) {
+    sDateArr = startDate.split("-");
+    eDateArr = endDate.split("-");
+  }
   // Start Date
-  // Split into an array by "/"
-  let sDateArr = startDate.split("/");
+
   let sDay = sDateArr[2]; // Start day
   let sMonth = monthNumberToName(sDateArr[1]); // Start Month
 
   // End Date
-  let eDateArr = endDate.split("/");
   let eDay = eDateArr[2]; // End day
   let eMonth = monthNumberToName(eDateArr[1]); // End Month
 

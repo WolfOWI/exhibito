@@ -1,83 +1,88 @@
-// Log In Page
-
-// Import
-import NavigationBar from "../components/NavigationBar"
 import React, { useState } from 'react';
-import LoginImage from "../assets/Log-In imagery.png"
-import '../styles/signup.css'
-import PrimaryBtn from '../components/buttons/PrimaryBtn'
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import NavigationBar from "../components/NavigationBar";
+import LoginImage from "../assets/Log-In imagery.png";
+import '../styles/signup.css';
+import PrimaryBtn from '../components/buttons/PrimaryBtn';
+import SecondaryBtn from "../components/buttons/SecondaryBtn";
 
 function LogInPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    location: '',
-    price: '',
-    bedrooms: '',
-    bathrooms: '',
-    image: null,
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: file });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can handle form submission (e.g., send data to backend)
-    console.log(formData);
-    // Reset form after submission
+  const handleChange = (event) => {
+    
+    const { name, value } = event.target;
     setFormData({
-      name: '',
-      description: '',
-      location: '',
-      price: '',
-      bedrooms: '',
-      bathrooms: '',
-      image: null,
+      ...formData,
+      [name]: value,
     });
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const { email, password } = formData;
+
+    try {
+      const response = await axios.post('http://localhost:3001/users/login', {
+        email,
+        password,
+      });
+      setMessage('User successfully Logged In!');
+      navigate('/');  // Redirect to a dashboard or home page after successful login
+    } catch (error) {
+      setMessage(`Invalid email or password.`);
+    }
+  };
+
   return (
-    <div className="background">
+    <div>
       <NavigationBar />
-      {/* <h1 className="font-display">Sign up Page</h1> */}
-      <div className="content">
-        <div className="row">
-          <div className="col-5">
-          <form onSubmit={handleSubmit} className="form2 py-5">
+      <div className="flex justify-between w-full">
+          <div className="w-[100%] md:w-[50%]">
+            <form className="ml-24 mr-24 md:mr-0 py-24" >
               <h1 className="font-display">Log In</h1>
               <p>Log in to your account to explore the latest art exhibitions and manage your art experiences.</p>
               <ul>
                 <li>
                   <label>
                     Email address:
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                    <input 
+                      type="email" 
+                      name="email" 
+                      value={formData.email} 
+                      onChange={handleChange} 
+                      required 
+                    />
                   </label>
                 </li>
                 <li>
                   <label>
                     Password:
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                    <input 
+                      type="password" 
+                      name="password" 
+                      value={formData.password} 
+                      onChange={handleChange} 
+                      required 
+                    />
                   </label>
                 </li>
               </ul>
-              <PrimaryBtn label="Log In" />
+              {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
+              <div>
+                <PrimaryBtn label="Log In" onClick={handleSubmit} />
+                <Link to="/signup">
+                  <SecondaryBtn label="Sign Up" className="m-2" />
+                </Link>
+              </div>
             </form>
-            
           </div>
-
-          <div className="col-7">
-            <img src={LoginImage} alt="blackandwhite" className="signupImage"></img>
-
+          <div className="hidden md:block w-[40%]">
+            <img src={LoginImage} alt="Log In Illustration" className=" h-screen object-cover" />
           </div>
-        </div>
         
       </div>
     </div>
