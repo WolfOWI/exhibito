@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import NavigationBar from "../components/NavigationBar";
 import "../styles/signup.css";
@@ -17,23 +17,15 @@ function SignUpPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
 
-  // State for when user selects arthouse
-  // const [selectedArtHouse, setSelectedArtHouse] = useState(false);
+  // State for when user selects art house
+  const [selectedArtHouse, setSelectedArtHouse] = useState(false);
 
 
-  // const handleOccupancy = (e) => {
-  //   if(e.target.value === ""){
+  const handleChangeOccupation = (e) => {
+    setUserType(e.target.value);
+    setSelectedArtHouse(e.target.value === "house");
+  };
 
-  //   }
-  // }
-
-  // When input field changes, update the newEvent state (on navbar)
-  // const handleChange = (e) => {
-  //   setNewEvent({
-  //     ...newEvent,
-  //     [e.target.id]: e.target.value,
-  //   });
-  // };
 
 
   const handleSubmit = async (event) => {
@@ -113,33 +105,35 @@ function SignUpPage() {
                   </label>
                 </li>
                 <li>
-                  <label>Choose Your Occupation:</label>
+                  <label>Occupation:</label>
                   <div className="dropdown">
                     <select
                       className="form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
                       name="occupancy"
-                      onChange={(e) => setUserType(e.target.value)}
+                      onChange={handleChangeOccupation}
                       required
                     >
-                      <option value="">Select Occupation</option>
+                      <option value="" disabled>Select Occupation</option>
                       <option value="standard">Standard User</option>
-                      <option value="house">Arthouse Director</option>
+                      <option value="house">Art House Employee</option>
                     </select>
                   </div>
-                  <label className="mt-2">Arthouse:</label>
-                  <div className="dropdown">
-                    <select
-                      className="form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
-                      name="occupancy"
-                      onChange={(e) => setArtHouseId(e.target.value)}
-                      required
-                    >
-                      <option value="a">Select Arthouse</option>
-                      <option value="a">Arthouse 1</option>
-                      <option value="a">Arthouse 2</option>
-                      <option value="a">Arthouse 3</option>
-                    </select>
-                  </div>
+                  {userType === "house" && (
+                    <div>
+                      <select className="mt-2 form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full" onChange={(e) => setArtHouseId(e.target.value)}>
+                        <option value="" disabled>Select Art House</option>
+                        <option value="1">Art House 1</option>
+                        <option value="2">Art House 2</option>
+                        <option value="3">Art House 3</option>
+                        <option value="4">Art House 4</option>
+                        <option value="5">Art House 5</option>
+                        <option value="6">Art House 6</option>
+                        <option value="7">Art House 7</option>
+                        <option value="8">Art House 8</option>
+                        <option value="9">Art House 9</option>
+                      </select>
+                    </div>
+                  )}
                 </li>
                 <li>
                   <label>
@@ -164,12 +158,13 @@ function SignUpPage() {
                   </label>
                 </li>
               </ul>
+              {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
               <div>
                 <PrimaryBtn label="Sign Up" onClick={handleSubmit}/>
                 <Link to="/login"><SecondaryBtn label="Log In " className="m-2" /></Link>
               </div>
             </form>
-            {message && <p>{message}</p>}
+            
           </div>
         </div>
       </div>

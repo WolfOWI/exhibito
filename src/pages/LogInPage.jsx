@@ -26,8 +26,6 @@ function LogInPage() {
     const { email, password } = formData;
 
     try {
-      console.log("trying axios")
-      
       const response = await axios.post('http://localhost:3001/users/login', {
         email,
         password,
@@ -35,17 +33,16 @@ function LogInPage() {
       setMessage('User successfully Logged In!');
       navigate('/');  // Redirect to a dashboard or home page after successful login
     } catch (error) {
-      setMessage(`Invalid email or password ${error.response ? error.response.data.message : error.message}`);
+      setMessage(`Invalid email or password.`);
     }
   };
 
   return (
-    <div className="background">
+    <div>
       <NavigationBar />
-      <div className="content">
-        <div className="row">
-          <div className="col-5">
-            <form className="form2 py-5" >
+      <div className="flex justify-between w-full">
+          <div className="w-[100%] md:w-[50%]">
+            <form className="ml-24 mr-24 md:mr-0 py-24" >
               <h1 className="font-display">Log In</h1>
               <p>Log in to your account to explore the latest art exhibitions and manage your art experiences.</p>
               <ul>
@@ -74,7 +71,7 @@ function LogInPage() {
                   </label>
                 </li>
               </ul>
-              {message && <p>{message}</p>}
+              {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
               <div>
                 <PrimaryBtn label="Log In" onClick={handleSubmit} />
                 <Link to="/signup">
@@ -83,10 +80,10 @@ function LogInPage() {
               </div>
             </form>
           </div>
-          <div className="col-7">
-            <img src={LoginImage} alt="Log In Illustration" className="signupImage" />
+          <div className="hidden md:block w-[40%]">
+            <img src={LoginImage} alt="Log In Illustration" className=" h-screen object-cover" />
           </div>
-        </div>
+        
       </div>
     </div>
   );

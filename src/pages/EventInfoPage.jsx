@@ -5,8 +5,10 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getEventById } from "../services/getExhibitoData";
 import NavigationBar from "../components/NavigationBar";
+import CommentsCard from "../components/cards/CommentCard";
 // import EventImage from "../assets/images/homepage.png";
 import "../styles/EventInfo.css";
+import "../styles/commentCard.css"
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Footer from "../components/Footer";
 
@@ -52,19 +54,26 @@ function EventInfoPage() {
 
       <div className="container">
         <h2 className="font-display mt-4">Reviews</h2>
-        <div className="row mt-5"></div>
+        <div className="row mt-2">
+          <div className="col-6">
+            <CommentsCard />
+          </div>
+          <div className="col-6">
+            <CommentsCard />
+          </div>
+        </div>
       </div>
 
       <div className="container mt-5">
         <h2 className="font-display">Leave a Review</h2>
-        <div className="row">
+        <div className="row flex items-end">
           <div className="col-10">
             <label className="comment-input font-body">
               Leave a Comment:
-              <textarea name="description" required />
+              <textarea name="description" className="h-20" required />
             </label>
           </div>
-          <div className="col-2 mt-4">
+          <div className="col-2">
             <PrimaryBtn label="Post Review" />
           </div>
         </div>
