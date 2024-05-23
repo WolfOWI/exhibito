@@ -10,32 +10,28 @@ function AddedCard() {
             <div className="card-rectangle">
                 <div className="row">
                     <div className="col-2">
-                        <h4 className="font-body">Event Name</h4>
+                        <h4 className="font-body mt-1">Event Name</h4>
                     </div>
                     <div className="col-2">
-                        <p style={{ marginTop: '-11px', fontSize: '19px' }}>Location: </p>
-                        <p style={{ marginTop: '-20px' }}>Centurion</p>
+                        <p className="font-body mt-2">Location: Centurion</p>
                     </div>
                     <div className="col-2">
-                        <p style={{ marginTop: '-11px', fontSize: '19px' }}>Date: </p>
-                        <p style={{ marginTop: '-20px' }}>00/00/0000</p>
+                        <p className="font-body mt-2">Date: 00/00/0000</p>
                     </div>
                     <div className="col-2">
-                        <p style={{ marginTop: '-11px', fontSize: '19px' }}>Seats: </p>
-                        <p style={{ marginTop: '-20px' }}>Seat Number/s</p>
+                        <p className="font-body mt-2">Time: 00:00 - 00:00</p>
                     </div>
                     <div className="col-2">
-                        <p style={{ marginTop: '-11px', fontSize: '19px' }}>Cost: </p>
-                        <p style={{ marginTop: '-20px' }}>R000.00</p>
+                        <p className="font-body mt-2">Cost: R000.00</p>
                     </div>
                     <div className="col-1"></div>
-                    <div className="col-3" style={{ marginLeft: '1000px', marginTop: '-61px' }}>
+                    <div className="col-3" style={{ marginLeft: '1040px', marginTop: '-50px' }}>
                         <div className="row">
-                            <Form.Select 
+                            <Form.Select
                                 id="inputQuantity"
                                 className="bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE"
-                                aria-label="Default select example" 
-                                style={{ width: '70px'}}
+                                aria-label="Default select example"
+                                style={{ width: '70px' }}
                             >
                                 <option disabled>Select Quantity</option>
                                 <option value="1">1</option>

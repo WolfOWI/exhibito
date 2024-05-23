@@ -50,20 +50,18 @@ function TicketsPage() {
           <div className="card-rectangle">
             <div className="row">
                  <div className="col-3">
-                    <h4 className="font-body">Proceed to Checkout</h4>
+                    <h4 className="font-body" style={{marginTop: '5px'}}>Proceed to Checkout</h4>
                  </div>
-                 <div className="col-8">
-                    <p style={{marginTop: '-11px', fontSize: '19px', marginLeft: '322px'}}>Quantity: </p>
-                    <p style={{marginTop: '-20px', marginLeft: '322px'}}>00</p>
-                </div>
-                 <div className="col-12">
-                    <p style={{marginTop: '-11px', fontSize: '19px', marginLeft: '860px', marginTop: '-65px'}}>Total Cost: </p>
-                    <p style={{marginTop: '-20px', marginLeft: '860px', marginTop: '-20px'}}>R000.00</p>
-                </div>
+                 <div className="col-2" style={{marginLeft: '321px', fontWeight: 'bold'}}>
+                        <p className="font-body mt-2">Quantity: 00</p>
+                    </div>
+                    <div className="col-2" style={{fontWeight: 'bold'}}>
+                        <p className="font-body mt-2">Total Cost: R000.00</p>
+                    </div>
                  <div className="col-1"></div>
-                 <div className="col-3" style={{marginLeft: '1000px', marginTop: '-61px'}}>
+                 <div className="col-3" style={{marginLeft: '1030px', marginTop: '-50px',}}>
                     <div className="row">
-                        <div className="col-6 btns" style={{marginLeft: '35px'}}>
+                        <div className="col-6 btns" style={{marginLeft: '75px'}}>
                             <PrimaryBtn label="Check Out" />
                         </div>
                     </div>
