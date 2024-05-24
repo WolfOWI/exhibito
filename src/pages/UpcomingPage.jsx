@@ -55,6 +55,7 @@ function UpcomingPage() {
       filteredEvents = defaultAllEvents;
     }
 
+    // console.log("Filtered events: ");
     console.log(filteredEvents);
 
     // SORTING
@@ -92,8 +93,10 @@ function UpcomingPage() {
         filteredEvents.sort((a, b) => b.availableSeats - a.availableSeats);
         break;
       case "clear":
+        filteredEvents = defaultAllEvents;
         break;
       default:
+        filteredEvents = defaultAllEvents;
         break;
     }
 
@@ -102,7 +105,6 @@ function UpcomingPage() {
 
   // Clear Filters
   const clearFilters = () => {
-    setEvents(defaultAllEvents);
     setMinPrice("");
     setMaxPrice("");
     setStartDate("");
