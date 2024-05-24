@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import "../styles/signup.css";
 import SignupImage from "../assets/Sign-up imagery.png";
@@ -8,41 +8,29 @@ import SecondaryBtn from "../components/buttons/SecondaryBtn";
 import { Link } from "react-router-dom";
 
 function SignUpPage() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [userType, setUserType] = useState('');
-  const [artHouseId, setArtHouseId] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-
-  // State for when user selects art house
-  const [selectedArtHouse, setSelectedArtHouse] = useState(false);
-
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [userType, setUserType] = useState("");
+  const [artHouseId, setArtHouseId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleChangeOccupation = (e) => {
     setUserType(e.target.value);
-    setSelectedArtHouse(e.target.value === "house");
   };
 
-
-
   const handleSubmit = async (event) => {
-    console.log("Handling Submit")
+    console.log("Handling Submit");
     event.preventDefault();
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage("Passwords do not match");
       return;
     }
     try {
-      console.log(username,
-        email,
-        mobile,
-        userType,
-        password,
-        artHouseId);
-      const response = await axios.post('http://localhost:3001/users/register', {
+      console.log(username, email, mobile, userType, password, artHouseId);
+      const response = await axios.post("http://localhost:3001/users/register", {
         username,
         email,
         mobile,
@@ -50,9 +38,11 @@ function SignUpPage() {
         password,
         artHouseId,
       });
-      setMessage('User created successfully!');
+      setMessage("User created successfully!");
     } catch (error) {
-      setMessage(`Error creating user: ${error.response ? error.response.data.message : error.message}`);
+      setMessage(
+        `Error creating user: ${error.response ? error.response.data.message : error.message}`
+      );
     }
   };
 
@@ -68,7 +58,8 @@ function SignUpPage() {
             <form className="form1 py-5" onSubmit={handleSubmit}>
               <h1 className="font-display">Sign Up</h1>
               <p>
-                Join our community of art enthusiasts and gain access to exclusive exhibitions and events.
+                Join our community of art enthusiasts and gain access to exclusive exhibitions and
+                events.
               </p>
               <ul>
                 <li>
@@ -109,19 +100,27 @@ function SignUpPage() {
                   <div className="dropdown">
                     <select
                       className="form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
-                      name="occupancy"
+                      name="occupation"
                       onChange={handleChangeOccupation}
                       required
                     >
-                      <option value="" disabled>Select Occupation</option>
+                      <option value="" disabled>
+                        Select Occupation
+                      </option>
                       <option value="standard">Standard User</option>
                       <option value="house">Art House Employee</option>
                     </select>
                   </div>
                   {userType === "house" && (
                     <div>
-                      <select className="mt-2 form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full" onChange={(e) => setArtHouseId(e.target.value)}>
-                        <option value="" disabled>Select Art House</option>
+                      <select
+                        className="mt-2 form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
+                        onChange={(e) => setArtHouseId(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          Select Art House
+                        </option>
+                        <option value="none">No Art House</option>
                         <option value="1">Art House 1</option>
                         <option value="2">Art House 2</option>
                         <option value="3">Art House 3</option>
@@ -160,11 +159,12 @@ function SignUpPage() {
               </ul>
               {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
               <div>
-                <PrimaryBtn label="Sign Up" onClick={handleSubmit}/>
-                <Link to="/login"><SecondaryBtn label="Log In " className="m-2" /></Link>
+                <PrimaryBtn label="Sign Up" onClick={handleSubmit} />
+                <Link to="/login">
+                  <SecondaryBtn label="Log In " className="m-2" />
+                </Link>
               </div>
             </form>
-            
           </div>
         </div>
       </div>
