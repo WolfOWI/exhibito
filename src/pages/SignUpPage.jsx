@@ -11,14 +11,16 @@ function SignUpPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
-  const [userType, setUserType] = useState("");
-  const [artHouseId, setArtHouseId] = useState("");
+  const [userType, setUserType] = useState("standard");
+  const [artHouseId, setArtHouseId] = useState("none");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const handleChangeOccupation = (e) => {
     setUserType(e.target.value);
+    if (e.target.value === "standard") {
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -104,7 +106,7 @@ function SignUpPage() {
                       onChange={handleChangeOccupation}
                       required
                     >
-                      <option value="" disabled>
+                      <option value="standard" disabled>
                         Select Occupation
                       </option>
                       <option value="standard">Standard User</option>
@@ -117,7 +119,7 @@ function SignUpPage() {
                         className="mt-2 form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
                         onChange={(e) => setArtHouseId(e.target.value)}
                       >
-                        <option value="" disabled>
+                        <option value="none" disabled>
                           Select Art House
                         </option>
                         <option value="none">No Art House</option>
