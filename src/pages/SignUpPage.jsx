@@ -59,9 +59,18 @@ function SignUpPage() {
           <div className="col-4">
             <form className="form1 py-5" onSubmit={handleSubmit}>
               <h1 className="font-display">Sign Up</h1>
-              <p>
+              <p className="font-body">
                 Join our community of art enthusiasts and gain access to exclusive exhibitions and
                 events.
+              </p>
+              <p className="font-body italic mt-[-10px]">
+                Already with us?{" "}
+                <a
+                  href="/login"
+                  className="font-body fw-bold text-decoration-none text-scarlet-melody-BASE not-italic"
+                >
+                  Log in.
+                </a>
               </p>
               <ul>
                 <li>
@@ -159,7 +168,9 @@ function SignUpPage() {
                   </label>
                 </li>
               </ul>
-              {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
+              {message && (
+                <p className="font-body font-bold text-sapphire-whisper-70%">{message}</p>
+              )}
               <div>
                 <PrimaryBtn label="Sign Up" onClick={handleSubmit} />
                 <Link to="/login">
