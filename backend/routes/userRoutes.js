@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { requireAuth } = require("../middleware/auth");
+const { authenticateRole } = require("../middleware/authMiddleware");
 
 // Get all users
 router.get("/", async (req, res) => {
@@ -19,11 +21,17 @@ router.post("/register", async (req, res) => {
   const { username, email, mobile, userType, password, artHouseId } = req.body;
 
   try {
+    // Check if the user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
     // Hash password before saving
     const salt = await bcrypt.genSalt(10); // 10 rounds
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const user = new User({
+    const newUser = new User({
       username,
       email,
       mobile,
@@ -31,8 +39,21 @@ router.post("/register", async (req, res) => {
       password: hashedPassword, // store the hashed password
       artHouseId,
     });
-    await user.save();
-    res.status(201).json({ message: "User registered successfully", userId: user._id });
+
+    const savedUser = await newUser.save();
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: savedUser._id, userType: savedUser.userType },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+
+    res.status(201).json({
+      message: "User registered successfully",
+      userId: savedUser._id,
+      token: token, // Include the token in the response
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -64,6 +85,10 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+});
+
+router.get("/protected", requireAuth(), (req, res) => {
+  res.status(200).send("This route is secured. Your user id is: " + req.auth.userId);
 });
 
 module.exports = router;

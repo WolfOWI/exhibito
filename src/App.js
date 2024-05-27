@@ -19,9 +19,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LogInPage />} />
+        <Route path="/" element={<LogInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/upcoming" element={<UpcomingPage />} />
         <Route path="/eventinfo/:eventId" element={<EventInfoPage />} />
         <Route path="/profile" element={<UserProfilePage />} />

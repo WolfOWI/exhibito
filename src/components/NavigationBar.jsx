@@ -72,7 +72,7 @@ function NavigationBar() {
       {/* Navbar */}
       <Navbar expand="lg" className="bg-canvas-white-BASE border-b border-ink-silhouette-50%">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/home">
             <img className="h-10" src={exhibitoLogo} alt="Exhibito Home" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -80,7 +80,7 @@ function NavigationBar() {
             <Nav className="custom-nav">
               <Nav className="align-items-center font-body">
                 <Nav.Link href="/signup">Sign Up</Nav.Link>
-                <Nav.Link href="/login">Log In</Nav.Link>
+                <Nav.Link href="/">Log In</Nav.Link>
                 <Nav.Link href="/upcoming">Upcoming</Nav.Link>
                 {/* <Nav.Link href="/eventinfo">EventInfo</Nav.Link> */}
                 <Nav.Link href="/admin">Admin</Nav.Link>

@@ -29,8 +29,9 @@ function LogInPage() {
         email,
         password,
       });
+      sessionStorage.setItem("token", response.data.token); // Store the token
       setMessage("User successfully Logged In!");
-      navigate("/"); // Redirect to a dashboard or home page after successful login
+      navigate("/home"); // Redirect to home page after successful login
     } catch (error) {
       setMessage(`Invalid email or password.`);
     }

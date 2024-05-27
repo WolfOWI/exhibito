@@ -5,33 +5,39 @@ import "../styles/signup.css";
 import SignupImage from "../assets/Sign-up imagery.png";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import SecondaryBtn from "../components/buttons/SecondaryBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUpPage() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [userType, setUserType] = useState("standard");
-  const [artHouseId, setArtHouseId] = useState("none");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    mobile: "",
+    userType: "standard",
+    artHouseId: "none",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [message, setMessage] = useState("");
 
-  const handleChangeOccupation = (e) => {
-    setUserType(e.target.value);
-    if (e.target.value === "standard") {
-    }
+  const navigate = useNavigate(); // Navigation when signing up successfully
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     console.log("Handling Submit");
     event.preventDefault();
+
+    const { username, email, mobile, userType, password, confirmPassword, artHouseId } = formData;
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
       return;
     }
     try {
-      console.log(username, email, mobile, userType, password, artHouseId);
+      // console.log(username, email, mobile, userType, password, artHouseId);
       const response = await axios.post("http://localhost:3001/users/register", {
         username,
         email,
@@ -40,7 +46,11 @@ function SignUpPage() {
         password,
         artHouseId,
       });
+
+      sessionStorage.setItem("token", response.data.token);
+
       setMessage("User created successfully!");
+      navigate("/home");
     } catch (error) {
       setMessage(
         `Error creating user: ${error.response ? error.response.data.message : error.message}`
@@ -66,7 +76,7 @@ function SignUpPage() {
               <p className="font-body italic mt-[-10px]">
                 Already with us?{" "}
                 <a
-                  href="/login"
+                  href="/"
                   className="font-body fw-bold text-decoration-none text-scarlet-melody-BASE not-italic"
                 >
                   Log in.
@@ -78,8 +88,9 @@ function SignUpPage() {
                     Username:
                     <input
                       type="text"
-                      name="name"
-                      onChange={(e) => setUsername(e.target.value)}
+                      name="username"
+                      value={formData.username}
+                      onChange={handleChange}
                       required
                     />
                   </label>
@@ -90,7 +101,8 @@ function SignUpPage() {
                     <input
                       type="email"
                       name="email"
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={formData.email}
+                      onChange={handleChange}
                       required
                     />
                   </label>
@@ -101,7 +113,8 @@ function SignUpPage() {
                     <input
                       type="text"
                       name="mobile"
-                      onChange={(e) => setMobile(e.target.value)}
+                      value={formData.mobile}
+                      onChange={handleChange}
                       required
                     />
                   </label>
@@ -111,8 +124,8 @@ function SignUpPage() {
                   <div className="dropdown">
                     <select
                       className="form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
-                      name="occupation"
-                      onChange={handleChangeOccupation}
+                      name="userType"
+                      onChange={handleChange}
                       required
                     >
                       <option value="standard" disabled>
@@ -122,11 +135,12 @@ function SignUpPage() {
                       <option value="house">Art House Employee</option>
                     </select>
                   </div>
-                  {userType === "house" && (
+                  {formData.userType === "house" && (
                     <div>
                       <select
                         className="mt-2 form-select bg-canvas-white-BASE border-1 border-canvas-white-100% rounded-full"
-                        onChange={(e) => setArtHouseId(e.target.value)}
+                        name="artHouseId"
+                        onChange={handleChange}
                       >
                         <option value="none" disabled>
                           Select Art House
@@ -148,12 +162,7 @@ function SignUpPage() {
                 <li>
                   <label>
                     Password:
-                    <input
-                      type="password"
-                      name="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
+                    <input type="password" name="password" onChange={handleChange} required />
                   </label>
                 </li>
                 <li>
@@ -162,7 +171,7 @@ function SignUpPage() {
                     <input
                       type="password"
                       name="confirmPassword"
-                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      onChange={handleChange}
                       required
                     />
                   </label>
@@ -173,7 +182,7 @@ function SignUpPage() {
               )}
               <div>
                 <PrimaryBtn label="Sign Up" onClick={handleSubmit} />
-                <Link to="/login">
+                <Link to="/">
                   <SecondaryBtn label="Log In " className="m-2" />
                 </Link>
               </div>
