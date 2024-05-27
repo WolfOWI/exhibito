@@ -88,6 +88,7 @@ function UserProfilePage() {
         <EventTicket />
         <EventTicket />
       </div>
+      <div className="h-24">{/* Spacer */}</div>
     </div>
   );
 }
