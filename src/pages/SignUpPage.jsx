@@ -78,6 +78,8 @@ function SignUpPage() {
                       type="text"
                       name="name"
                       onChange={(e) => setUsername(e.target.value)}
+                      minlength="6"
+                      maxlength="8"
                       required
                     />
                   </label>
@@ -97,7 +99,7 @@ function SignUpPage() {
                   <label>
                     Mobile Number:
                     <input
-                      type="text"
+                      type="tel"
                       name="mobile"
                       onChange={(e) => setMobile(e.target.value)}
                       required
@@ -158,7 +160,7 @@ function SignUpPage() {
                   </label>
                 </li>
               </ul>
-              {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
+              {/* {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>} */}
               <div>
                 <PrimaryBtn label="Sign Up" onClick={handleSubmit}/>
                 <Link to="/login"><SecondaryBtn label="Log In " className="m-2" /></Link>

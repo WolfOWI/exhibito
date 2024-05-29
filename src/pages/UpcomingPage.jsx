@@ -148,7 +148,7 @@ function UpcomingPage() {
             <Row>
               {/* Generate (map) All events from MongoDB to an EventCard in a column (for styling) */}
               {events.length > 0 ? (
-                events.map((event) => (
+                events.map((event) => ( 
                   <Col xs={12} lg={6} xl={4} key={event._id}>
                     <EventCard
                       key={event._id}

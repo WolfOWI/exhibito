@@ -64,7 +64,7 @@ function EventInfoPage() {
         </div>
       </div>
 
-      <div className="container mt-5">
+      <div className="container mt-3">
         <h2 className="font-display">Leave a Review</h2>
         <div className="row flex items-end">
           <div className="col-10">

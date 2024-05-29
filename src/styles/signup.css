@@ -32,6 +32,7 @@ label {
   input[type="number"],
   input[type="email"],
   input[type="password"],
+  input[type="tel"],
   textarea,
   .form-select,
   input[type="file"] {
