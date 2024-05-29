@@ -2,13 +2,34 @@ const express = require("express");
 const router = express.Router();
 const Comment = require("../models/Comment");
 
-// Get all comments
+// Get all comments or filter by eventId
 router.get("/", async (req, res) => {
   try {
-    const comments = await Comment.find();
+    const { eventId } = req.query;
+    const query = eventId ? { eventId } : {};
+    const comments = await Comment.find(query);
     res.json(comments);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+// Create a new Comment
+router.post("/addComment", async (req, res) => {
+  const { eventId, userId, text, createdDate, createdTime } = req.body;
+
+  try {
+    const comment = new Comment({
+      eventId,
+      userId,
+      text,
+      createdDate,
+      createdTime,
+    });
+    await comment.save();
+    res.status(201).json(comment);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 

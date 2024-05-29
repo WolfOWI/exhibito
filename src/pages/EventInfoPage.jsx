@@ -11,6 +11,7 @@ import "../styles/EventInfo.css";
 import "../styles/commentCard.css"
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Footer from "../components/Footer";
+import NewComment from "../components/cards/NewComment";
 
 function EventInfoPage() {
   const { eventId } = useParams();
@@ -53,30 +54,17 @@ function EventInfoPage() {
       </div>
 
       <div className="container">
-        <h2 className="font-display mt-4">Reviews</h2>
+        <h2 className="font-display mt-4">Previous Comments</h2>
         <div className="row mt-2">
-          <div className="col-6">
-            <CommentsCard />
-          </div>
-          <div className="col-6">
-            <CommentsCard />
+          <div>
+            <CommentsCard eventId={eventId} />
           </div>
         </div>
       </div>
 
       <div className="container mt-3">
-        <h2 className="font-display">Leave a Review</h2>
-        <div className="row flex items-end">
-          <div className="col-10">
-            <label className="comment-input font-body">
-              Leave a Comment:
-              <textarea name="description" className="h-20" required />
-            </label>
-          </div>
-          <div className="col-2">
-            <PrimaryBtn label="Post Review" />
-          </div>
-        </div>
+      <h2 className="font-display">Leave a Review</h2>
+        <NewComment />
       </div>
 
       <Footer />
