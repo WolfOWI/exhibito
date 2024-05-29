@@ -18,8 +18,8 @@ export function addNewEvent(eventData) {
 
 // COMMENTS
 // -------------------------------------
-// Create a new event
-export function addNewCOmment(commentData) {
+// Create a new comment
+export function addNewComment(commentData) {
   return fetch("http://localhost:3001/comments/addComment", {
     method: "POST",
     headers: {

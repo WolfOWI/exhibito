@@ -16,13 +16,14 @@ router.get("/", async (req, res) => {
 
 // Create a new Comment
 router.post("/addComment", async (req, res) => {
-  const { eventId, userId, text, createdDate, createdTime } = req.body;
+  const { eventId, userId, text, isFlagged, createdDate, createdTime } = req.body;
 
   try {
     const comment = new Comment({
       eventId,
       userId,
       text,
+      isFlagged,
       createdDate,
       createdTime,
     });
@@ -39,6 +40,24 @@ router.put("/:id/unflag", async (req, res) => {
     const comment = await Comment.findByIdAndUpdate(
       req.params.id,
       { $set: { isFlagged: false } },
+      { new: true }
+    );
+    if (comment) {
+      res.json(comment);
+    } else {
+      res.status(404).send("Comment not found");
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Flag a comment (Update isFlagged to true)
+router.put("/:id/flag", async (req, res) => {
+  try {
+    const comment = await Comment.findByIdAndUpdate(
+      req.params.id,
+      { $set: { isFlagged: true } },
       { new: true }
     );
     if (comment) {

@@ -4,6 +4,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getEventById } from "../services/getExhibitoData";
+import { addNewComment } from "../services/createExhibitoData";
 import NavigationBar from "../components/NavigationBar";
 import CommentsCard from "../components/cards/CommentCard";
 // import EventImage from "../assets/images/homepage.png";
@@ -17,6 +18,17 @@ function EventInfoPage() {
   const { eventId } = useParams();
   const [specificEvent, setSpecificEvent] = useState("");
 
+  const [refreshComments, setRefreshComments] = useState(false);
+
+  const [newComment, setNewComment] = useState({
+    eventId: eventId,
+    userId: "", // !!!!!!!!!!!!!!!!!!!!!!!!
+    text: "",
+    isFlagged: false,
+    createdDate: "", // !!!!!!!!!!!!!!!!!!!!!!!!
+    createdTime: "", // !!!!!!!!!!!!!!!!!!!!!!!!
+  })
+
   useEffect(() => {
     getEventById(eventId)
       .then((data) => {
@@ -26,6 +38,23 @@ function EventInfoPage() {
         console.error("Error fetching event details:", error);
       });
   }, [eventId]);
+
+  function createComment() {
+    
+    const commentData = {
+      eventId: eventId,
+      userId: "664899a26073906275ba104a", // !!!!!!!!!!!!!!!!!!!!!!!!
+      text: newComment.text,
+      isFlagged: false,
+      createdDate: "hello", // !!!!!!!!!!!!!!!!!!!!!!!!
+      createdTime: "hello", // !!!!!!!!!!!!!!!!!!!!!!!!
+    }
+    
+    addNewComment(commentData).then(() => {
+      setRefreshComments((prev) => !prev); // Toggle between false & true
+    });
+  }
+
 
   return (
     <div>
@@ -57,14 +86,14 @@ function EventInfoPage() {
         <h2 className="font-display mt-4">Previous Comments</h2>
         <div className="row mt-2">
           <div>
-            <CommentsCard eventId={eventId} />
+            <CommentsCard eventId={eventId} refreshComments={refreshComments} />
           </div>
         </div>
       </div>
 
       <div className="container mt-3">
       <h2 className="font-display">Leave a Review</h2>
-        <NewComment />
+        <NewComment onPostClick={createComment} newComment={newComment} setNewComment={setNewComment} />
       </div>
 
       <Footer />
