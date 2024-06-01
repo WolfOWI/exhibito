@@ -1,10 +1,10 @@
 // Private routes designated to certain user roles only (like admin)
 
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-const PrivateRoute = ({ element: Component, allowedRoles, ...rest }) => {
+const PrivateRoute = ({ allowedRoles }) => {
   const token = sessionStorage.getItem("token");
 
   if (!token) {
@@ -18,7 +18,7 @@ const PrivateRoute = ({ element: Component, allowedRoles, ...rest }) => {
     return <Navigate to="/home" />;
   }
 
-  return <Route {...rest} element={<Component />} />;
+  return <Outlet />;
 };
 
 export default PrivateRoute;

@@ -21,29 +21,23 @@ function App() {
         <Route path="/" element={<LogInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
-        {/* Public Routes - Everyone can access (if logged in) */}
-        <Route path="/home" element={<ProtectedRoute element={<HomePage />} />} />
-        <Route path="/upcoming" element={<ProtectedRoute element={<UpcomingPage />} />} />
-        <Route
-          path="/eventinfo/:eventId"
-          element={<ProtectedRoute element={<EventInfoPage />} />}
-        />
-        <Route path="/profile" element={<ProtectedRoute element={<UserProfilePage />} />} />
-        <Route path="/tickets" element={<ProtectedRoute element={<TicketsPage />} />} />
+        {/* Protected Routes - Only logged-in users can access */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/upcoming" element={<UpcomingPage />} />
+          <Route path="/eventinfo/:eventId" element={<EventInfoPage />} />
+          <Route path="/profile" element={<UserProfilePage />} />
+          <Route path="/tickets" element={<TicketsPage />} />
+        </Route>
 
         {/* Private Routes - Reserved for admin */}
-        <Route
-          path="/admin/*"
-          element={<PrivateRoute element={<AdminDashPage />} allowedRoles={["admin"]} />}
-        />
-        <Route
-          path="/admin/events"
-          element={<PrivateRoute element={<PendingEventPage />} allowedRoles={["admin"]} />}
-        />
-        <Route
-          path="/admin/comments"
-          element={<PrivateRoute element={<FlaggedCommentPage />} allowedRoles={["admin"]} />}
-        />
+        <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin/*" element={<AdminDashPage />}>
+            <Route index element={<PendingEventPage />} />
+            <Route path="events" element={<PendingEventPage />} />
+            <Route path="comments" element={<FlaggedCommentPage />} />
+          </Route>
+        </Route>
       </Routes>
     </Router>
   );
