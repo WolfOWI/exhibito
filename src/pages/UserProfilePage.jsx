@@ -1,14 +1,15 @@
-// User Profile Page
-
-// Import
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import EventTicket from "../components/cards/TicketsCard";
-import UserImage from "../assets/images/User-image.png";
 import { useNavigate } from "react-router-dom";
+
+// Images
+import UserImage from "../assets/images/User-image.png";
+import AdminImage from "../assets/images/adminProfileImg.png";
+import HouseImage from "../assets/images/houseProfileImg.png";
 
 function UserProfilePage() {
   const [user, setUser] = useState(null); // Logged in user
@@ -53,12 +54,22 @@ function UserProfilePage() {
     <div>
       <NavigationBar />
       <div className="container mt-4">
-        <h1 className="font-display">User Profile</h1>
+        {user.userType === "standard" && <h1 className="font-display">User Profile</h1>}
+        {user.userType === "house" && <h1 className="font-display">House Profile</h1>}
+        {user.userType === "admin" && <h1 className="font-display">Admin Profile</h1>}
 
         <div className="row mt-5">
           <div className="col-3">
             <div>
-              <img src={UserImage} alt="blackandwhite" className="user-profile-img"></img>
+              {user.userType === "standard" && (
+                <img src={UserImage} alt="blackandwhite" className="user-profile-img"></img>
+              )}
+              {user.userType === "house" && (
+                <img src={HouseImage} alt="blackandwhite" className="user-profile-img"></img>
+              )}
+              {user.userType === "admin" && (
+                <img src={AdminImage} alt="blackandwhite" className="user-profile-img"></img>
+              )}
             </div>
           </div>
           <div className="col-9">
@@ -84,9 +95,20 @@ function UserProfilePage() {
       </div>
 
       <div className="container mt-5">
-        <h2 className="font-display">Your Events</h2>
-        <EventTicket />
-        <EventTicket />
+        {user.userType === "standard" && (
+          <>
+            <h2 className="font-display">Booked Events</h2>
+            <EventTicket />
+            <EventTicket />
+          </>
+        )}
+        {user.userType === "house" && (
+          <>
+            <h2 className="font-display">House Events</h2>
+            <h3 className="font-body">Add New Event</h3>
+          </>
+        )}
+        {user.userType === "admin" && <></>}
       </div>
       <div className="h-24">{/* Spacer */}</div>
     </div>
