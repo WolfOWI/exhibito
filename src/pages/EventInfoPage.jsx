@@ -3,13 +3,12 @@
 // Import
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getEventById } from "../services/getExhibitoData";
+import { getEventById, getHouseById } from "../services/getExhibitoData";
 import { addNewComment } from "../services/createExhibitoData";
 import NavigationBar from "../components/NavigationBar";
 import CommentsCard from "../components/cards/CommentCard";
-// import EventImage from "../assets/images/homepage.png";
 import "../styles/EventInfo.css";
-import "../styles/commentCard.css"
+import "../styles/commentCard.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Footer from "../components/Footer";
 import NewComment from "../components/cards/NewComment";
@@ -17,6 +16,7 @@ import NewComment from "../components/cards/NewComment";
 function EventInfoPage() {
   const { eventId } = useParams();
   const [specificEvent, setSpecificEvent] = useState("");
+  const [artHouse, setArtHouse] = useState(null);
 
   const [refreshComments, setRefreshComments] = useState(false);
 
@@ -27,12 +27,16 @@ function EventInfoPage() {
     isFlagged: false,
     createdDate: "", // !!!!!!!!!!!!!!!!!!!!!!!!
     createdTime: "", // !!!!!!!!!!!!!!!!!!!!!!!!
-  })
+  });
 
   useEffect(() => {
     getEventById(eventId)
       .then((data) => {
         setSpecificEvent(data);
+        return getHouseById(data.artHouseId);
+      })
+      .then((houseData) => {
+        setArtHouse(houseData);
       })
       .catch((error) => {
         console.error("Error fetching event details:", error);
@@ -40,7 +44,6 @@ function EventInfoPage() {
   }, [eventId]);
 
   function createComment() {
-    
     const commentData = {
       eventId: eventId,
       userId: "664899a26073906275ba104a", // !!!!!!!!!!!!!!!!!!!!!!!!
@@ -48,13 +51,12 @@ function EventInfoPage() {
       isFlagged: false,
       createdDate: "hello", // !!!!!!!!!!!!!!!!!!!!!!!!
       createdTime: "hello", // !!!!!!!!!!!!!!!!!!!!!!!!
-    }
-    
+    };
+
     addNewComment(commentData).then(() => {
       setRefreshComments((prev) => !prev); // Toggle between false & true
     });
   }
-
 
   return (
     <div>
@@ -70,7 +72,7 @@ function EventInfoPage() {
 
         <p className="font-body">{specificEvent.description}</p>
         <ul className="font-body mt-1">
-          <li>Arthouse: REQUIRES TO BE LINKED WITH ARTHOUSE ID: {specificEvent.artHouseId}</li>
+          <li>Arthouse: {artHouse ? artHouse.name : specificEvent.artHouseId}</li>
           <li>Location: {specificEvent.location}</li>
           <li>
             Exhibition Date: {specificEvent.startDate} - {specificEvent.endDate}
@@ -92,8 +94,12 @@ function EventInfoPage() {
       </div>
 
       <div className="container mt-3">
-      <h2 className="font-display">Leave a Review</h2>
-        <NewComment onPostClick={createComment} newComment={newComment} setNewComment={setNewComment} />
+        <h2 className="font-display">Leave a Review</h2>
+        <NewComment
+          onPostClick={createComment}
+          newComment={newComment}
+          setNewComment={setNewComment}
+        />
       </div>
 
       <Footer />

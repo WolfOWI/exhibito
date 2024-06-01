@@ -55,3 +55,20 @@ export function getAllComments() {
     });
 }
 // -------------------------------------
+
+// HOUSES
+// -------------------------------------
+// Get specific art house by ID
+export function getHouseById(houseId) {
+  return fetch(`http://localhost:3001/houses/${houseId}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Failed to fetch art house details.");
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+// -------------------------------------
