@@ -146,15 +146,15 @@ function SignUpPage() {
                           Select Art House
                         </option>
                         <option value="none">No Art House</option>
-                        <option value="1">Art House 1</option>
-                        <option value="2">Art House 2</option>
-                        <option value="3">Art House 3</option>
-                        <option value="4">Art House 4</option>
-                        <option value="5">Art House 5</option>
-                        <option value="6">Art House 6</option>
-                        <option value="7">Art House 7</option>
-                        <option value="8">Art House 8</option>
-                        <option value="9">Art House 9</option>
+                        <option value="663de7cebb036aad91e8c5fb">The Art Loft</option>
+                        <option value="664c701e7b4a225be6534cf7">The Avant-Garde Gallery</option>
+                        <option value="664f5e935123636e1872046b">The Palette Pavilion</option>
+                        <option value="664f5e8c5123636e1872046a">Masterpiece Manor</option>
+                        <option value="664f5ddd6882bb732229f744">Spectrum Studios</option>
+                        <option value="664c70707b4a225be6534cf8">Galleria Imaginarium</option>
+                        <option value="664c707b7b4a225be6534cf9">Envision Art Space</option>
+                        <option value="664c70847b4a225be6534cfa">Prism Gallery</option>
+                        <option value="664c71217b4a225be6534cfb">Artistry Haven</option>
                       </select>
                     </div>
                   )}
