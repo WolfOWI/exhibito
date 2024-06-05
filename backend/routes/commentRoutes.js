@@ -70,4 +70,18 @@ router.put("/:id/flag", async (req, res) => {
   }
 });
 
+// Delete a comment by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const comment = await Comment.findByIdAndDelete(req.params.id);
+    if (comment) {
+      res.json({ message: "Comment deleted" });
+    } else {
+      res.status(404).send("Comment not found");
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
