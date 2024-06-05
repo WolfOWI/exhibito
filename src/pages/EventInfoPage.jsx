@@ -3,7 +3,8 @@
 // Import
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getEventById, getHouseById } from "../services/getExhibitoData";
+import { jwtDecode } from "jwt-decode";
+import { getEventById, getHouseById, getUserById } from "../services/getExhibitoData";
 import { addNewComment } from "../services/createExhibitoData";
 import NavigationBar from "../components/NavigationBar";
 import CommentsCard from "../components/cards/CommentCard";
@@ -13,21 +14,24 @@ import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Footer from "../components/Footer";
 import NewComment from "../components/cards/NewComment";
 import useScrollToTop from "../services/useScrollToTop";
+import { getCurrentDate, getCurrentTime } from "../services/datesFunctions";
 
 function EventInfoPage() {
   const { eventId } = useParams();
+
   const [specificEvent, setSpecificEvent] = useState("");
   const [artHouse, setArtHouse] = useState(null);
+  const [user, setUser] = useState(null);
 
   const [refreshComments, setRefreshComments] = useState(false);
 
   const [newComment, setNewComment] = useState({
     eventId: eventId,
-    userId: "", // !!!!!!!!!!!!!!!!!!!!!!!!
+    userId: "",
     text: "",
     isFlagged: false,
-    createdDate: "", // !!!!!!!!!!!!!!!!!!!!!!!!
-    createdTime: "", // !!!!!!!!!!!!!!!!!!!!!!!!
+    createdDate: "",
+    createdTime: "",
   });
 
   useScrollToTop();
@@ -44,16 +48,33 @@ function EventInfoPage() {
       .catch((error) => {
         console.error("Error fetching event details:", error);
       });
+
+    // Fetch the current user data
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      getUserById(decodedToken.userId)
+        .then((userData) => {
+          setUser(userData);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
   }, [eventId]);
 
+  // Creating a new comment
   function createComment() {
+    if (!user) return;
+
     const commentData = {
       eventId: eventId,
-      userId: "664899a26073906275ba104a", // !!!!!!!!!!!!!!!!!!!!!!!!
+      userId: user._id,
+      username: user.username,
       text: newComment.text,
       isFlagged: false,
-      createdDate: "hello", // !!!!!!!!!!!!!!!!!!!!!!!!
-      createdTime: "hello", // !!!!!!!!!!!!!!!!!!!!!!!!
+      createdDate: getCurrentDate(),
+      createdTime: getCurrentTime(),
     };
 
     addNewComment(commentData).then(() => {
