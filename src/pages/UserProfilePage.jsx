@@ -95,6 +95,7 @@ function UserProfilePage() {
       </div>
 
       <div className="container mt-5">
+        {/* When standard user is logged in */}
         {user.userType === "standard" && (
           <>
             <h2 className="font-display">Booked Events</h2>
@@ -102,12 +103,14 @@ function UserProfilePage() {
             <EventTicket />
           </>
         )}
+        {/* When house user is logged in */}
         {user.userType === "house" && (
           <>
             <h2 className="font-display">House Events</h2>
             <h3 className="font-body">Add New Event</h3>
           </>
         )}
+        {/* When admin user is logged in */}
         {user.userType === "admin" && <></>}
       </div>
       <div className="h-24">{/* Spacer */}</div>

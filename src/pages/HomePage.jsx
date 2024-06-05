@@ -28,6 +28,7 @@ function HomePage() {
 
   // On Page Load, get events data from MongoDB and set store in the highlighted events
   useEffect(() => {
+    window.scrollTo(0, 0);
     getAllEvents()
       .then((data) => {
         setEvents(data);

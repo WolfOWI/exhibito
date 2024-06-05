@@ -12,6 +12,7 @@ import "../styles/commentCard.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Footer from "../components/Footer";
 import NewComment from "../components/cards/NewComment";
+import useScrollToTop from "../services/useScrollToTop";
 
 function EventInfoPage() {
   const { eventId } = useParams();
@@ -28,6 +29,8 @@ function EventInfoPage() {
     createdDate: "", // !!!!!!!!!!!!!!!!!!!!!!!!
     createdTime: "", // !!!!!!!!!!!!!!!!!!!!!!!!
   });
+
+  useScrollToTop();
 
   useEffect(() => {
     getEventById(eventId)
