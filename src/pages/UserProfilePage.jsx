@@ -14,6 +14,7 @@ import HouseImage from "../assets/images/houseProfileImg.png";
 
 function UserProfilePage() {
   const [user, setUser] = useState(null); // Logged in user
+  const [house, setHouse] = useState(null); // House details (if house user is logged in)
   const navigate = useNavigate(); // Navigate when logging out / not logged in
 
   useEffect(() => {

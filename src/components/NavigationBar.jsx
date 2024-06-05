@@ -3,6 +3,7 @@
 // Import
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { getUserById } from "../services/getExhibitoData";
 import { addNewEvent } from "../services/createExhibitoData";
 import "../styles/navbar.css";
 import Container from "react-bootstrap/Container";
@@ -19,24 +20,50 @@ function NavigationBar() {
   const [modalBOpen, setModalBOpen] = useState(false);
 
   // Modal New Event Form State (Details)
-  const [newEvent, setNewEvent] = useState([]);
+  const [newEvent, setNewEvent] = useState({
+    title: "",
+    description: "",
+    location: "",
+    startDate: "",
+    endDate: "",
+    startTime: "",
+    endTime: "",
+    ticketPrice: "",
+    maxSeats: "",
+    thumbnail: "",
+  });
 
   // What role for logged in user?
   const [userRole, setUserRole] = useState(null);
+
+  // Arthouse Id (if an arthouse is logged in)
+  const [loggedInArtHouseId, setLoggedInArtHouseId] = useState("");
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
+      console.log("Logged-in user details - decoded token:", decodedToken);
       setUserRole(decodedToken.userType);
+
+      if (decodedToken.userType === "house") {
+        getUserById(decodedToken.userId)
+          .then((response) => {
+            const artHouseId = response.artHouseId;
+            setLoggedInArtHouseId(artHouseId);
+          })
+          .catch((error) => {
+            console.error("Error fetching user details:", error);
+          });
+      }
     }
   }, []);
 
   // Modal A Handlers
   const handleModalAClose = () => setModalAOpen(false);
   const handleModalAOpen = () => setModalAOpen(true);
+  // Next Button
   const handleNextBtn = () => {
-    // Next Button
     handleModalAClose();
     handleModalBOpen();
   };
@@ -44,13 +71,13 @@ function NavigationBar() {
   // Modal B Handlers
   const handleModalBClose = () => setModalBOpen(false);
   const handleModalBOpen = () => setModalBOpen(true);
+  // Back Button
   const handleBackBtn = () => {
-    // Back Button
     handleModalBClose();
     handleModalAOpen();
   };
+  // Submit Button
   const handleSubmitBtn = () => {
-    // Submit Button
     handleModalBClose();
     // Create new event in backend
     createNewEvent();
@@ -59,7 +86,7 @@ function NavigationBar() {
   // Adding the new event
   function createNewEvent() {
     const newEventData = {
-      artHouseId: "663de7cebb036aad91e8c5fb",
+      artHouseId: loggedInArtHouseId,
       title: newEvent.title,
       description: newEvent.description,
       location: newEvent.location,
@@ -76,7 +103,17 @@ function NavigationBar() {
 
     console.log("Creating new event: " + newEventData.title);
     console.log(newEventData);
-    addNewEvent(newEventData);
+    addNewEvent(newEventData)
+      .then((response) => {
+        if (response && response.data) {
+          console.log("Event created: ", response.data);
+        } else {
+          console.error("Error creating event: No data in response", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error creating event: ", error);
+      });
   }
 
   return (
