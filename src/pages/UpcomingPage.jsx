@@ -26,15 +26,23 @@ function UpcomingPage() {
 
   // On Page Load, get events data from MongoDB and set to state "events"
   useEffect(() => {
+    fetchApprovedEvents();
+  }, []);
+
+  // Get events from MongoDB, but filter to only show "Approved" events.
+
+  const fetchApprovedEvents = () => {
     getAllEvents()
       .then((data) => {
-        setEvents(data);
-        setDefaultAllEvents(data);
+        // Filter Pending events
+        const filteredEvents = data.filter((event) => event.status === "Approved");
+        setEvents(filteredEvents);
+        setDefaultAllEvents(filteredEvents);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
 
   // Filtering & Sorting
   const applyFiltersAndSort = (newSortType, clearFiltersRequest) => {
@@ -148,7 +156,7 @@ function UpcomingPage() {
             <Row>
               {/* Generate (map) All events from MongoDB to an EventCard in a column (for styling) */}
               {events.length > 0 ? (
-                events.map((event) => ( 
+                events.map((event) => (
                   <Col xs={12} lg={6} xl={4} key={event._id}>
                     <EventCard
                       key={event._id}
