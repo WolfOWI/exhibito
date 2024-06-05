@@ -5,6 +5,7 @@ import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import EventTicket from "../components/cards/TicketsCard";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 // Images
 import UserImage from "../assets/images/User-image.png";
@@ -13,7 +14,6 @@ import HouseImage from "../assets/images/houseProfileImg.png";
 
 function UserProfilePage() {
   const [user, setUser] = useState(null); // Logged in user
-
   const navigate = useNavigate(); // Navigate when logging out / not logged in
 
   useEffect(() => {
@@ -26,12 +26,16 @@ function UserProfilePage() {
           navigate("/");
           return;
         }
-        const response = await axios.get("http://localhost:3001/users/profile", {
+        // Decode token to get userId
+        const decodedToken = jwtDecode(token);
+
+        const response = await axios.get(`http://localhost:3001/users/${decodedToken.userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUser(response.data.user);
+
+        setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
