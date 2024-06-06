@@ -48,20 +48,3 @@ export function monthNumberToName(monthNumber) {
   ];
   return monthsNames[parseInt(monthNumber) - 1];
 }
-
-// Get current date in "DD/MM/YYYY" format
-export function getCurrentDate() {
-  const date = new Date();
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-}
-
-// Get current time in "HH:MM" format
-export function getCurrentTime() {
-  const date = new Date();
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  return `${hours}:${minutes}`;
-}

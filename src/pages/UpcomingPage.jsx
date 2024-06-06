@@ -26,23 +26,15 @@ function UpcomingPage() {
 
   // On Page Load, get events data from MongoDB and set to state "events"
   useEffect(() => {
-    fetchApprovedEvents();
-  }, []);
-
-  // Get events from MongoDB, but filter to only show "Approved" events.
-
-  const fetchApprovedEvents = () => {
     getAllEvents()
       .then((data) => {
-        // Filter Pending events
-        const filteredEvents = data.filter((event) => event.status === "Approved");
-        setEvents(filteredEvents);
-        setDefaultAllEvents(filteredEvents);
+        setEvents(data);
+        setDefaultAllEvents(data);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
+  }, []);
 
   // Filtering & Sorting
   const applyFiltersAndSort = (newSortType, clearFiltersRequest) => {

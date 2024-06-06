@@ -12,22 +12,6 @@ export function getAllUsers() {
       throw err;
     });
 }
-
-// Get specific user by ID
-export function getUserById(userId) {
-  return fetch(`http://localhost:3001/users/${userId}`)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      console.error(`Failed to fetch user details for ID: ${userId}. Status: ${res.status}`);
-      throw new Error("Failed to fetch specific user details.");
-    })
-    .catch((err) => {
-      console.error(`Error fetching user details for ID: ${userId}`, err);
-      throw err;
-    });
-}
 // -------------------------------------
 
 // EVENTS
@@ -65,23 +49,6 @@ export function getAllComments() {
   return fetch("http://localhost:3001/comments")
     .then((res) => {
       return res.json();
-    })
-    .catch((err) => {
-      throw err;
-    });
-}
-// -------------------------------------
-
-// HOUSES
-// -------------------------------------
-// Get specific art house by ID
-export function getHouseById(houseId) {
-  return fetch(`http://localhost:3001/houses/${houseId}`)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Failed to fetch art house details.");
     })
     .catch((err) => {
       throw err;

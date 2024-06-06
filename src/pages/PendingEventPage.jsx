@@ -5,7 +5,6 @@ import PendingEventCard from "../components/cards/PendingEventCard";
 import { useState, useEffect } from "react";
 import { getAllEvents } from "../services/getExhibitoData";
 import { approveEventById } from "../services/updateExhibitoData";
-import { deleteEventById } from "../services/deleteExhibitoData";
 
 function PendingEventPage() {
   // STATES
@@ -42,17 +41,6 @@ function PendingEventPage() {
       });
   };
 
-  const handleDelete = async (eventId) => {
-    try {
-      await deleteEventById(eventId);
-      setPendingEvents((prevEvents) => prevEvents.filter((event) => event._id !== eventId));
-      console.log("Event: " + eventId + " deleted.");
-      fetchPendingEvents(); // Refresh pending events
-    } catch (err) {
-      console.log("Error deleting event:", err);
-    }
-  };
-
   return (
     <div className="container">
       <h3 className="font-body mt-4 text-sapphire-whisper-BASE">Pending Event Submissions</h3>
@@ -77,7 +65,6 @@ function PendingEventPage() {
             location={pEvent.location}
             artHouseId={pEvent.artHouseId}
             onApprove={() => handleApprove(pEvent._id)} // Approve Button
-            onDelete={() => handleDelete(pEvent._id)}
           />
         ))
       ) : (

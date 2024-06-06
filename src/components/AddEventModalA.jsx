@@ -51,7 +51,7 @@ function AddEventModalA({ show, onHide, onNextClick, newEvent, setNewEvent }) {
               className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
               aria-label="Default select example"
             >
-              <option value="None">Select Province</option>
+              <option disabled>Select Province</option>
               <option value="Gauteng">Gauteng</option>
               <option value="FreeState">Free State</option>
               <option value="KwaZulu-Natal">KwaZulu-Natal</option>
