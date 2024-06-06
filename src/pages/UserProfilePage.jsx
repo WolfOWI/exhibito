@@ -39,10 +39,12 @@ function UserProfilePage() {
             setUser(userData); // Set user data
             const artHouseId = userData.artHouseId;
 
-            getHouseById(artHouseId).then((houseData) => {
-              console.log(houseData);
-              setHouse(houseData);
-            });
+            if (userData.artHouseId !== "none") {
+              getHouseById(artHouseId).then((houseData) => {
+                console.log(houseData);
+                setHouse(houseData);
+              });
+            }
           })
           .catch((error) => {
             console.error("Error fetching user details:", error);
@@ -69,10 +71,12 @@ function UserProfilePage() {
       <NavigationBar />
       <div className="container mt-4">
         {user.userType === "standard" && <h1 className="font-display">User Profile</h1>}
-        {user.userType === "house" && (
+        {house && user.userType === "house" ? (
           <h1 className="font-display">
             {house.name} <span className="text-ink-silhouette-30%">Art House</span>
           </h1>
+        ) : (
+          ""
         )}
         {user.userType === "admin" && <h1 className="font-display">Admin Profile</h1>}
 
@@ -137,7 +141,7 @@ function UserProfilePage() {
           </>
         )}
         {/* House */}
-        {user.userType === "house" && (
+        {house && user.userType === "house" ? (
           <>
             <div className="mt-6">
               <h2 className="font-display mb-2">Art House Details</h2>
@@ -187,6 +191,8 @@ function UserProfilePage() {
               </div>
             </div>
           </>
+        ) : (
+          ""
         )}
         {/* Admin */}
         {user.userType === "admin" && <></>}
