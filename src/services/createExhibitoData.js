@@ -45,7 +45,13 @@ export function addNewTicket(ticketData) {
     body: JSON.stringify(ticketData),
   })
     .then((response) => response.json())
-    .then((data) => console.log("Ticket created:", data))
-    .catch((error) => console.error("Error:", error));
+    .then((data) => {
+      console.log("Ticket created:", data);
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error creating ticket:", error);
+      throw error;
+    });
 }
 // -------------------------------------
