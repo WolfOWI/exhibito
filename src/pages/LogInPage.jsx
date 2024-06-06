@@ -53,7 +53,7 @@ function LogInPage() {
     <div>
       <NavigationBar />
       <div className="flex justify-between w-full">
-        <div className="w-[100%] md:w-[50%]">
+        <div className="w-[100%] md:w-[50%] mt-24">
           <form className="2xl:ml-96 xl:ml-56 sm:ml-24 ml-12 mr-24 md:mr-0 py-24">
             <h1 className="font-display">Log In</h1>
             <p className="font-body md:w-[80%]">
@@ -100,12 +100,12 @@ function LogInPage() {
               <PrimaryBtn label="Log In" onClick={handleSubmit} />
               <Link to="/signup">
                 <SecondaryBtn label="Sign Up" className="m-2" />
-              </Link>
+              </Link> 
             </div>
           </form>
         </div>
-        <div className="hidden md:block w-[40%]">
-          <img src={LoginImage} alt="Log In Illustration" className=" h-screen object-cover" />
+        <div className="hidden md:block w-[60%]">
+          <img src={LoginImage} alt="Log In Illustration" className="h-screen object-cover" />
         </div>
       </div>
     </div>

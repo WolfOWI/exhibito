@@ -5,6 +5,8 @@ import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import EventTicket from "../components/cards/TicketsCard";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { getUserById, getHouseById } from "../services/getExhibitoData";
 
 // Images
 import UserImage from "../assets/images/User-image.png";
@@ -13,9 +15,10 @@ import HouseImage from "../assets/images/houseProfileImg.png";
 
 function UserProfilePage() {
   const [user, setUser] = useState(null); // Logged in user
-
+  const [house, setHouse] = useState(null); // House details (if house user is logged in)
   const navigate = useNavigate(); // Navigate when logging out / not logged in
 
+  // Get House & User details from stored token (logged in)
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -26,17 +29,30 @@ function UserProfilePage() {
           navigate("/");
           return;
         }
-        const response = await axios.get("http://localhost:3001/users/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUser(response.data.user);
+        // Decode token to get userId
+        const decodedToken = jwtDecode(token);
+
+        // Get User By Id
+        getUserById(decodedToken.userId)
+          .then((userData) => {
+            console.log(userData);
+            setUser(userData); // Set user data
+            const artHouseId = userData.artHouseId;
+
+            if (userData.artHouseId !== "none") {
+              getHouseById(artHouseId).then((houseData) => {
+                console.log(houseData);
+                setHouse(houseData);
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user details:", error);
+          });
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
-
     fetchUserData();
   }, [navigate]);
 
@@ -55,26 +71,37 @@ function UserProfilePage() {
       <NavigationBar />
       <div className="container mt-4">
         {user.userType === "standard" && <h1 className="font-display">User Profile</h1>}
-        {user.userType === "house" && <h1 className="font-display">House Profile</h1>}
+        {house && user.userType === "house" ? (
+          <h1 className="font-display">
+            {house.name} <span className="text-ink-silhouette-30%">Art House</span>
+          </h1>
+        ) : (
+          ""
+        )}
         {user.userType === "admin" && <h1 className="font-display">Admin Profile</h1>}
 
         <div className="row mt-5">
           <div className="col-3">
             <div>
+              {/* Standard */}
               {user.userType === "standard" && (
                 <img src={UserImage} alt="blackandwhite" className="user-profile-img"></img>
               )}
+              {/* House */}
               {user.userType === "house" && (
                 <img src={HouseImage} alt="blackandwhite" className="user-profile-img"></img>
               )}
+              {/* Admin */}
               {user.userType === "admin" && (
                 <img src={AdminImage} alt="blackandwhite" className="user-profile-img"></img>
               )}
             </div>
           </div>
           <div className="col-9">
-            <h2 className="font-body mt-3">{user.username}</h2>
-            <div className="flex items-center">
+            {/* User Name */}
+            <h2 className="font-body fw-bold mt-3">{user.username}</h2>
+            {/* User Email */}
+            <div className="flex items-center mt-[-10px]">
               <svg
                 className="h-8"
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,16 +113,26 @@ function UserProfilePage() {
               <div className="w-2"></div>
               <p className="font-body mt-3">{user.email}</p>
             </div>
-            <div className="flex items-center">
-              <p className="font-body number">{user.mobile}</p>
+            {/* User Mobile */}
+            <div className="flex items-center mb-4 mt-[-10px]">
+              <svg
+                className="h-8"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
+                fill="#D88776"
+              >
+                <path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z" />
+              </svg>
+              <div className="w-2"></div>
+              <p className="font-body mt-3">{user.mobile}</p>
             </div>
-            <PrimaryBtn label="Log Out" onClick={handleLogout} />
+            <PrimaryBtn label="Log Out" onClick={handleLogout} className="mt-2" />
           </div>
         </div>
       </div>
 
       <div className="container mt-5">
-        {/* When standard user is logged in */}
+        {/* Standard */}
         {user.userType === "standard" && (
           <>
             <h2 className="font-display">Booked Events</h2>
@@ -103,14 +140,61 @@ function UserProfilePage() {
             <EventTicket />
           </>
         )}
-        {/* When house user is logged in */}
-        {user.userType === "house" && (
+        {/* House */}
+        {house && user.userType === "house" ? (
           <>
-            <h2 className="font-display">House Events</h2>
-            <h3 className="font-body">Add New Event</h3>
+            <div className="mt-6">
+              <h2 className="font-display mb-2">Art House Details</h2>
+              <div className="space-y-2">
+                <div className="flex items-center">
+                  <p className="font-body">{house.description}</p>
+                </div>
+                {/* House Mobile */}
+                <div className="flex items-center">
+                  <svg
+                    className="h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                    fill="#6e9297"
+                  >
+                    <path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z" />
+                  </svg>
+                  <div className="w-2"></div>
+                  <p className="font-body mt-3">{house.mobile}</p>
+                </div>
+                {/* House Email */}
+                <div className="flex items-center">
+                  <svg
+                    className="h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                    fill="#6e9297"
+                  >
+                    <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-287q5 0 10.5-1.5T501-453l283-177q8-5 12-12.5t4-16.5q0-20-17-30t-35 1L480-520 212-688q-18-11-35-.5T160-659q0 10 4 17.5t12 11.5l283 177q5 3 10.5 4.5T480-447Z" />
+                  </svg>
+                  <div className="w-2"></div>
+                  <p className="font-body mt-3">{house.email}</p>
+                </div>
+                {/* House Address */}
+                <div className="flex items-center">
+                  <svg
+                    className="h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                    fill="#6e9297"
+                  >
+                    <path d="M160-200v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H600q-17 0-28.5-11.5T560-160v-200q0-17-11.5-28.5T520-400h-80q-17 0-28.5 11.5T400-360v200q0 17-11.5 28.5T360-120H240q-33 0-56.5-23.5T160-200Z" />
+                  </svg>
+                  <div className="w-2"></div>
+                  <p className="font-body mt-3">{house.address}</p>
+                </div>
+              </div>
+            </div>
           </>
+        ) : (
+          ""
         )}
-        {/* When admin user is logged in */}
+        {/* Admin */}
         {user.userType === "admin" && <></>}
       </div>
       <div className="h-24">{/* Spacer */}</div>

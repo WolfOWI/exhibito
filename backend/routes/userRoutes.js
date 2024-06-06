@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { requireAuth } = require("../middleware/auth");
 
+// GET
+// -------------------------------------
 // Get all users
 router.get("/", async (req, res) => {
   try {
@@ -28,7 +30,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get user profile (authorisation)
+// Get user profile (for authorisation)
 router.get("/profile", requireAuth(), async (req, res) => {
   try {
     const user = await User.findById(req.auth.userId).select("-password");
@@ -37,7 +39,10 @@ router.get("/profile", requireAuth(), async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
 
+// CREATE (with token)
+// -------------------------------------
 // Create a new User
 router.post("/register", async (req, res) => {
   const { username, email, mobile, userType, password, artHouseId } = req.body;
@@ -80,7 +85,10 @@ router.post("/register", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+// -------------------------------------
 
+// LOGIN
+// -------------------------------------
 // Login Function
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -112,5 +120,6 @@ router.post("/login", async (req, res) => {
 router.get("/protected", requireAuth(), (req, res) => {
   res.status(200).send("This route is secured. Your user id is: " + req.auth.userId);
 });
+// -------------------------------------
 
 module.exports = router;

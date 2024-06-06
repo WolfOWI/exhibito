@@ -61,13 +61,13 @@ function SignUpPage() {
   return (
     <div className="background">
       <NavigationBar />
-      <div className="content">
-        <div className="row">
-          <div className="col-7">
-            <img src={SignupImage} alt="Signup" className="signupImage" />
+      <div className="flex justify-between w-full">
+        {/* <div className="w-[100%] md:w-[50%]"> */}
+          <div className="hidden md:block w-[60%]">
+            <img src={SignupImage} alt="Signup" className="h-screen object-cover" />
           </div>
-          <div className="col-4">
-            <form className="form1 py-5" onSubmit={handleSubmit}>
+          <div className="2xl:ml-96 xl:ml-56 sm:ml-24 ml-12 mr-24 md:mr-0 py-16">
+            <form className="form1" onSubmit={handleSubmit}>
               <h1 className="font-display">Sign Up</h1>
               <p className="font-body">
                 Join our community of art enthusiasts and gain access to exclusive exhibitions and
@@ -186,7 +186,7 @@ function SignUpPage() {
               </div>
             </form>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );
