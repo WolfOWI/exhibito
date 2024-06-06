@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
 
+// GET
+// -------------------------------------
 // Get all Tickets
 router.get("/", async (req, res) => {
   try {
@@ -11,5 +13,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
 
 module.exports = router;

@@ -22,7 +22,7 @@ function AdminDashPage() {
         <Route path="events" element={<PendingEventPage />} />
         <Route path="comments" element={<FlaggedCommentPage />} />
       </Routes>
-    </div>
+    </div> 
   );
 }
 

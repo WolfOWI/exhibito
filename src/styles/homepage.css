@@ -1,0 +1,29 @@
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #587579;
+  width: 30px;
+  height: 30px;
+  border-radius: 10%;
+  padding: 10%;
+}
+
+.carousel-control-prev {
+  left: -10%;
+}
+
+.carousel-control-next {
+  right: -5%;
+}
+
+.carousel-indicators button {
+  background-color: #587579 !important;
+}
+
+.carousel-indicators {
+  bottom: -30px;
+}
