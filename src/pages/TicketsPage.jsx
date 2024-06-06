@@ -61,7 +61,7 @@ function TicketsPage() {
                  <div className="col-1"></div>
                  <div className="col-3" style={{marginLeft: '1030px', marginTop: '-50px',}}>
                     <div className="row">
-                        <div className="col-6 btns" style={{marginLeft: '75px'}}>
+                        <div className="col-6 btns" style={{marginLeft: '35px'}}>
                             <PrimaryBtn label="Check Out" />
                         </div>
                     </div>
