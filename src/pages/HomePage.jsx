@@ -1,16 +1,16 @@
 // Home Page
 
-// IMPORT
-// -----------------------------------------------
-// Custom CSS
-import "../styles/homepage.css";
-
-// React Hooks
 import { useState, useEffect } from "react";
 
+// Import Imagery
+import HeroImage from "../assets/images/Hero-img.png";
+
 // Import Bootstrap Components
-import { Carousel, Row, Col, Container, Card, Button } from "react-bootstrap";
+import { Carousel, Row, Col } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 import EventCard from "../components/cards/EventCard";
+import Button from "react-bootstrap/Button";
 
 // Import Custom Components
 import NavigationBar from "../components/NavigationBar";
@@ -19,16 +19,12 @@ import Footer from "../components/Footer";
 // Import Functions
 import { getAllEvents } from "../services/getExhibitoData";
 
-// Import Imagery
-import HeroImage from "../assets/images/Hero-img.png";
-// -----------------------------------------------
-
 function HomePage() {
+  // STATES
   const [events, setEvents] = useState([]); // Events stored
 
   // On Page Load, get events data from MongoDB and set store in the highlighted events
   useEffect(() => {
-    window.scrollTo(0, 0);
     getAllEvents()
       .then((data) => {
         setEvents(data);
@@ -37,42 +33,6 @@ function HomePage() {
         console.log(error);
       });
   }, []);
-
-  const featuredEventIndices = [1, 4, 5, 6, 8, 10, 12, 13];
-  const featuredEvents = featuredEventIndices
-    .map((index) => events[index])
-    .filter((event) => event !== undefined);
-
-  const renderEventCards = (eventList) => {
-    return eventList.map((event, index) => (
-      <Col xs={12} lg={6} xl={3} key={event._id}>
-        <EventCard
-          eventIdNum={event._id}
-          thumbnail={event.thumbnail}
-          title={event.title}
-          desc={event.description}
-          ticketPrice={event.ticketPrice}
-          avSeats={event.availableSeats}
-          maxSeats={event.maxSeats}
-          startTime={event.startTime}
-          endTime={event.endTime}
-          startDate={event.startDate}
-          endDate={event.endDate}
-          location={event.location}
-        />
-      </Col>
-    ));
-  };
-
-  const chunkArray = (array, size) => {
-    const chunkedArr = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunkedArr.push(array.slice(i, i + size));
-    }
-    return chunkedArr;
-  };
-
-  const eventChunks = chunkArray(featuredEvents, 4);
 
   return (
     <div style={{ backgroundColor: "#f3f1ee" }}>
@@ -132,12 +92,57 @@ function HomePage() {
           </div>
 
           {/* Carousel with Scroller */}
-          <Carousel indicators={true} controls={true} className="custom-carousel">
-            {eventChunks.map((chunk, idx) => (
-              <Carousel.Item key={idx}>
-                <Row>{renderEventCards(chunk)}</Row>
-              </Carousel.Item>
-            ))}
+          <Carousel>
+            <Carousel.Item>
+              <Row>
+                <Col xs={12} lg={6} xl={3}>
+                  {events.length > 1 ? (
+                    <EventCard
+                      key={events[1]._id}
+                      thumbnail={events[1].thumbnail}
+                      title={events[1].title}
+                      desc={events[1].description}
+                      ticketPrice={events[1].ticketPrice}
+                      avSeats={events[1].availableSeats}
+                      maxSeats={events[1].maxSeats}
+                      startTime={events[1].startTime}
+                      endTime={events[1].endTime}
+                      startDate={events[1].startDate}
+                      endDate={events[1].endDate}
+                      location={events[1].location}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </Col>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+              </Row>
+            </Carousel.Item>
+
+            <Carousel.Item>
+              <Row>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+                <Col xs={12} lg={6} xl={3}>
+                  <EventCard />
+                </Col>
+              </Row>
+            </Carousel.Item>
           </Carousel>
         </div>
 
@@ -189,7 +194,7 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              Arthouse 1
+              The Avant-Garde Gallery
             </h3>
             <p
               style={{

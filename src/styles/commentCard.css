@@ -1,6 +1,6 @@
 .rectangle{
     width: 100%;
-    height: auto;
+    height: 140px;
     border: 1px solid #262015;
     border-radius: 20px;
 }

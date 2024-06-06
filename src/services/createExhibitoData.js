@@ -16,19 +16,4 @@ export function addNewEvent(eventData) {
     .catch((error) => console.error("Error:", error));
 }
 
-// COMMENTS
-// -------------------------------------
-// Create a new comment
-export function addNewComment(commentData) {
-  return fetch("http://localhost:3001/comments/addComment", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(commentData),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log("Comment created:", data))
-    .catch((error) => console.error("Error:", error));
-}
 // -------------------------------------
