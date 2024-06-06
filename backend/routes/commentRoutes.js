@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Comment = require("../models/Comment");
 
+// GET
+// -------------------------------------
 // Get all comments or filter by eventId
 router.get("/", async (req, res) => {
   try {
@@ -13,7 +15,10 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
 
+// CREATE
+// -------------------------------------
 // Create a new Comment
 router.post("/addComment", async (req, res) => {
   const { eventId, userId, text, isFlagged, createdDate, createdTime } = req.body;
@@ -33,7 +38,10 @@ router.post("/addComment", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+// -------------------------------------
 
+// UPDATE
+// -------------------------------------
 // Unflag (approve) a flagged comment (Update isFlagged to false)
 router.put("/:id/unflag", async (req, res) => {
   try {
@@ -69,5 +77,23 @@ router.put("/:id/flag", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
+
+// DELETE
+// -------------------------------------
+// Delete a comment by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const comment = await Comment.findByIdAndDelete(req.params.id);
+    if (comment) {
+      res.json({ message: "Comment deleted" });
+    } else {
+      res.status(404).send("Comment not found");
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+// -------------------------------------
 
 module.exports = router;

@@ -4,8 +4,9 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { requireAuth } = require("../middleware/auth");
-// const { authenticateRole } = require("../middleware/authMiddleware");
 
+// GET
+// -------------------------------------
 // Get all users
 router.get("/", async (req, res) => {
   try {
@@ -16,7 +17,20 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get user profile
+// Get user by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get user profile (for authorisation)
 router.get("/profile", requireAuth(), async (req, res) => {
   try {
     const user = await User.findById(req.auth.userId).select("-password");
@@ -25,7 +39,10 @@ router.get("/profile", requireAuth(), async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
 
+// CREATE (with token)
+// -------------------------------------
 // Create a new User
 router.post("/register", async (req, res) => {
   const { username, email, mobile, userType, password, artHouseId } = req.body;
@@ -68,7 +85,10 @@ router.post("/register", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+// -------------------------------------
 
+// LOGIN
+// -------------------------------------
 // Login Function
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -100,5 +120,6 @@ router.post("/login", async (req, res) => {
 router.get("/protected", requireAuth(), (req, res) => {
   res.status(200).send("This route is secured. Your user id is: " + req.auth.userId);
 });
+// -------------------------------------
 
 module.exports = router;

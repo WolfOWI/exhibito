@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Event = require("../models/Event");
 
+// GET
+// -------------------------------------
 // Get all events
 router.get("/", async (req, res) => {
   try {
@@ -25,7 +27,10 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
 
+// UPDATE
+// -------------------------------------
 // Approve an event (Update event.status to "Approved")
 router.put("/:id/approve", async (req, res) => {
   try {
@@ -44,7 +49,10 @@ router.put("/:id/approve", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// -------------------------------------
 
+// CREATE
+// -------------------------------------
 // Create a new event
 router.post("/addEvent", async (req, res) => {
   const {
@@ -85,5 +93,23 @@ router.post("/addEvent", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+// -------------------------------------
+
+// DELETE
+// -------------------------------------
+// Delete an event by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const event = await Event.findByIdAndDelete(req.params.id);
+    if (event) {
+      res.json({ message: "Event deleted" });
+    } else {
+      res.status(404).send("Event not found");
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+// -------------------------------------
 
 module.exports = router;

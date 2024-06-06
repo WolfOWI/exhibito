@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import NavigationBar from "../components/NavigationBar";
 import LoginImage from "../assets/Log-In imagery.png";
 import "../styles/signup.css";
@@ -29,9 +30,20 @@ function LogInPage() {
         email,
         password,
       });
-      sessionStorage.setItem("token", response.data.token); // Store the token
+      const token = response.data.token;
+      sessionStorage.setItem("token", token); // Store the token
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.userType;
       setMessage("User successfully Logged In!");
-      navigate("/home"); // Redirect to home page after successful login
+
+      // Redirect based on user role
+      if (userRole === "admin") {
+        navigate("/admin");
+      } else if (userRole === "house") {
+        navigate("/home");
+      } else {
+        navigate("/home");
+      }
     } catch (error) {
       setMessage(`Invalid email or password.`);
     }

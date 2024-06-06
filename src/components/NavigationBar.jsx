@@ -3,6 +3,7 @@
 // Import
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { getUserById } from "../services/getExhibitoData";
 import { addNewEvent } from "../services/createExhibitoData";
 import "../styles/navbar.css";
 import Container from "react-bootstrap/Container";
@@ -19,24 +20,50 @@ function NavigationBar() {
   const [modalBOpen, setModalBOpen] = useState(false);
 
   // Modal New Event Form State (Details)
-  const [newEvent, setNewEvent] = useState([]);
+  const [newEvent, setNewEvent] = useState({
+    title: "",
+    description: "",
+    location: "",
+    startDate: "",
+    endDate: "",
+    startTime: "",
+    endTime: "",
+    ticketPrice: "",
+    maxSeats: "",
+    thumbnail: "",
+  });
 
   // What role for logged in user?
   const [userRole, setUserRole] = useState(null);
+
+  // Arthouse Id (if an arthouse is logged in)
+  const [loggedInArtHouseId, setLoggedInArtHouseId] = useState("");
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
+      console.log("Logged-in user details - decoded token:", decodedToken);
       setUserRole(decodedToken.userType);
+
+      if (decodedToken.userType === "house") {
+        getUserById(decodedToken.userId)
+          .then((response) => {
+            const artHouseId = response.artHouseId;
+            setLoggedInArtHouseId(artHouseId);
+          })
+          .catch((error) => {
+            console.error("Error fetching user details:", error);
+          });
+      }
     }
   }, []);
 
   // Modal A Handlers
   const handleModalAClose = () => setModalAOpen(false);
   const handleModalAOpen = () => setModalAOpen(true);
+  // Next Button
   const handleNextBtn = () => {
-    // Next Button
     handleModalAClose();
     handleModalBOpen();
   };
@@ -44,13 +71,13 @@ function NavigationBar() {
   // Modal B Handlers
   const handleModalBClose = () => setModalBOpen(false);
   const handleModalBOpen = () => setModalBOpen(true);
+  // Back Button
   const handleBackBtn = () => {
-    // Back Button
     handleModalBClose();
     handleModalAOpen();
   };
+  // Submit Button
   const handleSubmitBtn = () => {
-    // Submit Button
     handleModalBClose();
     // Create new event in backend
     createNewEvent();
@@ -59,7 +86,7 @@ function NavigationBar() {
   // Adding the new event
   function createNewEvent() {
     const newEventData = {
-      artHouseId: "663de7cebb036aad91e8c5fb",
+      artHouseId: loggedInArtHouseId,
       title: newEvent.title,
       description: newEvent.description,
       location: newEvent.location,
@@ -76,7 +103,17 @@ function NavigationBar() {
 
     console.log("Creating new event: " + newEventData.title);
     console.log(newEventData);
-    addNewEvent(newEventData);
+    addNewEvent(newEventData)
+      .then((response) => {
+        if (response && response.data) {
+          console.log("Event created: ", response.data);
+        } else {
+          console.error("Error creating event: No data in response", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error creating event: ", error);
+      });
   }
 
   return (
@@ -105,7 +142,7 @@ function NavigationBar() {
                         </Nav.Link>
                       </Nav>
                       <Nav className="align-items-center">
-                        <Nav.Link href="/tickets" className="md:hidden lg:block">
+                        <Nav.Link href="/tickets" className="hidden lg:block">
                           {/* Ticket SVG */}
                           <svg
                             className="h-8 lg:ml-3 fill-ink-silhouette-BASE hover:fill-scarlet-melody-BASE"
@@ -115,7 +152,7 @@ function NavigationBar() {
                             <path d="m480-404 60 46q11 9 24 .5t8-22.5l-24-76 67-52q11-9 6-22.5T602-544h-78l-25-77q-5-14-19-14t-19 14l-25 77h-79q-14 0-18.5 13.5T345-508l65 52-24 77q-5 14 7 22.5t24-.5l63-47ZM160-160q-33 0-56.5-23.5T80-240v-135q0-11 7-19t18-10q24-8 39.5-29t15.5-47q0-26-15.5-47T105-556q-11-2-18-10t-7-19v-135q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v135q0 11-7 19t-18 10q-24 8-39.5 29T800-480q0 26 15.5 47t39.5 29q11 2 18 10t7 19v135q0 33-23.5 56.5T800-160H160Z" />
                           </svg>
                         </Nav.Link>
-                        <Nav.Link href="/profile" className="md:hidden lg:block">
+                        <Nav.Link href="/profile" className="hidden lg:block">
                           {/* Account Circle SVG */}
                           <svg
                             className=" h-10 fill-ink-silhouette-BASE hover:fill-scarlet-melody-BASE"
@@ -143,20 +180,17 @@ function NavigationBar() {
                     <Nav className="custom-nav">
                       <Nav className="align-items-center font-body">
                         <Nav.Link href="/upcoming">Upcoming</Nav.Link>
-                        <Nav.Link href="/tickets" className="lg:hidden">
-                          Tickets
-                        </Nav.Link>
                         <Nav.Link href="/profile" className="lg:hidden">
-                          Profile
+                          House Profile
                         </Nav.Link>
                       </Nav>
                       <Nav className="align-items-center">
                         <PrimaryBtn label="Add Event" onClick={handleModalAOpen} />
 
-                        <Nav.Link href="/profile" className="md:hidden lg:block">
-                          {/* Account Circle SVG */}
+                        <Nav.Link href="/profile" className="group hidden lg:block">
+                          {/* House SVG */}
                           <svg
-                            className="h-10 lg:ml-3 fill-ink-silhouette-BASE hover:fill-scarlet-melody-BASE"
+                            className="h-10 lg:ml-3 fill-ink-silhouette-BASE group-hover:fill-scarlet-melody-BASE"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 -960 960 960"
                           >
@@ -185,11 +219,9 @@ function NavigationBar() {
                         </Nav.Link>
                       </Nav>
                       <Nav className="align-items-center">
-                        <PrimaryBtn label="Add Event" onClick={handleModalAOpen} />
-
                         <Nav.Link
                           href="/profile"
-                          className="group md:hidden lg:flex lg:items-center lg:ml-3"
+                          className="group hidden lg:flex lg:items-center lg:ml-3"
                         >
                           {/* Admin Icon SVG */}
                           <h5 className="m-0 font-body text-ink-silhouette-BASE group-hover:text-scarlet-melody-BASE">
