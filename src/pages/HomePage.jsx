@@ -194,7 +194,7 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              Arthouse 1
+              The Avant-Garde Gallery
             </h3>
             <p
               style={{
