@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getEventById, getHouseById, getUserById } from "../services/getExhibitoData";
-import { addNewComment } from "../services/createExhibitoData";
+import { addNewComment, addNewTicket } from "../services/createExhibitoData";
 import NavigationBar from "../components/NavigationBar";
 import CommentsCard from "../components/cards/CommentCard";
 import "../styles/EventInfo.css";
@@ -15,6 +15,8 @@ import Footer from "../components/Footer";
 import NewComment from "../components/cards/NewComment";
 import useScrollToTop from "../services/useScrollToTop";
 import { getCurrentDate, getCurrentTime } from "../services/datesFunctions";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 function EventInfoPage() {
   const { eventId } = useParams();
@@ -22,6 +24,7 @@ function EventInfoPage() {
   const [specificEvent, setSpecificEvent] = useState("");
   const [artHouse, setArtHouse] = useState(null);
   const [user, setUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const [refreshComments, setRefreshComments] = useState(false);
 
@@ -82,6 +85,25 @@ function EventInfoPage() {
     });
   }
 
+  // Booking the event
+  function handleBookNow() {
+    if (!user) return;
+
+    const ticketData = {
+      eventId: eventId,
+      userId: user._id,
+      status: "cart",
+    };
+
+    addNewTicket(ticketData)
+      .then(() => {
+        setShowModal(true);
+      })
+      .catch((error) => {
+        console.error("Error creating ticket:", error);
+      });
+  }
+
   return (
     <div>
       <NavigationBar />
@@ -105,7 +127,7 @@ function EventInfoPage() {
             Exhibition Times: {specificEvent.startTime} - {specificEvent.endTime}
           </li>
         </ul>
-        <PrimaryBtn label="Book Now" />
+        <PrimaryBtn label="Book Now" onClick={handleBookNow} />
       </div>
 
       <div className="container">
@@ -127,6 +149,16 @@ function EventInfoPage() {
       </div>
 
       <Footer />
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title className="font-display">Booking Confirmed</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="font-body">You have successfully booked this event.</Modal.Body>
+        <Modal.Footer>
+          <PrimaryBtn label="Close" onClick={() => setShowModal(false)} />
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

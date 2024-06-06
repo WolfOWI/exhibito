@@ -88,3 +88,20 @@ export function getHouseById(houseId) {
     });
 }
 // -------------------------------------
+
+// TICKETS
+// -------------------------------------
+// Get tickets by user ID and status
+export function getTicketsByStatus(userId, status) {
+  return fetch(`http://localhost:3001/tickets?userId=${userId}&status=${status}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Failed to fetch tickets.");
+    })
+    .catch((err) => {
+      console.error(`Error fetching tickets for user ${userId} with status ${status}:`, err);
+      throw err;
+    });
+} // -------------------------------------

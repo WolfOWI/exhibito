@@ -16,3 +16,11 @@ export function deleteEventById(eventId) {
   return axios.delete(`http://localhost:3001/events/${eventId}`);
 }
 // -------------------------------------
+
+// TICKETS
+// -------------------------------------
+// Delete a ticket based on id (cart / booking)
+export function deleteTicketById(ticketId) {
+  return axios.delete(`http://localhost:3001/tickets/${ticketId}`);
+}
+// -------------------------------------
