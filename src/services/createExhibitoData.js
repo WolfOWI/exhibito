@@ -32,3 +32,20 @@ export function addNewComment(commentData) {
     .catch((error) => console.error("Error:", error));
 }
 // -------------------------------------
+
+// TICKETS
+// -------------------------------------
+// Create a new ticket
+export function addNewTicket(ticketData) {
+  return fetch("http://localhost:3001/tickets/addTicket", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ticketData),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log("Ticket created:", data))
+    .catch((error) => console.error("Error:", error));
+}
+// -------------------------------------
