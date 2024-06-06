@@ -21,6 +21,9 @@ import { getAllEvents } from "../services/getExhibitoData";
 
 // Import Imagery
 import HeroImage from "../assets/images/Hero-img.png";
+import ArthouseImage2 from "../assets/images/SpectrumStudios.png"
+import ArthouseImage1 from "../assets/images/Arthouse-2.png"
+import ArthouseImage3 from "../assets/images/TheArtLoft.png"
 // -----------------------------------------------
 
 function HomePage() {
@@ -173,8 +176,9 @@ function HomePage() {
             `}
               </style>
               <Card.Img
+                style={{height: "300px", width: "600px"}}
                 className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
-                src="https://www.saic.edu/sites/default/files/styles/16_9_768x432/public/2023-06/030223_2234_0.jpg.jpeg?itok=kNLCWZjv"
+                src={ArthouseImage1}
               />
             </Card>
           </div>
@@ -189,7 +193,7 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              Arthouse 1
+              The Avant-Garde Gallery
             </h3>
             <p
               style={{
@@ -199,8 +203,8 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br /> sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              Visitors can expect to see cutting-edge installations, abstract art, <br />
+              and multimedia projects that push the limits of artistic expression and provoke thought.
             </p>
             <Button
               href="/upcoming"
@@ -231,7 +235,7 @@ function HomePage() {
                 fontSize: "31px",
               }}
             >
-              Arthouse 2
+              Spectrum Studios
             </h3>
             <p
               style={{
@@ -240,8 +244,8 @@ function HomePage() {
                 fontSize: "16px",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br /> sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              Exhibits include virtual reality experiences, multimedia installations,<br /> 
+              and experimental works that engage visitors through technology <br /> and creativity.
             </p>
             <Button
               href="/upcoming"
@@ -265,9 +269,9 @@ function HomePage() {
             `}
               </style>
               <Card.Img
-                style={{ marginLeft: "135px" }}
+                style={{ marginLeft: "135px", height: "300px", width: "600px"}}
                 className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
-                src="https://www.saic.edu/sites/default/files/styles/16_9_768x432/public/2023-06/030223_2234_0.jpg.jpeg?itok=kNLCWZjv"
+                src={ArthouseImage2}
               />
             </Card>
           </div>
@@ -297,8 +301,9 @@ function HomePage() {
             `}
               </style>
               <Card.Img
+                style={{height: "300px", width: "600px"}}
                 className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
-                src="https://www.saic.edu/sites/default/files/styles/16_9_768x432/public/2023-06/030223_2234_0.jpg.jpeg?itok=kNLCWZjv"
+                src={ArthouseImage3}
               />
             </Card>
           </div>
@@ -313,7 +318,7 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              Arthouse 3
+              The Art Loft
             </h3>
             <p
               style={{
@@ -323,8 +328,9 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br />
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              The Art Loft is a hub for contemporary art. The gallery showcases modern paintings, <br /> 
+              street art, and experimental works. It also hosts rotating exhibitions, <br /> 
+              artist residencies, and community events that foster artistic collaboration.
             </p>
             <Button
               href="/upcoming"
