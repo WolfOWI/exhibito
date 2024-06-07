@@ -6,7 +6,12 @@ import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import BookedTicket from "../components/cards/BookedTicket";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { getUserById, getHouseById } from "../services/getExhibitoData";
+import {
+  getUserById,
+  getHouseById,
+  getTicketsByStatus,
+  getEventById,
+} from "../services/getExhibitoData";
 
 // Images
 import UserImage from "../assets/images/User-image.png";
@@ -16,6 +21,8 @@ import HouseImage from "../assets/images/houseProfileImg.png";
 function UserProfilePage() {
   const [user, setUser] = useState(null); // Logged in user
   const [house, setHouse] = useState(null); // House details (if house user is logged in)
+  const [bookedTickets, setBookedTickets] = useState([]); // Booked tickets
+  const [bookedEvents, setBookedEvents] = useState([]); // Booked events
   const navigate = useNavigate(); // Navigate when logging out / not logged in
 
   // Get House & User details from stored token (logged in)
@@ -45,7 +52,17 @@ function UserProfilePage() {
                 setHouse(houseData);
               });
             }
+            // Fetch booked tickets
+            return getTicketsByStatus(userData._id, "booked");
           })
+          .then(async (tickets) => {
+            setBookedTickets(tickets);
+            // Fetch event details for each booked ticket
+            const eventPromises = tickets.map((ticket) => getEventById(ticket.eventId));
+            const events = await Promise.all(eventPromises);
+            setBookedEvents(events);
+          })
+
           .catch((error) => {
             console.error("Error fetching user details:", error);
           });
@@ -60,6 +77,12 @@ function UserProfilePage() {
     // Delete token if logging out
     sessionStorage.removeItem("token");
     navigate("/");
+  };
+
+  // Cancel button on booked events ticket (standard users)
+  const handleCancelTicket = (ticketId) => {
+    setBookedTickets((prevTickets) => prevTickets.filter((ticket) => ticket._id !== ticketId));
+    setBookedEvents((prevEvents, index) => prevEvents.filter((event, i) => i !== index));
   };
 
   if (!user) {
@@ -136,9 +159,14 @@ function UserProfilePage() {
         {user.userType === "standard" && (
           <>
             <h2 className="font-display">Booked Events</h2>
-            <BookedTicket />
-            <BookedTicket />
-            <BookedTicket />
+            {bookedTickets.map((ticket, index) => (
+              <BookedTicket
+                key={ticket._id}
+                ticket={ticket}
+                eventDetails={bookedEvents[index]}
+                onCancel={handleCancelTicket}
+              />
+            ))}
           </>
         )}
         {/* House */}

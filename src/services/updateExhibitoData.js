@@ -25,3 +25,20 @@ export function unflagCommentById(commentId) {
     .catch((error) => console.error("Error:", error));
 }
 // -------------------------------------
+
+// TICKETS
+// -------------------------------------
+// Update the status of a ticket by ID
+export function updateTicketStatus(ticketId, status) {
+  return fetch(`/tickets/${ticketId}/updateStatus`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
+}
+// -------------------------------------
