@@ -8,10 +8,13 @@ import { getTicketsByStatus } from "../services/getExhibitoData";
 import { jwtDecode } from "jwt-decode";
 import { updateTicketStatus } from "../services/updateExhibitoData";
 import Container from "react-bootstrap/Container";
+import SecondaryBtn from "../components/buttons/SecondaryBtn";
+import { useNavigate } from "react-router-dom";
 
 function TicketsPage() {
   const [cartTickets, setCartTickets] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
+  const navigate = useNavigate(); // Navigate
 
   useEffect(() => {
     const fetchCartTickets = async () => {
@@ -58,6 +61,10 @@ function TicketsPage() {
     }
   };
 
+  const handleToUpcomingEvents = () => {
+    navigate("/upcoming");
+  };
+
   return (
     <div style={{ backgroundColor: "#f3f1ee" }}>
       <NavigationBar />
@@ -74,13 +81,26 @@ function TicketsPage() {
           >
             Added To Your Cart
           </h1>
-
-          <p className="font-body">Below are the events that you have added to your cart.</p>
+          {cartTickets.length > 1 ? (
+            <p className="font-body">Below are the events that you have added to your cart.</p>
+          ) : (
+            ""
+          )}
         </div>
 
-        {cartTickets.map((ticket) => (
-          <CartCard key={ticket._id} ticket={ticket} />
-        ))}
+        {cartTickets.length > 1 ? (
+          cartTickets.map((ticket) => <CartCard key={ticket._id} ticket={ticket} />)
+        ) : (
+          <div className="w-full flex justify-center my-5">
+            <div className="flex flex-col items-center">
+              <h3 className="font-body fw-bold">Cart is Empty</h3>
+              <p className="font-body">
+                Please add items to your cart by visiting the upcoming events pages.
+              </p>
+              <SecondaryBtn label="Upcoming Events" onClick={handleToUpcomingEvents} />
+            </div>
+          </div>
+        )}
 
         {/* Check Out Section Mobile View */}
         <div className="flex md:hidden flex-col border-t-2 border-ink-silhouette-40% pt-5">

@@ -23,7 +23,7 @@ function UserProfilePage() {
   const [house, setHouse] = useState(null); // House details (if house user is logged in)
   const [bookedTickets, setBookedTickets] = useState([]); // Booked tickets
   const [bookedEvents, setBookedEvents] = useState([]); // Booked events
-  const navigate = useNavigate(); // Navigate when logging out / not logged in
+  const navigate = useNavigate(); // Navigate
 
   // Get House & User details from stored token (logged in)
   useEffect(() => {
