@@ -158,15 +158,42 @@ function UserProfilePage() {
         {/* Standard */}
         {user.userType === "standard" && (
           <>
-            <h2 className="font-display">Booked Events</h2>
-            {bookedTickets.map((ticket, index) => (
-              <BookedTicket
-                key={ticket._id}
-                ticket={ticket}
-                eventDetails={bookedEvents[index]}
-                onCancel={handleCancelTicket}
-              />
-            ))}
+            {/* {cartTickets.length > 0 ? (
+          cartTickets.map((ticket) => <CartCard key={ticket._id} ticket={ticket} />)
+        ) : (
+          <div className="w-full flex justify-center my-5">
+            <div className="flex flex-col items-center">
+              <h3 className="font-body fw-bold">Cart is Empty</h3>
+              <p className="font-body">
+                Please add items to your cart by visiting the upcoming events pages.
+              </p>
+              <SecondaryBtn label="Upcoming Events" onClick={handleToUpcomingEvents} />
+            </div>
+          </div>
+        )} */}
+            {bookedTickets.length > 0 ? (
+              <div>
+                <h2 className="font-display">Booked Events</h2>
+                {bookedTickets.map((ticket, index) => (
+                  <BookedTicket
+                    key={ticket._id}
+                    ticket={ticket}
+                    eventDetails={bookedEvents[index]}
+                    onCancel={handleCancelTicket}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="w-full flex my-5">
+                <div className="flex flex-col">
+                  <h2 className="font-display">No Booked Events</h2>
+                  <p className="font-body">
+                    In order for events to be booked, please add them to your cart, and then click
+                    on 'Book Events'.
+                  </p>
+                </div>
+              </div>
+            )}
           </>
         )}
         {/* House */}
