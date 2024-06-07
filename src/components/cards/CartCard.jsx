@@ -34,19 +34,21 @@ function CartCard({ ticket }) {
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row justify-between items-center my-3 p-3 bg-white shadow rounded-md">
+      <div className="flex flex-col md:flex-row justify-between items-center my-3 py-3 px-4 bg-canvas-white-40% shadow rounded-3xl">
         <div className="flex-1 md:flex-grow">
           <h4 className="font-body text-lg truncate">{eventDetails.title}</h4>
           <p className="font-body text-sm">Location: {eventDetails.location}</p>
         </div>
-        <div className="flex flex-col md:flex-row items-center md:space-x-4 mt-2 md:mt-0">
-          <div className="hidden md:block text-center">
+        <div className="flex flex-col md:flex-row items-center md:space-x-10">
+          <div className="text-center">
             <p className="font-body text-sm">Date: {eventDetails.startDate}</p>
             <p className="font-body text-sm">
               Time: {eventDetails.startTime} - {eventDetails.endTime}
             </p>
           </div>
-          <p className="font-body text-sm mr-5">R{eventDetails.ticketPrice.toFixed(2)}</p>
+          <div className="mt-2">
+            <p className="font-body">R{eventDetails.ticketPrice.toFixed(2)}</p>
+          </div>
           <SecondaryBtn label="Remove" onClick={handleRemove} />
         </div>
       </div>

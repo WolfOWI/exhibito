@@ -3,7 +3,7 @@ import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
-import EventTicket from "../components/cards/TicketsCard";
+import BookedTicket from "../components/cards/BookedTicket";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { getUserById, getHouseById } from "../services/getExhibitoData";
@@ -136,8 +136,9 @@ function UserProfilePage() {
         {user.userType === "standard" && (
           <>
             <h2 className="font-display">Booked Events</h2>
-            <EventTicket />
-            <EventTicket />
+            <BookedTicket />
+            <BookedTicket />
+            <BookedTicket />
           </>
         )}
         {/* House */}
