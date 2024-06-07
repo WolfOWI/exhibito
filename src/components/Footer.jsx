@@ -1,17 +1,23 @@
-// Footer for all pages
-
-// Import Bootstrap elements
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
-
-// Import custom components
+import Modal from "react-bootstrap/Modal";
 import PrimaryBtn from "./buttons/PrimaryBtn";
-
-// Import Images
 import logo from "../assets/logos/logoV1.svg";
 
 function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribedEmail, setSubscribedEmail] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setSubscribedEmail(email); // Store the current email value
+    setShowModal(true); // Show the modal
+    setEmail(""); // Clear the email field
+  };
+
   return (
     <div className="bg-canvas-white-BASE border-t-2 border-ink-silhouette-BASE mt-16">
       {/* Footer Contents */}
@@ -19,7 +25,7 @@ function Footer() {
         {/* Left side container */}
         <div className="flex lg:w-[30%] lg:justify-between sm:items-center lg:items-start">
           <Nav>
-            <Nav.Link href="/">
+            <Nav.Link href="/home">
               <img src={logo} alt="exhibito logo" />
             </Nav.Link>
           </Nav>
@@ -80,21 +86,21 @@ function Footer() {
             <Nav.Link href="/upcoming" className="text-ink-silhouette-BASE pl-0">
               Upcoming
             </Nav.Link>
-            <Nav.Link href="/" className="text-ink-silhouette-BASE pl-0">
-              Featured
+            <Nav.Link href="/profile" className="text-ink-silhouette-BASE pl-0">
+              Profile
             </Nav.Link>
-            <Nav.Link href="/" className="text-ink-silhouette-BASE pl-0">
-              Art Houses
+            <Nav.Link href="/tickets" className="text-ink-silhouette-BASE pl-0">
+              Cart
             </Nav.Link>
           </Nav>
           <Nav className="font-display flex-col">
-            <Nav.Link href="/" className="text-ink-silhouette-BASE pl-0">
+            <Nav.Link href="#" className="text-ink-silhouette-BASE pl-0">
               About Us
             </Nav.Link>
-            <Nav.Link href="/" className="text-ink-silhouette-BASE pl-0">
+            <Nav.Link href="#" className="text-ink-silhouette-BASE pl-0">
               Contact Us
             </Nav.Link>
-            <Nav.Link href="/" className="text-ink-silhouette-BASE pl-0">
+            <Nav.Link href="#" className="text-ink-silhouette-BASE pl-0">
               Privacy Policy
             </Nav.Link>
           </Nav>
@@ -109,14 +115,30 @@ function Footer() {
           </p>
           <div className="flex">
             <Form.Control
-              type="text"
+              type="email"
               id="inputMinPrice"
               className="border-2 border-canvas-white-60% mr-2"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <PrimaryBtn label="Join" />
+            <PrimaryBtn label="Join" onClick={handleSubscribe} />
           </div>
         </div>
       </Container>
+
+      {/* Subscription Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title className="font-display">Welcome to The Newsletter</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="font-body">
+          Your email, <span className="fw-bold">{subscribedEmail}</span> has been successfully
+          subscribed to our weekly newsletter.
+        </Modal.Body>
+        <Modal.Footer>
+          <PrimaryBtn label="Done" onClick={() => setShowModal(false)} />
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
