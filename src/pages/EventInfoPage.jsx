@@ -28,6 +28,7 @@ function EventInfoPage() {
   const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [refreshComments, setRefreshComments] = useState(false);
+  const [isHouse, setIsHouse] = useState(false);
 
   const [newComment, setNewComment] = useState({
     eventId: eventId,
@@ -60,6 +61,9 @@ function EventInfoPage() {
       getUserById(decodedToken.userId)
         .then((userData) => {
           setUser(userData);
+          if (userData.userType === "house") {
+            setIsHouse(true);
+          }
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -133,7 +137,7 @@ function EventInfoPage() {
             Exhibition Times: {specificEvent.startTime} - {specificEvent.endTime}
           </li>
         </ul>
-        <PrimaryBtn label="Add to Cart" onClick={handleAddtoCart} />
+        {isHouse ? "" : <PrimaryBtn label="Add to Cart" onClick={handleAddtoCart} />}
       </div>
 
       <div className="container">
