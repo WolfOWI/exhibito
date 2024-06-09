@@ -8,6 +8,7 @@ import { getTicketsByStatus, getEventById } from "../services/getExhibitoData";
 import { jwtDecode } from "jwt-decode";
 import { updateTicketStatus } from "../services/updateExhibitoData";
 import Container from "react-bootstrap/Container";
+import Modal from "react-bootstrap/Modal";
 import SecondaryBtn from "../components/buttons/SecondaryBtn";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,7 @@ function TicketsPage() {
   const [cartTickets, setCartTickets] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [cartedEvents, setCartedEvents] = useState([]); // The events in the cart
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate(); // Navigate
 
   useEffect(() => {
@@ -53,7 +55,7 @@ function TicketsPage() {
     try {
       const promises = cartTickets.map((ticket) => updateTicketStatus(ticket._id, "booked"));
       await Promise.all(promises);
-      alert("Tickets booked successfully!");
+      setShowModal(true);
       // Optionally, refetch the cart tickets to update the UI
       const token = sessionStorage.getItem("token");
       if (token) {
@@ -68,8 +70,14 @@ function TicketsPage() {
     }
   };
 
+  // Navigate to Events Page
   const handleToUpcomingEvents = () => {
     navigate("/upcoming");
+  };
+
+  // Navigate to Profile
+  const handleToProfile = () => {
+    navigate("/profile");
   };
 
   return (
@@ -132,6 +140,19 @@ function TicketsPage() {
         )}
       </Container>
       <Footer />
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title className="font-display">Event(s) Booked</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="font-body">
+          You have successfully booked the event(s) in your cart. <br />
+          If you'd like to see your booked events, visit your profile.
+        </Modal.Body>
+        <Modal.Footer>
+          <SecondaryBtn label="View Profile" onClick={handleToProfile} />
+          <PrimaryBtn label="Done" onClick={() => setShowModal(false)} />
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

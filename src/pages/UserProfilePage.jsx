@@ -242,6 +242,7 @@ function UserProfilePage() {
         {/* Admin */}
         {user.userType === "admin" && <></>}
       </div>
+
       <div className="h-24">{/* Spacer */}</div>
     </div>
   );

@@ -11,21 +11,22 @@ import CommentsCard from "../components/cards/CommentCard";
 import "../styles/EventInfo.css";
 import "../styles/commentCard.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
+import SecondaryBtn from "../components/buttons/SecondaryBtn";
 import Footer from "../components/Footer";
 import NewComment from "../components/cards/NewComment";
 import useScrollToTop from "../services/useScrollToTop";
 import { getCurrentDate, getCurrentTime } from "../services/datesFunctions";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 function EventInfoPage() {
   const { eventId } = useParams();
+  const navigate = useNavigate(); // Navigate
 
   const [specificEvent, setSpecificEvent] = useState("");
   const [artHouse, setArtHouse] = useState(null);
   const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
   const [refreshComments, setRefreshComments] = useState(false);
 
   const [newComment, setNewComment] = useState({
@@ -104,6 +105,11 @@ function EventInfoPage() {
       });
   }
 
+  // Navigate to Events Page
+  const handleToCart = () => {
+    navigate("/tickets");
+  };
+
   return (
     <div>
       <NavigationBar />
@@ -159,6 +165,7 @@ function EventInfoPage() {
           Please visit your cart to book the event.
         </Modal.Body>
         <Modal.Footer>
+          <SecondaryBtn label="View Cart" onClick={handleToCart} />
           <PrimaryBtn label="Done" onClick={() => setShowModal(false)} />
         </Modal.Footer>
       </Modal>
