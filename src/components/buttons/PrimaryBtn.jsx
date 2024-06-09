@@ -6,6 +6,7 @@ function PrimaryBtn(props) {
     <Button
       onClick={props.onClick}
       className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body ${props.className}`}
+      type={props.type}
     >
       {props.label}
     </Button>

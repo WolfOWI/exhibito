@@ -32,10 +32,19 @@ function SignUpPage() {
     event.preventDefault();
 
     const { username, email, mobile, userType, password, confirmPassword, artHouseId } = formData;
+
+    // Is there a password entered?
+    if (password === "" || confirmPassword === "") {
+      setMessage("Please enter a password in both fields.");
+      return;
+    }
+
+    // Do the password match?
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
       return;
     }
+
     try {
       // console.log(username, email, mobile, userType, password, artHouseId);
       const response = await axios.post("http://localhost:3001/users/register", {
@@ -173,7 +182,7 @@ function SignUpPage() {
             </ul>
             {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
             <div>
-              <PrimaryBtn label="Sign Up" onClick={handleSubmit} />
+              <PrimaryBtn label="Sign Up" onClick={handleSubmit} type="submit" />
               <Link to="/">
                 <SecondaryBtn label="Log In " className="m-2" />
               </Link>
