@@ -1,23 +1,29 @@
 // Event Info Page (Specific)
 
 // Import
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+
+// Functions
 import { getEventById, getHouseById, getUserById } from "../services/getExhibitoData";
 import { addNewComment, addNewTicket } from "../services/createExhibitoData";
+import { getCurrentDate, getCurrentTime } from "../services/datesFunctions";
+import useScrollToTop from "../services/useScrollToTop";
+
+// Components
 import NavigationBar from "../components/NavigationBar";
 import CommentsCard from "../components/cards/CommentCard";
-import "../styles/EventInfo.css";
-import "../styles/commentCard.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import SecondaryBtn from "../components/buttons/SecondaryBtn";
 import Footer from "../components/Footer";
 import NewComment from "../components/cards/NewComment";
-import useScrollToTop from "../services/useScrollToTop";
-import { getCurrentDate, getCurrentTime } from "../services/datesFunctions";
 import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
+
+// CSS & Styling
+import "../styles/EventInfo.css";
+import "../styles/commentCard.css";
 
 function EventInfoPage() {
   const { eventId } = useParams();
@@ -39,9 +45,12 @@ function EventInfoPage() {
     createdTime: "",
   });
 
+  // Scroll to top when page loads
   useScrollToTop();
 
+  // When eventId changes
   useEffect(() => {
+    // Get the event by its ID
     getEventById(eventId)
       .then((data) => {
         setSpecificEvent(data);
@@ -73,6 +82,7 @@ function EventInfoPage() {
 
   // Creating a new comment
   function createComment() {
+    // If logged in user does not exist, stop the comment-creation process
     if (!user) return;
 
     const commentData = {
