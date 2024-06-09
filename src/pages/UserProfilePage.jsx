@@ -56,9 +56,11 @@ function UserProfilePage() {
             return getTicketsByStatus(userData._id, "booked");
           })
           .then(async (tickets) => {
+            console.log(tickets);
             setBookedTickets(tickets);
             // Fetch event details for each booked ticket
             const eventPromises = tickets.map((ticket) => getEventById(ticket.eventId));
+
             const events = await Promise.all(eventPromises);
             setBookedEvents(events);
           })
@@ -158,19 +160,6 @@ function UserProfilePage() {
         {/* Standard */}
         {user.userType === "standard" && (
           <>
-            {/* {cartTickets.length > 0 ? (
-          cartTickets.map((ticket) => <CartCard key={ticket._id} ticket={ticket} />)
-        ) : (
-          <div className="w-full flex justify-center my-5">
-            <div className="flex flex-col items-center">
-              <h3 className="font-body fw-bold">Cart is Empty</h3>
-              <p className="font-body">
-                Please add items to your cart by visiting the upcoming events pages.
-              </p>
-              <SecondaryBtn label="Upcoming Events" onClick={handleToUpcomingEvents} />
-            </div>
-          </div>
-        )} */}
             {bookedTickets.length > 0 ? (
               <div>
                 <h2 className="font-display">Booked Events</h2>

@@ -8,7 +8,7 @@ const Ticket = require("../models/Ticket");
 router.get("/", async (req, res) => {
   const { userId, status } = req.query;
   try {
-    const tickets = await Ticket.find({ userId, status }).populate("eventId");
+    const tickets = await Ticket.find({ userId, status });
     res.json(tickets);
   } catch (err) {
     res.status(500).json({ message: err.message });

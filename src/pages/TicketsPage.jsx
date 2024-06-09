@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import CartCard from "../components/cards/CartCard";
 import "../styles/pendingEventCard.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
-import { getTicketsByStatus } from "../services/getExhibitoData";
+import { getTicketsByStatus, getEventById } from "../services/getExhibitoData";
 import { jwtDecode } from "jwt-decode";
 import { updateTicketStatus } from "../services/updateExhibitoData";
 import Container from "react-bootstrap/Container";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 function TicketsPage() {
   const [cartTickets, setCartTickets] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
+  const [cartedEvents, setCartedEvents] = useState([]); // The events in the cart
   const navigate = useNavigate(); // Navigate
 
   useEffect(() => {
@@ -27,13 +28,16 @@ function TicketsPage() {
           const tickets = await getTicketsByStatus(userId, "cart");
           setCartTickets(tickets);
 
+          const eventPromises = tickets.map((ticket) => getEventById(ticket.eventId));
+
+          const events = await Promise.all(eventPromises);
+          setCartedEvents(events);
+
+          console.log(events);
           // Calculate the total cost
-          const cost = tickets.reduce((acc, ticket) => {
+          const cost = events.reduce((acc, event) => {
             // Check if eventId and ticketPrice exist
-            if (ticket.eventId && ticket.eventId.ticketPrice) {
-              return acc + ticket.eventId.ticketPrice;
-            }
-            return acc;
+            return acc + event.ticketPrice;
           }, 0);
           setTotalCost(cost);
         } catch (error) {
@@ -45,7 +49,7 @@ function TicketsPage() {
     fetchCartTickets();
   }, []);
 
-    const handleCheckOut = async () => {
+  const handleCheckOut = async () => {
     try {
       const promises = cartTickets.map((ticket) => updateTicketStatus(ticket._id, "booked"));
       await Promise.all(promises);
@@ -91,7 +95,9 @@ function TicketsPage() {
         </div>
 
         {cartTickets.length > 0 ? (
-          cartTickets.map((ticket) => <CartCard key={ticket._id} ticket={ticket} />)
+          cartTickets.map((ticket, index) => (
+            <CartCard key={ticket._id} ticket={ticket} event={cartedEvents[index]} />
+          ))
         ) : (
           <div className="w-full flex justify-center my-5">
             <div className="flex flex-col items-center">
