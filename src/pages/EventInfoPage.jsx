@@ -122,19 +122,26 @@ function EventInfoPage() {
           <img src={specificEvent.thumbnail} alt="imagery of event" className="event-img"></img>
         </div>
         <h1 className="font-display mt-5">{specificEvent.title}</h1>
-        <h3 className="font-body text-scarlet-melody-BASE mt-1">
+        <h3 className="font-body text-sapphire-whisper-BASE mt-1">
           R{specificEvent.ticketPrice} per person
         </h3>
 
         <p className="font-body">{specificEvent.description}</p>
         <ul className="font-body mt-1">
-          <li>Arthouse: {artHouse ? artHouse.name : specificEvent.artHouseId}</li>
-          <li>Location: {specificEvent.location}</li>
           <li>
-            Exhibition Date: {specificEvent.startDate} - {specificEvent.endDate}
+            <span className="fw-bold">Exhibition by:</span>{" "}
+            {artHouse ? artHouse.name : specificEvent.artHouseId}
           </li>
           <li>
-            Exhibition Times: {specificEvent.startTime} - {specificEvent.endTime}
+            <span className="fw-bold">Location:</span> {specificEvent.location}
+          </li>
+          <li>
+            <span className="fw-bold">Dates: </span>
+            {specificEvent.startDate} - {specificEvent.endDate}
+          </li>
+          <li>
+            <span className="fw-bold">Times: </span>
+            {specificEvent.startTime} - {specificEvent.endTime}
           </li>
         </ul>
         {isHouse ? "" : <PrimaryBtn label="Add to Cart" onClick={handleAddtoCart} />}
