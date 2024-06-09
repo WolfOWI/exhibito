@@ -85,8 +85,8 @@ function EventInfoPage() {
     });
   }
 
-  // Booking the event
-  function handleBookNow() {
+  // Add the event to cart
+  function handleAddtoCart() {
     if (!user) return;
 
     const ticketData = {
@@ -127,7 +127,7 @@ function EventInfoPage() {
             Exhibition Times: {specificEvent.startTime} - {specificEvent.endTime}
           </li>
         </ul>
-        <PrimaryBtn label="Book Now" onClick={handleBookNow} />
+        <PrimaryBtn label="Add to Cart" onClick={handleAddtoCart} />
       </div>
 
       <div className="container">
@@ -152,11 +152,14 @@ function EventInfoPage() {
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title className="font-display">Booking Confirmed</Modal.Title>
+          <Modal.Title className="font-display">Added to Cart</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="font-body">You have successfully booked this event.</Modal.Body>
+        <Modal.Body className="font-body">
+          You have successfully added this event to your cart. <br />
+          Please visit your cart to book the event.
+        </Modal.Body>
         <Modal.Footer>
-          <PrimaryBtn label="Close" onClick={() => setShowModal(false)} />
+          <PrimaryBtn label="Done" onClick={() => setShowModal(false)} />
         </Modal.Footer>
       </Modal>
     </div>

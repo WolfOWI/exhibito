@@ -1,22 +1,23 @@
-import React from "react";
+// Admin Dashboard Page
+
+// Import css
 import SecondaryBtn from "../buttons/SecondaryBtn";
 import { deleteTicketById } from "../../services/deleteExhibitoData";
 
-function CartCard({ ticket }) {
-  const eventDetails = ticket.eventId;
+function BookedTicket({ ticket, eventDetails, onCancel }) {
+  if (!eventDetails) {
+    return <div>Loading...</div>;
+  }
 
-  const handleRemove = async () => {
+  // Handling the cancellation of the booking.
+  const handleCancel = async () => {
     try {
       await deleteTicketById(ticket._id);
-      window.location.reload(); // Reload the page to reflect changes
+      onCancel(ticket._id);
     } catch (error) {
-      console.error("Error removing ticket from cart:", error);
+      console.error("Error canceling ticket:", error);
     }
   };
-
-  if (!eventDetails) {
-    return <div>Loading event details...</div>;
-  }
 
   return (
     <div>
@@ -35,11 +36,11 @@ function CartCard({ ticket }) {
           <div className="mt-2">
             <p className="font-body">R{eventDetails.ticketPrice.toFixed(2)}</p>
           </div>
-          <SecondaryBtn label="Remove" onClick={handleRemove} />
+          <SecondaryBtn label="Cancel" onClick={handleCancel} />
         </div>
       </div>
     </div>
   );
 }
 
-export default CartCard;
+export default BookedTicket;

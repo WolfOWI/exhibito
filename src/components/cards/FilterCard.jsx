@@ -5,6 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import SecondaryBtn from "../buttons/SecondaryBtn";
 import PrimaryBtn from "../buttons/PrimaryBtn";
+import "../../styles/filterCard.css";
 
 function FilterCard({
   minPrice,
@@ -31,7 +32,7 @@ function FilterCard({
           <SecondaryBtn label="Clear" onClick={clearFilters} />
         </div>
       </div>
-      <Accordion defaultActiveKey="0">
+      <Accordion defaultActiveKey="0" className="custom-accordion">
         <Accordion.Item eventKey="0">
           <Accordion.Header className="font-body">Price</Accordion.Header>
           <Accordion.Body>

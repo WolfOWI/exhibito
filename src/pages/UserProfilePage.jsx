@@ -3,10 +3,15 @@ import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
-import EventTicket from "../components/cards/TicketsCard";
+import BookedTicket from "../components/cards/BookedTicket";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { getUserById, getHouseById } from "../services/getExhibitoData";
+import {
+  getUserById,
+  getHouseById,
+  getTicketsByStatus,
+  getEventById,
+} from "../services/getExhibitoData";
 
 // Images
 import UserImage from "../assets/images/User-image.png";
@@ -16,7 +21,9 @@ import HouseImage from "../assets/images/houseProfileImg.png";
 function UserProfilePage() {
   const [user, setUser] = useState(null); // Logged in user
   const [house, setHouse] = useState(null); // House details (if house user is logged in)
-  const navigate = useNavigate(); // Navigate when logging out / not logged in
+  const [bookedTickets, setBookedTickets] = useState([]); // Booked tickets
+  const [bookedEvents, setBookedEvents] = useState([]); // Booked events
+  const navigate = useNavigate(); // Navigate
 
   // Get House & User details from stored token (logged in)
   useEffect(() => {
@@ -45,7 +52,17 @@ function UserProfilePage() {
                 setHouse(houseData);
               });
             }
+            // Fetch booked tickets
+            return getTicketsByStatus(userData._id, "booked");
           })
+          .then(async (tickets) => {
+            setBookedTickets(tickets);
+            // Fetch event details for each booked ticket
+            const eventPromises = tickets.map((ticket) => getEventById(ticket.eventId));
+            const events = await Promise.all(eventPromises);
+            setBookedEvents(events);
+          })
+
           .catch((error) => {
             console.error("Error fetching user details:", error);
           });
@@ -60,6 +77,12 @@ function UserProfilePage() {
     // Delete token if logging out
     sessionStorage.removeItem("token");
     navigate("/");
+  };
+
+  // Cancel button on booked events ticket (standard users)
+  const handleCancelTicket = (ticketId) => {
+    setBookedTickets((prevTickets) => prevTickets.filter((ticket) => ticket._id !== ticketId));
+    setBookedEvents((prevEvents, index) => prevEvents.filter((event, i) => i !== index));
   };
 
   if (!user) {
@@ -135,9 +158,42 @@ function UserProfilePage() {
         {/* Standard */}
         {user.userType === "standard" && (
           <>
-            <h2 className="font-display">Booked Events</h2>
-            <EventTicket />
-            <EventTicket />
+            {/* {cartTickets.length > 0 ? (
+          cartTickets.map((ticket) => <CartCard key={ticket._id} ticket={ticket} />)
+        ) : (
+          <div className="w-full flex justify-center my-5">
+            <div className="flex flex-col items-center">
+              <h3 className="font-body fw-bold">Cart is Empty</h3>
+              <p className="font-body">
+                Please add items to your cart by visiting the upcoming events pages.
+              </p>
+              <SecondaryBtn label="Upcoming Events" onClick={handleToUpcomingEvents} />
+            </div>
+          </div>
+        )} */}
+            {bookedTickets.length > 0 ? (
+              <div>
+                <h2 className="font-display">Booked Events</h2>
+                {bookedTickets.map((ticket, index) => (
+                  <BookedTicket
+                    key={ticket._id}
+                    ticket={ticket}
+                    eventDetails={bookedEvents[index]}
+                    onCancel={handleCancelTicket}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="w-full flex my-5">
+                <div className="flex flex-col">
+                  <h2 className="font-display">No Booked Events</h2>
+                  <p className="font-body">
+                    In order for events to be booked, please add them to your cart, and then click
+                    on 'Book Events'.
+                  </p>
+                </div>
+              </div>
+            )}
           </>
         )}
         {/* House */}
