@@ -57,7 +57,6 @@ function TicketsPage() {
         const userId = decodedToken.userId;
         const tickets = await getTicketsByStatus(userId, "cart");
         setCartTickets(tickets);
-        calculateTotalCost(tickets);
       }
     } catch (error) {
       console.error("Error during check out:", error);
