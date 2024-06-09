@@ -1,23 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SecondaryBtn from "../buttons/SecondaryBtn";
-import { getEventById } from "../../services/getExhibitoData";
 import { deleteTicketById } from "../../services/deleteExhibitoData";
 
 function CartCard({ ticket }) {
-  const [eventDetails, setEventDetails] = useState(null);
-
-  useEffect(() => {
-    const fetchEventDetails = async () => {
-      try {
-        const event = await getEventById(ticket.eventId);
-        setEventDetails(event);
-      } catch (error) {
-        console.error("Error fetching event details:", error);
-      }
-    };
-
-    fetchEventDetails();
-  }, [ticket.eventId]);
+  const eventDetails = ticket.eventId;
 
   const handleRemove = async () => {
     try {

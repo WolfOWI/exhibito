@@ -4,11 +4,11 @@ const Ticket = require("../models/Ticket");
 
 // GET
 // -------------------------------------
-// Get tickets by user ID and status
+// GET tickets by user ID and status with populated event details
 router.get("/", async (req, res) => {
   const { userId, status } = req.query;
   try {
-    const tickets = await Ticket.find({ userId, status });
+    const tickets = await Ticket.find({ userId, status }).populate("eventId");
     res.json(tickets);
   } catch (err) {
     res.status(500).json({ message: err.message });

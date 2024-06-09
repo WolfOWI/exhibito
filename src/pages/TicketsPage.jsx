@@ -22,7 +22,16 @@ function TicketsPage() {
         try {
           const tickets = await getTicketsByStatus(userId, "cart");
           setCartTickets(tickets);
-          calculateTotalCost(tickets);
+
+          // Calculate the total cost
+          const cost = tickets.reduce((acc, ticket) => {
+            // Check if eventId and ticketPrice exist
+            if (ticket.eventId && ticket.eventId.ticketPrice) {
+              return acc + ticket.eventId.ticketPrice;
+            }
+            return acc;
+          }, 0);
+          setTotalCost(cost);
         } catch (error) {
           console.error("Error fetching cart tickets:", error);
         }
@@ -32,15 +41,9 @@ function TicketsPage() {
     fetchCartTickets();
   }, []);
 
-  const calculateTotalCost = (tickets) => {
-    const total = tickets.reduce((sum, ticket) => sum + ticket.ticketPrice, 0);
-    setTotalCost(total);
-  };
-
   return (
     <div style={{ backgroundColor: "#f3f1ee" }}>
       <NavigationBar />
-
       <Container className="mt-6">
         <div className="flex flex-col">
           <h1
@@ -53,14 +56,14 @@ function TicketsPage() {
           >
             Added To Your Cart
           </h1>
-
-          <p className="font-body">Below are the events that you have added to your cart.</p>
+          <p className="font-body">
+            Below are the events that you have added to your cart.
+          </p>
         </div>
-
         {cartTickets.map((ticket) => (
-          <CartCard key={ticket._id} ticket={ticket} />
+          // Ensure event data is present before rendering CartCard
+          ticket.eventId ? <CartCard key={ticket._id} ticket={ticket} /> : null
         ))}
-
         {/* Check Out Section Mobile View */}
         <div className="flex md:hidden flex-col border-t-2 border-ink-silhouette-40% pt-5">
           <div className="flex justify-between mx-3">
