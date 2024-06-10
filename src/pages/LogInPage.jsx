@@ -55,44 +55,44 @@ function LogInPage() {
       <NavigationBar />
       <div className="flex justify-between w-full">
         <div className="w-[100%] md:w-[50%] mt-24">
-        <Form onSubmit={handleSubmit} className="2xl:ml-96 xl:ml-56 sm:ml-24 ml-12 mr-24 md:mr-0 py-24">
-              <h1 className="font-display">Log In</h1>
-              <p className="font-body md:w-[100%]">
-                Log in to your account to explore the latest art exhibitions and manage your art
-                experiences.
-              </p>
-              <p className="font-body italic mt-[-10px]">
-                Not with us?{" "}
-                <Link to="/signup" className="font-body fw-bold text-decoration-none text-scarlet-melody-BASE not-italic">
-                  Sign Up.
-                </Link>
-              </p>
-              <Form.Group controlId="email" className="mb-2">
-                <Form.Label>Email address:</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="password" className="mb-2">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
-              <PrimaryBtn label="Sign Up" onClick={handleSubmit} type="submit" />
-              <Link to="/">
-                <SecondaryBtn label="Log In " className="m-2" />
+          <Form onSubmit={handleSubmit} className="2xl:ml-96 xl:ml-56 sm:ml-24 ml-12 mr-24 md:mr-0 py-24">
+            <h1 className="font-display">Log In</h1>
+            <p className="font-body md:w-[100%]">
+              Log in to your account to explore the latest art exhibitions and manage your art
+              experiences.
+            </p>
+            <p className="font-body italic mt-[-10px]">
+              Not with us?{" "}
+              <Link to="/signup" className="font-body fw-bold text-decoration-none text-scarlet-melody-BASE not-italic">
+                Sign Up.
               </Link>
-            </Form>
+            </p>
+            <Form.Group controlId="email" className="mb-2">
+              <Form.Label>Email address:</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="password" className="mb-2">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
+            <PrimaryBtn label="Log In" type="submit" />
+            <Link to="/">
+              <SecondaryBtn label="Sign Up" className="m-2" />
+            </Link>
+          </Form>
         </div>
         <div className="hidden md:block w-[60%]">
           <img src={LoginImage} alt="Log In Illustration" className="h-screen object-cover" />
