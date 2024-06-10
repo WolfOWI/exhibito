@@ -21,17 +21,16 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.stopPropagation();
-    } else {
-      setAllInfoEntered(true);
       setValidated(true);
+    } else {
+      setValidated(true);
+      onSubmitClick(); // Call the submit function directly
       setShowConfirmationModal(true); // Show confirmation modal
     }
   };
 
   const handleClose = () => {
-    // Close the modal only if all info is entered
     if (allInfoEntered) {
-      onSubmitClick();
       onHide();
     }
   };
@@ -43,7 +42,11 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
 
   return (
     <>
-      <Modal show={show && !showConfirmationModal} onHide={onHide} onExited={() => setAllInfoEntered(false)}>
+      <Modal
+        show={show && !showConfirmationModal}
+        onHide={onHide}
+        onExited={() => setAllInfoEntered(false)}
+      >
         <Modal.Header closeButton className="bg-canvas-white-BASE border-none">
           <SecondaryBtn label="Back" className="mr-12" onClick={onBackClick} />
           <Modal.Title className="font-display fs-1">New Event</Modal.Title>
@@ -66,7 +69,9 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
                   required
                   className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
                 />
-                <Form.Control.Feedback type="invalid">Please provide a start date.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please provide a start date.
+                </Form.Control.Feedback>
               </div>
               <div className="w-6">{/* Spacer */}</div>
               <div className="w-full">
@@ -79,7 +84,9 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
                   onChange={handleChange}
                   className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
                 />
-                <Form.Control.Feedback type="invalid">Please provide an end date.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please provide an end date.
+                </Form.Control.Feedback>
               </div>
             </div>
             {/* Times */}
@@ -94,7 +101,9 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
                   onChange={handleChange}
                   className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
                 />
-                <Form.Control.Feedback type="invalid">Please provide a start time.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please provide a start time.
+                </Form.Control.Feedback>
               </div>
               <div className="w-6">{/* Spacer */}</div>
               <div className="w-full">
@@ -107,7 +116,9 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
                   onChange={handleChange}
                   className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
                 />
-                <Form.Control.Feedback type="invalid">Please provide an end time.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please provide an end time.
+                </Form.Control.Feedback>
               </div>
             </div>
             {/* Price & Seats */}
@@ -122,7 +133,9 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
                   onChange={handleChange}
                   className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
                 />
-                <Form.Control.Feedback type="invalid">Please provide a ticket price.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please provide a ticket price.
+                </Form.Control.Feedback>
               </div>
               <div className="w-6">{/* Spacer */}</div>
               <div className="w-full">
@@ -135,7 +148,9 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
                   onChange={handleChange}
                   className="bg-canvas-white-BASE border-2 border-canvas-white-60% rounded-full"
                 />
-                <Form.Control.Feedback type="invalid">Please provide the maximum number of seats.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please provide the maximum number of seats.
+                </Form.Control.Feedback>
               </div>
             </div>
             {/* Upload Thumbnail */}
@@ -148,19 +163,12 @@ function AddEventModalB({ show, onHide, onBackClick, onSubmitClick, newEvent, se
               required
               className="border-2 border-canvas-white-60%"
             />
-            <Form.Control.Feedback type="invalid">Please provide a thumbnail URL.</Form.Control.Feedback>
-            </Form>
+            <Form.Control.Feedback type="invalid">
+              Please provide a thumbnail URL.
+            </Form.Control.Feedback>
+            <PrimaryBtn label="Submit" className="w-full mt-4" type="submit" />
+          </Form>
         </Modal.Body>
-        <Modal.Footer className="bg-canvas-white-BASE border-none">
-          <div className="flex w-full">
-            <PrimaryBtn
-              label="Submit"
-              className="w-full"
-              type="submit"
-              onClick={handleSubmit}
-            />
-          </div>
-        </Modal.Footer>
       </Modal>
 
       {/* Confirmation Modal */}

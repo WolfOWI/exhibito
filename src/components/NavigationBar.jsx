@@ -78,9 +78,10 @@ function NavigationBar() {
   };
   // Submit Button
   const handleSubmitBtn = () => {
-    handleModalBClose();
+    console.log("Submit Button Pressed");
     // Create new event in backend
     createNewEvent();
+    handleModalBClose();
   };
 
   // Adding the new event
