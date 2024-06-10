@@ -43,7 +43,7 @@ function EventInfoPage() {
     isFlagged: false,
     createdDate: "",
     createdTime: "",
-  });
+  }); 
 
   // Scroll to top when page loads
   useScrollToTop();

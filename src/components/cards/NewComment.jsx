@@ -14,7 +14,7 @@ function NewComment({ onPostClick, newComment, setNewComment }) {
   const handlePostReviewBtnClick = (e) => {
     e.preventDefault();
     onPostClick();
-  };
+  }; 
 
   return (
     <Form>
