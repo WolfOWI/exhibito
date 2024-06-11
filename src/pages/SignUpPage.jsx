@@ -162,12 +162,7 @@ function SignUpPage() {
             )}
             <Form.Group controlId="password" className="mb-2">
               <Form.Label>Password:</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                onChange={handleChange}
-                required
-              />
+              <Form.Control type="password" name="password" onChange={handleChange} required />
             </Form.Group>
             <Form.Group controlId="confirmPassword" className="mb-2">
               <Form.Label>Confirm Password:</Form.Label>
@@ -179,9 +174,9 @@ function SignUpPage() {
               />
             </Form.Group>
             {message && <p className="font-body font-bold text-scarlet-melody-BASE">{message}</p>}
-            <PrimaryBtn label="Sign Up" type="submit" />
+            <PrimaryBtn label="Sign Up" type="submit" className="mt-2" />
             <Link to="/">
-              <SecondaryBtn label="Log In " className="m-2" />
+              <SecondaryBtn label="Log In" className="mt-2 ml-4" />
             </Link>
           </Form>
         </div>
@@ -191,4 +186,3 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
-
