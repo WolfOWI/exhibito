@@ -174,35 +174,35 @@ By following these steps, you will have the Exhibito project up and running on y
 
 ## Features and Functionality
 
-![ExhibitoLogo](./src/assets/mock-ups/SignIn.png)
-
 ### Feature 1
 
 Users can sign up onto Exhibito and then also select whether they are a standard user or part of an Art House.
 
-![ExhibitoLogo](./src/assets/mock-ups/Login.png)
+![ExhibitoLogo](./src/assets/mock-ups/SignIn.png)
 
 ### Feature 2
 
 The login functionality checks the user type and when they log in the appropriate page will load.
 
-![ExhibitoLogo](./src/assets/mock-ups/StandardUser.png)
+![ExhibitoLogo](./src/assets/mock-ups/Login.png)
 
 ### Feature 3 - Standard User
 
 Standard users are able to navigate between the homepage, events pages, tickets page, and the user profile page. On the Upcoming Events page, they can browse the different events and also filter the events according to price, date, and location. Users can then book a ticket(s) to the event, which will show up on the tickets page.
 
-![ExhibitoLogo](./src/assets/mock-ups/HouseUser.png)
+![ExhibitoLogo](./src/assets/mock-ups/StandardUser.png)
 
 ### Feature 4 - Art House User
 
 Art House users can see the upcoming events page and access the "Add a New Event" modal. In the modal, they can add a new event and provide the necessary information, which will be saved to the backend. When an event is added, it will be sent to the admin dashboard where the event will be reviewed and either added to the application or declined.
 
-![ExhibitoLogo](./src/assets/mock-ups/AdminUser.png)
+![ExhibitoLogo](./src/assets/mock-ups/HouseUser.png)
 
 ### Feature 5 - Admin User
 
 The admin user is in charge of managing new events and flagged comments. They can approve or decline new events and delete flagged comments or mark them as safe.
+
+![ExhibitoLogo](./src/assets/mock-ups/AdminUser.png)
 
 <!-- CONCEPT PROCESS -->
 <!-- Briefly explain your concept ideation process -->
