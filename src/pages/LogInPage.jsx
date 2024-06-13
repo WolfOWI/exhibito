@@ -55,7 +55,7 @@ function LogInPage() {
       <NavigationBar />
       <div className="flex justify-between w-full">
         <div className="w-[100%] md:w-[50%] mt-24">
-          <Form onSubmit={handleSubmit} className="2xl:ml-96 xl:ml-56 sm:ml-24 ml-12 mr-24 md:mr-0 py-24">
+          <Form onSubmit={handleSubmit} className="2xl:ml-96 xl:ml-56 sm:ml-16 ml-12 mr-24 md:mr-0 py-24">
             <h1 className="font-display">Log In</h1>
             <p className="font-body md:w-[100%]">
               Log in to your account to explore the latest art exhibitions and manage your art

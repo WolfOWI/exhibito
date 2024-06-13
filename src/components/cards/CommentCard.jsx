@@ -61,7 +61,7 @@ function CommentsCard({ eventId, refreshComments }) {
   return (
     <div className="w-full flex flex-wrap justify-between">
       {fComments.map((comment) => (
-        <div key={comment._id} className="rectangle bg-canvas-white-BASE w-[49%] mt-3">
+        <div key={comment._id} className="rectangle bg-canvas-white-BASE w-[100%] md:w-[49%] mt-3">
           <div className="top-section flex items-center justify-between pt-1 px-3 font-body text-ink-silhouette-BASE">
             <div className="font-bold">{users[comment.userId]?.username || "Deleted User"}</div>
             <div className="flex items-center space-x-3">

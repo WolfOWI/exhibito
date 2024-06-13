@@ -19,7 +19,7 @@ function NewComment({ onPostClick, newComment, setNewComment }) {
   return (
     <Form>
       <div className="row flex items-end">
-        <div className="col-10">
+        <div className="w-[60%] md:w-[80%]">
           <Form.Label className="font-body">Leave a Comment</Form.Label>
           <Form.Control
             type="text"
@@ -29,7 +29,7 @@ function NewComment({ onPostClick, newComment, setNewComment }) {
             className="border-2 border-canvas-white-60% h-32"
           />
         </div>
-        <div className="col-2">
+        <div className="w-[40%] md:w-[20%]">
           <PrimaryBtn label="Post Review" onClick={(e) => handlePostReviewBtnClick(e)} />
         </div>
       </div>

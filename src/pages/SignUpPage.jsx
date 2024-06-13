@@ -73,7 +73,7 @@ function SignUpPage() {
         <div className="hidden md:block w-[60%] ">
           <img src={SignupImage} alt="Signup" className="h-screen object-cover" />
         </div>
-        <div className="py-16 ml-8 mr-56">
+        <div className="py-16 ml-8 mr-4 md:mr-56">
           <Form onSubmit={handleSubmit}>
             <h1 className="font-display">Sign Up</h1>
             <p className="font-body">
