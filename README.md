@@ -1,10 +1,10 @@
 <!-- Repository Information & Links-->
 <br />
 
-![GitHub repo size](https://img.shields.io/github/repo-size/WolfOWI/exhibito?color=%000000)
-![GitHub watchers](https://img.shields.io/github/watchers/WolfOWI/exhibito?color=%000000)
-![GitHub language count](https://img.shields.io/github/languages/count/WolfOWI/exhibito?color=%000000)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/WolfOWI/exhibito?color=%000000)
+![GitHub repo size](https://img.shields.io/github/repo-size/WolfOWI/exhibito?color=black)
+![GitHub watchers](https://img.shields.io/github/watchers/WolfOWI/exhibito?color=black)
+![GitHub language count](https://img.shields.io/github/languages/count/WolfOWI/exhibito?color=black)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/WolfOWI/exhibito?color=black)
 
 <!-- HEADER SECTION -->
 <h5 align="center" style="padding:0;margin:0;">Wolf Botha - 21100255</h5>
@@ -16,7 +16,7 @@
 <p align="center">
 
   <a href="https://github.com/WolfOWI/exhibito">
-    <img src="../exhibito/public/logoV1.svg" alt="Logo" width="140" height="140">
+    <img src="./src/assets/logos/logoV1.svg" alt="Logo" width="140" height="140">
   </a>
   
   <h3 align="center">Exhibito</h3>
@@ -32,7 +32,9 @@
     ·
     <a href="https://github.com/WolfOWI/exhibito/issues">Request Feature</a>
 </p>
+
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -74,7 +76,7 @@
 
 <!-- header image of project -->
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Project%20Header.png)
+![ExhibitoLogo](./src/assets/mock-ups/Project%20Header.png)
 
 ### Project Description
 
@@ -119,38 +121,35 @@ Here are the steps to clone this repo using GitHub Desktop and set up the projec
    - Open your terminal or command prompt.
    - Navigate to the cloned repository directory.
    - Run the following command to install all required dependencies:
+
      ```sh
      npm install
      ```
 
-- Navigate to the backend folder of the repository and install the backend dependencies.
-  ```sh
-  cd backend
-  npm install
-  ```
+   - Navigate to the backend folder of the repository and install the backend dependencies.
+     ```sh
+     cd backend
+     npm install
+     ```
 
 3. **Set Up Environment Variables**:
 
    - Create a `.env` file in the `backend` directory.
    - Add the following environment variables to your `.env` file:
-
      ```sh
      PORT=3001
      MONGODB_URI=your_mongodb_connection_string
      JWT_SECRET=your_jwt_secret
      ```
-
      **Note**: Replace `your_mongodb_connection_string` and `your_jwt_secret` with your actual MongoDB URI and JWT secret key. Do not share these values publicly.
 
 4. **Run the Backend Server**:
 
    - Ensure you are in the `backend` directory.
    - Run the following command to start the backend server:
-
      ```sh
      npm start
      ```
-
    - The backend server should now be running on `http://localhost:3001`.
 
 5. **Run the Frontend Server**:
@@ -158,11 +157,9 @@ Here are the steps to clone this repo using GitHub Desktop and set up the projec
    - Open a new terminal window.
    - Navigate to the root directory of the cloned repository.
    - Run the following command to start the frontend server:
-
      ```sh
      npm start
      ```
-
    - The frontend server should now be running on `http://localhost:3000`.
 
 6. **Access the Application**:
@@ -177,64 +174,60 @@ By following these steps, you will have the Exhibito project up and running on y
 
 ## Features and Functionality
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/SignIn.png)
+![ExhibitoLogo](./src/assets/mock-ups/SignIn.png)
 
 ### Feature 1
 
 Users can sign up onto Exhibito and then also select whether they are a standard user or part of an Art House.
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Login.png)
+![ExhibitoLogo](./src/assets/mock-ups/Login.png)
 
 ### Feature 2
 
 The login functionality checks the user type and when they log in the appropriate page will load.
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/StandardUser.png)
+![ExhibitoLogo](./src/assets/mock-ups/StandardUser.png)
 
 ### Feature 3 - Standard User
 
-The Standard users are able to navigate between the upcoming the homepage, events pages, Tickets page and the user profile page. On the Upcoming events page they are able to browse the different events and also filter through the event according to price, date and location. The user are then able to book a ticket(s) to the event which will show up on the tickets page.
+Standard users are able to navigate between the homepage, events pages, tickets page, and the user profile page. On the Upcoming Events page, they can browse the different events and also filter the events according to price, date, and location. Users can then book a ticket(s) to the event, which will show up on the tickets page.
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/HouseUser.png)
+![ExhibitoLogo](./src/assets/mock-ups/HouseUser.png)
 
 ### Feature 4 - Art House User
 
-The Art House user is able to see the upcoming events page and then also able to access the add a new event modal. On the model they are able to add a new event and add the necessary information that will be saved to the backend. When an event is added it will then be sent to the admin dashboard where the event will be added to the application or declined.
+Art House users can see the upcoming events page and access the "Add a New Event" modal. In the modal, they can add a new event and provide the necessary information, which will be saved to the backend. When an event is added, it will be sent to the admin dashboard where the event will be reviewed and either added to the application or declined.
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/AdminUser.png)
+![ExhibitoLogo](./src/assets/mock-ups/AdminUser.png)
 
 ### Feature 5 - Admin User
 
-The admin user is in charge of the new events added and the flagged comments. They are able to approve or decline new events and also delete a flagged comment or decide the comment is safe.
+The admin user is in charge of managing new events and flagged comments. They can approve or decline new events and delete flagged comments or mark them as safe.
 
 <!-- CONCEPT PROCESS -->
 <!-- Briefly explain your concept ideation process -->
 
 ## Concept Process
 
-The `Conceptual Process` is the set of actions, activities and research that was done when starting this project.
+The `Conceptual Process` is the set of actions, activities, and research that was done when starting this project.
 
 ### Ideation
 
-For the ideation we designed a mood board and also determined our colour palette and typography
+For the ideation, we designed a mood board and also determined our color palette and typography.
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Moodboard.png)
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/ColourPalette.png)
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Typography.png)
+![ExhibitoLogo](./src/assets/mock-ups/Moodboard.png)
+![ExhibitoLogo](./src/assets/mock-ups/ColourPalette.png)
+![ExhibitoLogo](./src/assets/mock-ups/Typography.png)
 
 ### Wireframes
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Wireframes.png)
+![ExhibitoLogo](./src/assets/mock-ups/Wireframes.png)
 
 ### Database
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Database.png)
+![ExhibitoLogo](./src/assets/mock-ups/Database.png)
 
 <!-- DEVELOPMENT PROCESS -->
-
-Certainly! Here’s a filled-out version of the `Development Process` section:
-
----
 
 ## Development Process
 
@@ -244,7 +237,7 @@ The `Development Process` outlines the technical implementations and functionali
 
 - **Functionality Implementations**:
 
-  - Implemented user authentication and authorisation using `JWT` for secure access control.
+  - Implemented user authentication and authorization using `JWT` for secure access control.
   - Created CRUD operations for events, comments, and tickets using `Express` and `MongoDB`.
   - Developed a responsive UI using `React` and `Bootstrap`.
   - Used `React Router` for seamless client-side routing.
@@ -278,24 +271,20 @@ The `Development Process` outlines the technical implementations and functionali
 #### Highlights
 
 - Seeing the content from the backend populate on the front-end was very rewarding.
-- Making the login and sign up functionality work.
-- Adding our own colour and imagery palette to the application and see our idea come to life.
+- Making the login and sign-up functionality work.
+- Adding our own color and imagery palette to the application and seeing our idea come to life.
 
 #### Challenges
 
-<!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
-
-- Handling Asynchronous operations like API calls to get details of events, usernames or art houses proved difficult at times.
-- Designing a database schema to handle all the interactions between users, events, comments, art houses and tickets was a complex task.
+- Handling asynchronous operations like API calls to get details of events, usernames, or art houses proved difficult at times.
+- Designing a database schema to handle all the interactions between users, events, comments, art houses, and tickets was a complex task.
 - Ensuring that Exhibito was responsive at different screen sizes took a long time and was challenging.
 
 ### Future Implementation
 
-<!-- stipulate functionality and improvements that can be implemented in the future. -->
-
 - Adding more animations and interactivity.
-- Flagging a comment can be based on an integer value, so that multiple users' flags results in its removal, and not only one person.
-- Charts and in-depths statistics on monthly users, comments and art houses on the admin dashboard.
+- Flagging a comment can be based on an integer value so that multiple users' flags result in its removal, and not only one person.
+- Adding charts and in-depth statistics on monthly users, comments, and art houses on the admin dashboard.
 
 <!-- MOCKUPS -->
 
@@ -303,15 +292,15 @@ The `Development Process` outlines the technical implementations and functionali
 
 ### Mockups
 
-![Mockup1](/src/assets/mock-ups/SignIn.png)
+![Mockup1](./src/assets/mock-ups/SignIn.png)
 
-![Mockup2](../exhibito/src/assets/mock-ups/Login.png)
+![Mockup2](./src/assets/mock-ups/Login.png)
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/StandardUser.png)
+![Mockup3](./src/assets/mock-ups/StandardUser.png)
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/HouseUser.png)
+![Mockup4](./src/assets/mock-ups/HouseUser.png)
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/AdminUser.png)
+![Mockup5](./src/assets/mock-ups/AdminUser.png)
 
 <!-- VIDEO DEMONSTRATION -->
 
@@ -331,7 +320,7 @@ See the [open issues](https://github.com/WolfOWI/exhibito/issues) for a list of 
 
 ## Contributing
 
-Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -351,9 +340,9 @@ Contributions are what makes the open-source community such an amazing place to 
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.\
+Distributed under the MIT License. See `LICENSE` for more information.
 
-<!-- LICENSE -->
+<!-- CONTACT -->
 
 ## Contact
 
@@ -366,7 +355,5 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
-
-<!-- all resources that you used and Acknowledgements here -->
 
 - [Pinterest](https://za.pinterest.com/kaylaposthu/dv-200_t2/)
