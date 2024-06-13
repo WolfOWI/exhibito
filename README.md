@@ -52,7 +52,7 @@
 - [Concept Process](#concept-process)
   - [Ideation](#ideation)
   - [Wireframes](#wireframes)
-  - [User-flow](#user-flow)
+  - [Database](#database)
 - [Development Process](#development-process)
   - [Implementation Process](#implementation-process)
     - [Highlights](#highlights)
@@ -93,7 +93,6 @@ Exhibito is a dynamic platform dedicated to connecting art enthusiasts and artis
 - [JWT](https://jwt.io/)
 - [CORS](https://www.npmjs.com/package/cors)
 
-
 ## Getting Started
 
 The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -123,11 +122,12 @@ Here are the steps to clone this repo using GitHub Desktop and set up the projec
      ```sh
      npm install
      ```
-  - Navigate to the backend folder of the repository and install the backend dependencies.
-     ```sh
-     cd backend
-     npm install
-     ```
+
+- Navigate to the backend folder of the repository and install the backend dependencies.
+  ```sh
+  cd backend
+  npm install
+  ```
 
 3. **Set Up Environment Variables**:
 
@@ -146,6 +146,7 @@ Here are the steps to clone this repo using GitHub Desktop and set up the projec
 
    - Ensure you are in the `backend` directory.
    - Run the following command to start the backend server:
+
      ```sh
      npm start
      ```
@@ -157,6 +158,7 @@ Here are the steps to clone this repo using GitHub Desktop and set up the projec
    - Open a new terminal window.
    - Navigate to the root directory of the cloned repository.
    - Run the following command to start the frontend server:
+
      ```sh
      npm start
      ```
@@ -167,7 +169,6 @@ Here are the steps to clone this repo using GitHub Desktop and set up the projec
 
    - Open your web browser and go to `http://localhost:3000`.
    - You should see the homepage of the Exhibito application.
-
 
 By following these steps, you will have the Exhibito project up and running on your local machine with your API keys securely stored in the `.env` file. This ensures that your keys are not publicly displayed or included in your repository.
 
@@ -226,8 +227,8 @@ For the ideation we designed a mood board and also determined our colour palette
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/Wireframes.png)
 
 ### Database
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Database.png)
 
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/Database.png)
 
 <!-- DEVELOPMENT PROCESS -->
 
@@ -242,21 +243,25 @@ The `Development Process` outlines the technical implementations and functionali
 ### Implementation Process
 
 - **Functionality Implementations**:
+
   - Implemented user authentication and authorisation using `JWT` for secure access control.
   - Created CRUD operations for events, comments, and tickets using `Express` and `MongoDB`.
   - Developed a responsive UI using `React` and `Bootstrap`.
   - Used `React Router` for seamless client-side routing.
 
 - **Design Architecture**:
+
   - Followed `MVC` (Model-View-Controller) architecture for the backend to separate concerns.
   - Applied `MVVM` (Model-View-ViewModel) pattern in the frontend for clean separation of UI and business logic.
 
 - **Plugins and Tools**:
+
   - Utilized `Mongoose` for MongoDB object modeling and schema validation.
   - Used `Axios` for making HTTP requests from the frontend to the backend.
   - Integrated `React-Bootstrap` for pre-styled components and better UI/UX consistency.
 
 - **Frontend Functionalities**:
+
   - Developed user registration and login forms with validation.
   - Created dynamic event listings and details pages.
   - Implemented user profile pages showing booked events and allowing cancellations.
@@ -270,7 +275,6 @@ The `Development Process` outlines the technical implementations and functionali
   - Used environment variables for configuration settings and sensitive data management.
   - Implemented role-based access control to differentiate between standard users, art houses, and admins.
 
-
 #### Highlights
 
 - Seeing the content from the backend populate on the front-end was very rewarding.
@@ -281,7 +285,7 @@ The `Development Process` outlines the technical implementations and functionali
 
 <!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
 
-- Handling Asynchronous operations like API calls to get details of events, usernames or art houses proved difficult at times. 
+- Handling Asynchronous operations like API calls to get details of events, usernames or art houses proved difficult at times.
 - Designing a database schema to handle all the interactions between users, events, comments, art houses and tickets was a complex task.
 - Ensuring that Exhibito was responsive at different screen sizes took a long time and was challenging.
 
@@ -299,9 +303,9 @@ The `Development Process` outlines the technical implementations and functionali
 
 ### Mockups
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/SignIn.png)
+![Mockup1](/src/assets/mock-ups/SignIn.png)
 
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Login.png)
+![Mockup2](../exhibito/src/assets/mock-ups/Login.png)
 
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/StandardUser.png)
 
