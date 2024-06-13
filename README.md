@@ -26,7 +26,7 @@
       <a href="https://github.com/WolfOWI/exhibito"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-   <a href="path/to/demonstration/video">View Demo</a>
+   <a href="https://youtu.be/Nwe2vqvC288">View Demo</a>
     ·
     <a href="https://github.com/WolfOWI/exhibito/issues">Report Bug</a>
     ·
@@ -308,7 +308,7 @@ The `Development Process` outlines the technical implementations and functionali
 
 To see a run through of the application, click below:
 
-[View Demonstration](path/to/video/demonstration)
+[View Demonstration](https://youtu.be/Nwe2vqvC288)
 
 <!-- ROADMAP -->
 
