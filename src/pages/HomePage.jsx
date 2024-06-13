@@ -98,7 +98,7 @@ function HomePage() {
       >
         {/* Hero Text */}
         <h1 className="font-display text-canvas-white-BASE">Exhibito</h1>
-        <h4 className="font-body text-canvas-white-BASE">
+        <h4 className="font-body text-canvas-white-BASE text-sm md:text-base px-3 text-center">
           Explore our different Art Houses and their amazing Exhibitions
         </h4>
         <Button

@@ -1,16 +1,10 @@
-
-<!-- REPLACE ALL THE [USERNAME] TEXT WITH YOUR GITHUB PROFILE NAME & THE [PROJECTNAME] WITH THE NAME OF YOUR GITHUB PROJECT -->
-
 <!-- Repository Information & Links-->
 <br />
 
-![GitHub repo size](https://img.shields.io/github/repo-size/username/projectname?color=%000000)
-![GitHub watchers](https://img.shields.io/github/watchers/username/projectname?color=%000000)
-![GitHub language count](https://img.shields.io/github/languages/count/username/projectname?color=%000000)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/username/projectname?color=%000000)
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Instagram][instagram-shield]][instagram-url]
-[![Behance][behance-shield]][behance-url]
+![GitHub repo size](https://img.shields.io/github/repo-size/WolfOWI/exhibito?color=%000000)
+![GitHub watchers](https://img.shields.io/github/watchers/WolfOWI/exhibito?color=%000000)
+![GitHub language count](https://img.shields.io/github/languages/count/WolfOWI/exhibito?color=%000000)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/WolfOWI/exhibito?color=%000000)
 
 <!-- HEADER SECTION -->
 <h5 align="center" style="padding:0;margin:0;">Wolf Botha - 21100255</h5>
@@ -21,8 +15,8 @@
 </br>
 <p align="center">
 
-  <a href="https://github.com/username/projectname">
-    <img src="path/to/logo" alt="Logo" width="140" height="140">
+  <a href="https://github.com/WolfOWI/exhibito">
+    <img src="../exhibito/public/logoV1.svg" alt="Logo" width="140" height="140">
   </a>
   
   <h3 align="center">Exhibito</h3>
@@ -34,9 +28,9 @@
    <br />
    <a href="path/to/demonstration/video">View Demo</a>
     ·
-    <a href="https://github.com/username/projectname/issues">Report Bug</a>
+    <a href="https://github.com/WolfOWI/exhibito/issues">Report Bug</a>
     ·
-    <a href="https://github.com/username/projectname/issues">Request Feature</a>
+    <a href="https://github.com/WolfOWI/exhibito/issues">Request Feature</a>
 </p>
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -63,9 +57,6 @@
   - [Implementation Process](#implementation-process)
     - [Highlights](#highlights)
     - [Challenges](#challenges)
-  - [Reviews \& Testing](#reviews--testing)
-    - [Feedback from Reviews](#feedback-from-reviews)
-    - [Unit Tests](#unit-tests)
   - [Future Implementation](#future-implementation)
 - [Final Outcome](#final-outcome)
   - [Mockups](#mockups)
@@ -102,8 +93,6 @@ Exhibito is a dynamic platform dedicated to connecting art enthusiasts and artis
 - [JWT](https://jwt.io/)
 - [CORS](https://www.npmjs.com/package/cors)
 
-<!-- GETTING STARTED -->
-<!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
 
 ## Getting Started
 
@@ -111,38 +100,76 @@ The following instructions will get you a copy of the project up and running on 
 
 ### Prerequisites
 
-Ensure that you have the latest version of [Software](path/to/where/they/can/download/software) installed on your machine. The [Plugin](path/to/where/they/can/download/plugin) plugin will also be required.
+Ensure that you have the latest version of [Node.js](https://nodejs.org/) installed on your machine.
 
 ### How to install
 
 ### Installation
 
-Here are a couple of ways to clone this repo:
+Here are the steps to clone this repo using GitHub Desktop and set up the project:
 
-1.  Software </br>
-    `Android Studio` -> `File` -> `New` -> `From Version Control` -> `Git`</br>
-    Enter `https://github.com/username/projectname.git` into the URL field and press the `Clone` button.
+1. **Clone the Repository**:
 
-2.  Clone Repository </br>
-    Run the following in the command-line to clone the project:
+   - Open GitHub Desktop.
+   - Click on `File` -> `Clone repository...`.
+   - In the `URL` tab, enter `https://github.com/WolfOWI/exhibito.git` and choose the local path where you want to save the repository.
+   - Click `Clone`.
 
-    ```sh
-    git clone https://github.com/username/projectname.git
-    ```
+2. **Install Dependencies**:
 
-        Open `Software` and select `File | Open...` from the menu. Select cloned directory and press `Open` button
+   - Open your terminal or command prompt.
+   - Navigate to the cloned repository directory.
+   - Run the following command to install all required dependencies:
+     ```sh
+     npm install
+     ```
+  - Navigate to the backend folder of the repository and install the backend dependencies.
+     ```sh
+     cd backend
+     npm install
+     ```
 
-3.  Install Dependencies </br>
-    Run the following in the command-line to install all the required dependencies:
+3. **Set Up Environment Variables**:
 
-    ```sh
-    npm install
-    ```
+   - Create a `.env` file in the `backend` directory.
+   - Add the following environment variables to your `.env` file:
 
-4.  Get a free API Key at [https://example.com](https://example.com) and enter it in the `config.js` file:
-    ```js
-    const API_KEY = "ENTER YOUR API";
-    ```
+     ```sh
+     PORT=3001
+     MONGODB_URI=your_mongodb_connection_string
+     JWT_SECRET=your_jwt_secret
+     ```
+
+     **Note**: Replace `your_mongodb_connection_string` and `your_jwt_secret` with your actual MongoDB URI and JWT secret key. Do not share these values publicly.
+
+4. **Run the Backend Server**:
+
+   - Ensure you are in the `backend` directory.
+   - Run the following command to start the backend server:
+     ```sh
+     npm start
+     ```
+
+   - The backend server should now be running on `http://localhost:3001`.
+
+5. **Run the Frontend Server**:
+
+   - Open a new terminal window.
+   - Navigate to the root directory of the cloned repository.
+   - Run the following command to start the frontend server:
+     ```sh
+     npm start
+     ```
+
+   - The frontend server should now be running on `http://localhost:3000`.
+
+6. **Access the Application**:
+
+   - Open your web browser and go to `http://localhost:3000`.
+   - You should see the homepage of the Exhibito application.
+
+
+By following these steps, you will have the Exhibito project up and running on your local machine with your API keys securely stored in the `.env` file. This ensures that your keys are not publicly displayed or included in your repository.
 
 <!-- FEATURES AND FUNCTIONALITY-->
 <!-- You can add the links to all of your imagery at the bottom of the file as references -->
@@ -153,13 +180,13 @@ Here are a couple of ways to clone this repo:
 
 ### Feature 1
 
-User can Sign up to exhibito and then also determine whether they are a standard user, part of an arthouse or an admin user.
+Users can sign up onto Exhibito and then also select whether they are a standard user or part of an Art House.
 
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/Login.png)
 
 ### Feature 2
 
-The login fuctionality checks the user Type and when they log in the appropriate page will load.
+The login functionality checks the user type and when they log in the appropriate page will load.
 
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/StandardUser.png)
 
@@ -171,7 +198,7 @@ The Standard users are able to navigate between the upcoming the homepage, event
 
 ### Feature 4 - Art House User
 
-The Art House user are able to see the upcoming events page and then also able to access the add a new event modal. On the model they are able to add a new event and add the necessary information that will be saved to the backend. When an event is added it will then be sent to the admin dashboard where the event will be added to the application or declined.
+The Art House user is able to see the upcoming events page and then also able to access the add a new event modal. On the model they are able to add a new event and add the necessary information that will be saved to the backend. When an event is added it will then be sent to the admin dashboard where the event will be added to the application or declined.
 
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/AdminUser.png)
 
@@ -188,7 +215,7 @@ The `Conceptual Process` is the set of actions, activities and research that was
 
 ### Ideation
 
-For the ideation we designed a moodboard and also determined our colour palette and typography
+For the ideation we designed a mood board and also determined our colour palette and typography
 
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/Moodboard.png)
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/ColourPalette.png)
@@ -198,63 +225,73 @@ For the ideation we designed a moodboard and also determined our colour palette 
 
 ![ExhibitoLogo](../exhibito/src/assets/mock-ups/Wireframes.png)
 
-### User-flow
+### Database
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/Database.png)
 
-![image8][image8]
 
 <!-- DEVELOPMENT PROCESS -->
 
+Certainly! Here’s a filled-out version of the `Development Process` section:
+
+---
+
 ## Development Process
 
-The `Development Process` is the technical implementations and functionality done in the frontend and backend of the application.
+The `Development Process` outlines the technical implementations and functionalities included in both the frontend and backend of the Exhibito application.
 
 ### Implementation Process
 
-<!-- stipulate all of the functionality you included in the project -->
+- **Functionality Implementations**:
+  - Implemented user authentication and authorisation using `JWT` for secure access control.
+  - Created CRUD operations for events, comments, and tickets using `Express` and `MongoDB`.
+  - Developed a responsive UI using `React` and `Bootstrap`.
+  - Used `React Router` for seamless client-side routing.
 
-- Made use of both `functionality` to implement a specific feature.
-- `MVC/MVVM` design architecture implemented.
-- `Plugin` for this.
-- ETC.
+- **Design Architecture**:
+  - Followed `MVC` (Model-View-Controller) architecture for the backend to separate concerns.
+  - Applied `MVVM` (Model-View-ViewModel) pattern in the frontend for clean separation of UI and business logic.
+
+- **Plugins and Tools**:
+  - Utilized `Mongoose` for MongoDB object modeling and schema validation.
+  - Used `Axios` for making HTTP requests from the frontend to the backend.
+  - Integrated `React-Bootstrap` for pre-styled components and better UI/UX consistency.
+
+- **Frontend Functionalities**:
+  - Developed user registration and login forms with validation.
+  - Created dynamic event listings and details pages.
+  - Implemented user profile pages showing booked events and allowing cancellations.
+  - Built a cart system for users to add events and proceed to checkout.
+  - Added filtering and sorting features for event listings.
+  - Created modals for user interactions like adding events and subscribing to newsletters.
+
+- **Backend Functionalities**:
+  - Set up RESTful API endpoints for managing users, events, comments, and tickets.
+  - Implemented middleware for request validation and error handling.
+  - Used environment variables for configuration settings and sensitive data management.
+  - Implemented role-based access control to differentiate between standard users, art houses, and admins.
+
 
 #### Highlights
 
-<!-- stipulated the highlight you experienced with the project -->
-
-- Sunshine.
-- Rainbows.
+- Seeing the content from the backend populate on the front-end was very rewarding.
+- Making the login and sign up functionality work.
+- Adding our own colour and imagery palette to the application and see our idea come to life.
 
 #### Challenges
 
 <!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
 
-- Bugs.
-- Bugs.
-
-### Reviews & Testing
-
-<!-- stipulate how you've conducted testing in the form of peer reviews, feedback and also functionality testing, like unit tests (if applicable) -->
-
-#### Feedback from Reviews
-
-`Peer Reviews` were conducted by my fellow students and lecturer. The following feedback I found useful:
-
-- Feedback one.
-- Feedback two.
-
-#### Unit Tests
-
-`Unit Tests` were conducted to establish working functionality. Here are all the tests that were ran:
-
-- Test 1 of this functionality
-- Test 2 of this functionality
+- Handling Asynchronous operations like API calls to get details of events, usernames or art houses proved difficult at times. 
+- Designing a database schema to handle all the interactions between users, events, comments, art houses and tickets was a complex task.
+- Ensuring that Exhibito was responsive at different screen sizes took a long time and was challenging.
 
 ### Future Implementation
 
 <!-- stipulate functionality and improvements that can be implemented in the future. -->
 
-- Future 1.
-- Future 2.
+- Adding more animations and interactivity.
+- Flagging a comment can be based on an integer value, so that multiple users' flags results in its removal, and not only one person.
+- Charts and in-depths statistics on monthly users, comments and art houses on the admin dashboard.
 
 <!-- MOCKUPS -->
 
@@ -262,9 +299,15 @@ The `Development Process` is the technical implementations and functionality don
 
 ### Mockups
 
-![image9][image9]
-<br>
-![image10][image10]
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/SignIn.png)
+
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/Login.png)
+
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/StandardUser.png)
+
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/HouseUser.png)
+
+![ExhibitoLogo](../exhibito/src/assets/mock-ups/AdminUser.png)
 
 <!-- VIDEO DEMONSTRATION -->
 
@@ -278,7 +321,7 @@ To see a run through of the application, click below:
 
 ## Roadmap
 
-See the [open issues](https://github.com/username/projectname/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/WolfOWI/exhibito/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -296,10 +339,9 @@ Contributions are what makes the open-source community such an amazing place to 
 
 ## Authors
 
-- **Wolf Botha** - [username](https://github.com/username)
-- **Kayla Posthumus** - [username](https://github.com/username)
-- **Ine Smith** - [username](https://github.com/username)
-- **Frederick Beytell** - [username](https://github.com/username)
+- **Wolf Botha** - [WolfOWI](https://github.com/WolfOWI)
+- **Kayla Posthumus** - [KaylaPosthumusOW](https://github.com/KaylaPosthumusOW)
+- **Ine Smith** - [inesmith](https://github.com/inesmith)
 
 <!-- LICENSE -->
 
@@ -311,11 +353,11 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 
 ## Contact
 
-- **Wolf Botha** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/)
+- **Wolf Botha** - [21100255@virtualwindow.co.za](mailto:21100255@virtualwindow.co.za)
 - **Kayla Posthumus** - [231096@virtualwindow.co.za](mailto:231096@virtualwindow.co.za)
-- **Ine Smith** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/)
-- **Wolf Botha** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/)
-- **Project Link** - https://github.com/username/projectname
+- **Ine Smith** - [221076@virtualwindow.co.za](mailto:221076@virtualwindow.co.za)
+- **Frederick Beytell** - [231374@virtualwindow.co.za](mailto:231374@virtualwindow.co.za)
+- **Project Link** - https://github.com/WolfOWI/exhibito
 
 <!-- ACKNOWLEDGEMENTS -->
 
@@ -324,321 +366,3 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 <!-- all resources that you used and Acknowledgements here -->
 
 - [Pinterest](https://za.pinterest.com/kaylaposthu/dv-200_t2/)
-- [Resource Name](path/to/resource)
-- [Resource Name](path/to/resource)
-- [Resource Name](path/to/resource)
-- [Resource Name](path/to/resource)
-
-<!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/nameonlinkedin/
-[instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=flat-square&logo=instagram&colorB=555
-[instagram-url]: https://www.instagram.com/instagram_handle/
-[behance-shield]: https://img.shields.io/badge/-Behance-black.svg?style=flat-square&logo=behance&colorB=555
-[behance-url]: https://www.behance.net/name-on-behance/
->>>>>>> Stashed changes
-
-<!-- REPLACE ALL THE [USERNAME] TEXT WITH YOUR GITHUB PROFILE NAME & THE [PROJECTNAME] WITH THE NAME OF YOUR GITHUB PROJECT -->
-
-<!-- Repository Information & Links-->
-<br />
-
-![GitHub repo size](https://img.shields.io/github/repo-size/username/projectname?color=%000000)
-![GitHub watchers](https://img.shields.io/github/watchers/username/projectname?color=%000000)
-![GitHub language count](https://img.shields.io/github/languages/count/username/projectname?color=%000000)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/username/projectname?color=%000000)
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Instagram][instagram-shield]][instagram-url]
-[![Behance][behance-shield]][behance-url]
-
-<!-- HEADER SECTION -->
-<h5 align="center" style="padding:0;margin:0;">Wolf Botha - 21100255</h5>
-<h5 align="center" style="padding:0;margin:0;">Kayla Posthumus - 231096</h5>
-<h5 align="center" style="padding:0;margin:0;">Ine Smith - 221076</h5>
-<h5 align="center" style="padding:0;margin:0;">Frederick Beytell - 231374</h5>
-<h6 align="center">DV200 Term 2</h6>
-</br>
-<p align="center">
-
-  <a href="https://github.com/username/projectname">
-    <img src="path/to/logo" alt="Logo" width="140" height="140">
-  </a>
-  
-  <h3 align="center">Exhibito</h3>
-
-  <p align="center">
-     Where Art Meets Imagination<br>
-      <a href="https://github.com/WolfOWI/exhibito"><strong>Explore the docs »</strong></a>
-   <br />
-   <br />
-   <a href="path/to/demonstration/video">View Demo</a>
-    ·
-    <a href="https://github.com/username/projectname/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/username/projectname/issues">Request Feature</a>
-</p>
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
-
-* [About the Project](#about-the-project)
-  * [Project Description](#project-description)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [How to install](#how-to-install)
-* [Features and Functionality](#features-and-functionality)
-* [Concept Process](#concept-process)
-   * [Ideation](#ideation)
-   * [Wireframes](#wireframes)
-   * [User-flow](#user-flow)
-* [Development Process](#development-process)
-   * [Implementation Process](#implementation-process)
-        * [Highlights](#highlights)
-        * [Challenges](#challenges)
-   * [Reviews and Testing](#peer-reviews)
-        * [Feedback from Reviews](#feedback-from-reviews)
-        * [Unit Tests](#unit-tests)
-   * [Future Implementation](#peer-reviews)
-* [Final Outcome](#final-outcome)
-    * [Mockups](#mockups)
-    * [Video Demonstration](#video-demonstration)
-* [Conclusion](#conclusion)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
-<!--PROJECT DESCRIPTION-->
-## About the Project
-<!-- header image of project -->
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Project%20Header.png)
-
-### Project Description
-
-Exhibito is a dynamic platform dedicated to connecting art enthusiasts and artists within a vibrant online community, offering exclusive access to diverse art exhibitions, events, and experiences. 
-
-### Built With
-
-* [React.js](https://react.dev/)
-* [Node.js](https://nodejs.org/en)
-* [Express](https://expressjs.com/)
-* [MongoDB](https://www.mongodb.com/)
-* [Axios](https://axios-http.com/)
-* [Tailwind CSS](https://tailwindcss.com/)
-* [Bcrypt](https://www.npmjs.com/package/bcrypt)
-* [React Router](https://reactrouter.com/en/main)
-* [JWT](https://jwt.io/)
-* [CORS](https://www.npmjs.com/package/cors)
-
-
-
-<!-- GETTING STARTED -->
-<!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
-## Getting Started
-
-The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Ensure that you have the latest version of [Software](path/to/where/they/can/download/software) installed on your machine. The [Plugin](path/to/where/they/can/download/plugin) plugin will also be required.
-
-### How to install
-
-### Installation
-Here are a couple of ways to clone this repo:
-
-1. Software </br>
-`Android Studio` -> `File` -> `New` -> `From Version Control` -> `Git`</br>
-Enter `https://github.com/username/projectname.git` into the URL field and press the `Clone` button.
-
-2. Clone Repository </br>
-Run the following in the command-line to clone the project:
-   ```sh
-   git clone https://github.com/username/projectname.git
-   ```
-    Open `Software` and select `File | Open...` from the menu. Select cloned directory and press `Open` button
-
-3. Install Dependencies </br>
-Run the following in the command-line to install all the required dependencies:
-   ```sh
-   npm install
-   ```
-
-4. Get a free API Key at [https://example.com](https://example.com) and enter it in the `config.js` file:
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-
-<!-- FEATURES AND FUNCTIONALITY-->
-<!-- You can add the links to all of your imagery at the bottom of the file as references -->
-## Features and Functionality
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/SignIn.png)
-### Feature 1
-
-User can Sign up to exhibito and then also determine whether they are a standard user, part of an arthouse or an admin user.
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Login.png)
-### Feature 2
-
-The login fuctionality checks the user Type and when they log in the appropriate page will load.
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/StandardUser.png)
-### Feature 3 - Standard User
-
-The Standard users are able to navigate between the upcoming the homepage, events pages, Tickets page and the user profile page. On the Upcoming events page they are able to browse the different events and also filter through the event according to price, date and location. The user are then able to book a ticket(s) to the event which will show up on the tickets page.
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/HouseUser.png)
-### Feature 4 - Art House User
-
-The Art House user are able to see the upcoming events page and then also able to access the add a new event modal. On the model they are able to add a new event and add the necessary information that will be saved to the backend. When an event is added it will then be sent to the admin dashboard where the event will be added to the application or declined.
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/AdminUser.png)
-### Feature 5 - Admin User
-
-The admin user is in charge of the new events added and the flagged comments. They are able to approve or decline new events and also delete a flagged comment or decide the comment is safe.
-
-
-<!-- CONCEPT PROCESS -->
-<!-- Briefly explain your concept ideation process -->
-## Concept Process
-
-The `Conceptual Process` is the set of actions, activities and research that was done when starting this project.
-
-### Ideation
-
-For the ideation we designed a moodboard and also determined our colour palette and typography
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Moodboard.png)
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/ColourPalette.png)
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Typography.png)
-
-### Wireframes
-
-![ExhibitoLogo](../exhibito/src/assets/mock-ups/Wireframes.png)
-
-### User-flow
-
-![image8][image8]
-
-<!-- DEVELOPMENT PROCESS -->
-## Development Process
-
-The `Development Process` is the technical implementations and functionality done in the frontend and backend of the application.
-
-### Implementation Process
-<!-- stipulate all of the functionality you included in the project -->
-
-* Made use of both `functionality` to implement a specific feature.
-* `MVC/MVVM` design architecture implemented.
-* `Plugin` for this.
-* ETC.
-
-#### Highlights
-<!-- stipulated the highlight you experienced with the project -->
-* Sunshine.
-* Rainbows.
-
-#### Challenges
-<!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
-* Bugs.
-* Bugs.
-
-### Reviews & Testing
-<!-- stipulate how you've conducted testing in the form of peer reviews, feedback and also functionality testing, like unit tests (if applicable) -->
-
-#### Feedback from Reviews
-
-`Peer Reviews` were conducted by my fellow students and lecturer. The following feedback I found useful:
-
-* Feedback one.
-* Feedback two.
-
-#### Unit Tests
-
-`Unit Tests` were conducted to establish working functionality. Here are all the tests that were ran:
-
-* Test 1 of this functionality
-* Test 2 of this functionality
-
-### Future Implementation
-<!-- stipulate functionality and improvements that can be implemented in the future. -->
-
-* Future 1.
-* Future 2.
-
-<!-- MOCKUPS -->
-## Final Outcome
-
-### Mockups
-
-![image9][image9]
-<br>
-![image10][image10]
-
-<!-- VIDEO DEMONSTRATION -->
-### Video Demonstration
-
-To see a run through of the application, click below:
-
-[View Demonstration](path/to/video/demonstration)
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/username/projectname/issues) for a list of proposed features (and known issues).
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<!-- AUTHORS -->
-## Authors
-
-* **Wolf Botha** - [username](https://github.com/username)
-* **Kayla Posthumus** - [username](https://github.com/username)
-* **Ine Smith** - [username](https://github.com/username)
-* **Frederick Beytell** - [username](https://github.com/username)
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.\
-
-<!-- LICENSE -->
-## Contact
-
-* **Wolf Botha** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/) 
-* **Kayla Posthumus** - [231096@virtualwindow.co.za](mailto:231096@virtualwindow.co.za)
-* **Ine Smith** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/) 
-* **Wolf Botha** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/) 
-* **Project Link** - https://github.com/username/projectname
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-<!-- all resources that you used and Acknowledgements here -->
-* [Pinterest](https://za.pinterest.com/kaylaposthu/dv-200_t2/)
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
-
-
-<!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/nameonlinkedin/
-[instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=flat-square&logo=instagram&colorB=555
-[instagram-url]: https://www.instagram.com/instagram_handle/
-[behance-shield]: https://img.shields.io/badge/-Behance-black.svg?style=flat-square&logo=behance&colorB=555
-[behance-url]: https://www.behance.net/name-on-behance/
-
