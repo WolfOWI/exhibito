@@ -93,10 +93,12 @@ function TicketsPage() {
               float: "left",
             }}
           >
-            Added To Your Cart
+            Tickets in Cart
           </h1>
           {cartTickets.length > 0 ? (
-            <p className="font-body">Below are the events that you have added to your cart.</p>
+            <p className="font-body">
+              Below are the unbooked events that you have added to your cart.
+            </p>
           ) : (
             ""
           )}
@@ -118,17 +120,18 @@ function TicketsPage() {
           </div>
         )}
 
+        {/* Total Section */}
         {cartTickets.length > 0 ? (
           <div>
             <div className="flex md:hidden flex-col border-t-2 border-ink-silhouette-40% pt-5">
               <div className="flex justify-between mx-3">
-                <h4 className="font-body fw-bold">Total Cost</h4>
+                <h4 className="font-display">Total Cost</h4>
                 <h2 className="font-body">R{totalCost.toFixed(2)}</h2>
               </div>
               <PrimaryBtn label="Book Events" onClick={handleCheckOut} />
             </div>
             <div className="hidden md:flex justify-between border-t-2 border-ink-silhouette-40% pt-5">
-              <h4 className="font-body fw-bold">Total Cost</h4>
+              <h4 className="font-display">Total Cost</h4>
               <div className="flex flex-col items-center">
                 <h4 className="font-body">R{totalCost.toFixed(2)}</h4>
                 <PrimaryBtn label="Book Events" onClick={handleCheckOut} />
@@ -140,6 +143,7 @@ function TicketsPage() {
         )}
       </Container>
       <Footer />
+      {/* Success Modal Confirmation */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title className="font-display">Event(s) Booked</Modal.Title>
