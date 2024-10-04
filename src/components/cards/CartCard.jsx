@@ -19,7 +19,7 @@ function CartCard({ ticket, event }) {
   }
 
   return (
-    <div>
+    <>
       <div className="flex flex-col sm:text-center md:text-left md:flex-row justify-between items-center my-3 py-3 px-4 bg-canvas-white-40% shadow rounded-3xl">
         <div className="flex-1 md:flex-grow">
           <h4 className="font-display text-2xl truncate ">{event.title}</h4>
@@ -39,7 +39,7 @@ function CartCard({ ticket, event }) {
           <SecondaryBtn label="Remove" onClick={handleRemove} />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
