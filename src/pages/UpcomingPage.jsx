@@ -30,7 +30,6 @@ function UpcomingPage() {
   }, []);
 
   // Get events from MongoDB, but filter to only show "Approved" events.
-
   const fetchApprovedEvents = () => {
     getAllEvents()
       .then((data) => {
@@ -62,8 +61,6 @@ function UpcomingPage() {
     } else {
       filteredEvents = defaultAllEvents;
     }
-
-    console.log(filteredEvents);
 
     // SORTING
     let sortType = "clear";
@@ -125,11 +122,11 @@ function UpcomingPage() {
       <Container className="mt-6">
         {/* Heading Section */}
         <Row className="mb-3">
-          <Col xs={9}>
+          <Col xs={12} md={7}>
             <h1 className="font-display text-ink-silhouette-BASE">Upcoming Exhibitions</h1>
           </Col>
-          <Col xs={3} className="flex justify-end pr-8">
-            <SortDropdown onSortSelected={applyFiltersAndSort} />
+          <Col xs={12} md={5} className="flex justify-end md:pr-8">
+            <SortDropdown onSortSelected={applyFiltersAndSort} className="w-full md:w-fit" />
           </Col>
         </Row>
         {/* Content Section */}

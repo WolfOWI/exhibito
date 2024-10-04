@@ -21,9 +21,11 @@ function SortDropdown(props) {
   };
 
   return (
-    <div>
-      <Dropdown>
-        <Dropdown.Toggle className="bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE">
+    <>
+      <Dropdown className="w-full">
+        <Dropdown.Toggle
+          className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE ${props.className}`}
+        >
           {dropdownLabel}
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -85,7 +87,7 @@ function SortDropdown(props) {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-    </div>
+    </>
   );
 }
 
