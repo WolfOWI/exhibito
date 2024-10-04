@@ -95,7 +95,10 @@ function UserProfilePage() {
     <div>
       <NavigationBar />
       <div className="container mt-4">
+        {/* SCREEN HEADING */}
+        {/* Standard */}
         {user.userType === "standard" && <h1 className="font-display">User Profile</h1>}
+        {/* House */}
         {house && user.userType === "house" ? (
           <h1 className="font-display">
             {house.name} <span className="text-ink-silhouette-30%">Art House</span>
@@ -103,26 +106,26 @@ function UserProfilePage() {
         ) : (
           ""
         )}
+        {/* Admin */}
         {user.userType === "admin" && <h1 className="font-display">Admin Profile</h1>}
 
-        <div className="row mt-5">
-          <div className="col-3">
-            <div>
-              {/* Standard */}
-              {user.userType === "standard" && (
-                <img src={UserImage} alt="blackandwhite" className="user-profile-img"></img>
-              )}
-              {/* House */}
-              {user.userType === "house" && (
-                <img src={HouseImage} alt="blackandwhite" className="user-profile-img"></img>
-              )}
-              {/* Admin */}
-              {user.userType === "admin" && (
-                <img src={AdminImage} alt="blackandwhite" className="user-profile-img"></img>
-              )}
-            </div>
+        {/* User Details */}
+        <div className="flex mt-8">
+          <div className="p-0">
+            {/* Standard */}
+            {user.userType === "standard" && (
+              <img src={UserImage} alt="user icon" className="w-48"></img>
+            )}
+            {/* House */}
+            {user.userType === "house" && (
+              <img src={HouseImage} alt="house user icon" className="w-48"></img>
+            )}
+            {/* Admin */}
+            {user.userType === "admin" && (
+              <img src={AdminImage} alt="admin icon" className="w-48"></img>
+            )}
           </div>
-          <div className="col-9">
+          <div className="p-0">
             {/* User Name */}
             <h2 className="font-body fw-bold mt-3">{user.username}</h2>
             {/* User Email */}
@@ -139,7 +142,7 @@ function UserProfilePage() {
               <p className="font-body mt-3">{user.email}</p>
             </div>
             {/* User Mobile */}
-            <div className="flex items-center mb-4 mt-[-10px]">
+            <div className="flex items-center  mt-[-10px]">
               <svg
                 className="h-8"
                 xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +154,7 @@ function UserProfilePage() {
               <div className="w-2"></div>
               <p className="font-body mt-3">{user.mobile}</p>
             </div>
-            <PrimaryBtn label="Log Out" onClick={handleLogout} className="mt-2" />
+            <PrimaryBtn label="Log Out" onClick={handleLogout} className="w-full" />
           </div>
         </div>
       </div>
