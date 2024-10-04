@@ -22,9 +22,9 @@ function SortDropdown(props) {
 
   return (
     <>
-      <Dropdown className="w-full">
+      <Dropdown className="w-full flex justify-end">
         <Dropdown.Toggle
-          className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE ${props.className}`}
+          className={`flex items-center justify-between h-fit bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE ${props.className}`}
         >
           {dropdownLabel}
         </Dropdown.Toggle>

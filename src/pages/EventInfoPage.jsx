@@ -46,8 +46,7 @@ function EventInfoPage() {
   });
 
   // Scroll to top when page loads
-  // TODO TURN BACK ON!
-  // useScrollToTop();
+  useScrollToTop();
 
   // When eventId changes
   useEffect(() => {
