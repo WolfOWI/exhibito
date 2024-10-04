@@ -24,16 +24,18 @@ import { getAllEvents } from "../services/getExhibitoData";
 import HeroImage from "../assets/images/Hero-img.png";
 import SpectrumStudios from "../assets/images/SpectrumStudios.png";
 import TheArtLoft from "../assets/images/TheArtLoft.png";
-import ArthouseImage2 from "../assets/images/Arthouse-2.png";
+import AvantGardeGalleryImg from "../assets/images/Arthouse-2.png";
 // -----------------------------------------------
 
 function HomePage() {
   const windowSize = useWindowSize(); // Current Window Width
   const [events, setEvents] = useState([]); // Events stored
+  const [carouselIndex, setCarouselIndex] = useState(0); // Track current carousel index
 
   // On Page Load, get events data from MongoDB and set store in the highlighted events
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // TODO Turn back on!
+    // window.scrollTo(0, 0);
     getAllEvents()
       .then((data) => {
         setEvents(data);
@@ -63,7 +65,14 @@ function HomePage() {
     return chunkedArr;
   };
 
-  const eventChunks = chunkArray(featuredEvents, getChunkSize()); // Dynamically set chunk size
+  const eventChunks = chunkArray(featuredEvents, getChunkSize());
+
+  // Handle carousel index reset on resize (prevent breaking)
+  useEffect(() => {
+    if (carouselIndex >= eventChunks.length) {
+      setCarouselIndex(0); // Reset index if it's out of bounds after resizing
+    }
+  }, [windowSize, eventChunks.length, carouselIndex]);
 
   const renderEventCards = (eventList) => {
     return eventList.map((event, index) => (
@@ -123,7 +132,7 @@ function HomePage() {
         {/* Carousel Title */}
         <div className="Highlighted-Events-Section">
           <div className="flex justify-between w-full">
-            <h1 className="text-ink-silhouette-BASE font-display">Highlighted Events</h1>
+            <h1 className="text-ink-silhouette-BASE font-display text-4xl">Highlighted Events</h1>
             <Button
               href="/upcoming"
               className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE h-fit`}
@@ -131,9 +140,14 @@ function HomePage() {
               Browse Events
             </Button>
           </div>
-
           {/* Carousel with Scroller */}
-          <Carousel indicators={true} controls={true} className="custom-carousel">
+          <Carousel
+            activeIndex={carouselIndex}
+            onSelect={(selectedIndex) => setCarouselIndex(selectedIndex)}
+            indicators={true}
+            controls={true}
+            className="custom-carousel"
+          >
             {eventChunks.map((chunk, idx) => (
               <Carousel.Item key={idx}>
                 <Row>{renderEventCards(chunk)}</Row>
@@ -142,205 +156,79 @@ function HomePage() {
           </Carousel>
         </div>
 
-        {/* Heading Section */}
-        <div className="container Art-Houses-Section">
-          <h1
-            style={{
-              color: "black",
-              fontFamily: "DM Serif Display",
-              fontSize: "39px",
-              marginTop: "40px",
-              marginLeft: "0px",
-              marginBottom: "45px",
-            }}
-          >
-            Art Houses
-          </h1>
-        </div>
-
-        {/* Art House 1 */}
-        <div style={{ display: "flex", alignItems: "center", marginLeft: "0px", gap: "20px" }}>
-          <div className="Art-House-1" style={{ maxWidth: "550px" }}>
-            <Card className="cursor-pointer group p-3 border-none bg-transparent rounded-[40px]">
-              <style>
-                {`
-              .multi-line-truncation {
-                display: -webkit-box;
-                -webkit-line-clamp: 2; /* Number of lines */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-            `}
-              </style>
+        {/* Art Houses Section */}
+        <Container className="mt-16">
+          <h1 className="text-ink-silhouette-BASE font-display text-4xl">Art Houses</h1>
+          {/* Art House 1 */}
+          <div className="flex items-center md:gap-8 xl:gap-32 mt-16 md:mt-4">
+            <Card className="hidden md:block group p-3 border-none bg-transparent rounded-[40px]">
               <Card.Img
-                style={{ height: "300px", width: "600px" }}
-                className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
+                className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE h-[300px] w-[600px] xl:w-[1000px]"
                 src={SpectrumStudios}
               />
             </Card>
+            <div>
+              <h3 className="font-display fs-2">Spectrum Studios</h3>
+              <p className="font-body">
+                Exhibits include virtual reality experiences, multimedia installations, and
+                experimental works that engage visitors through technology and creativity.
+              </p>
+              <Button
+                href="/upcoming"
+                className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
+              >
+                Browse Events
+              </Button>
+            </div>
           </div>
 
-          {/* Text Section */}
-          <div>
-            <h3
-              style={{
-                color: "black",
-                fontFamily: "DM Serif Display",
-                fontSize: "31px",
-                marginLeft: "100px",
-              }}
-            >
-              Spectrum Studios
-            </h3>
-            <p
-              style={{
-                color: "black",
-                fontFamily: "DM Sans",
-                fontSize: "16px",
-                marginLeft: "100px",
-              }}
-            >
-              Exhibits include virtual reality experiences, multimedia installations, <br />
-              and experimental works that engage visitors through technology and creativity.
-            </p>
-            <Button
-              href="/upcoming"
-              className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
-              style={{ marginLeft: "100px" }}
-            >
-              Browse Events
-            </Button>
-          </div>
-        </div>
-
-        {/* Art House 2 */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: "90px",
-            gap: "20px",
-            marginTop: "45px",
-          }}
-        >
-          {/* Text Section */}
-          <div>
-            <h3
-              style={{
-                color: "black",
-                fontFamily: "DM Serif Display",
-                fontSize: "31px",
-              }}
-            >
-              The Avant-Garde Gallery
-            </h3>
-            <p
-              style={{
-                color: "black",
-                fontFamily: "DM Sans",
-                fontSize: "16px",
-              }}
-            >
-              Visitors can expect to see cutting-edge installations, abstract art, <br />
-              and multimedia projects that push the limits of artistic expression <br />
-              that provoke thought.
-            </p>
-            <Button
-              href="/upcoming"
-              className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
-            >
-              Browse Events
-            </Button>
-          </div>
-
-          <div className="Art-House-2" style={{ maxWidth: "550px" }}>
-            <Card className="cursor-pointer group p-3 border-none bg-transparent rounded-[40px] float-right">
-              <style>
-                {`
-              .multi-line-truncation {
-                display: -webkit-box;
-                -webkit-line-clamp: 2; /* Number of lines */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-            `}
-              </style>
+          {/* Art House 2 */}
+          <div className="flex items-center md:gap-8 xl:gap-32 mt-16 md:mt-4">
+            <div>
+              <h3 className="font-display fs-2">The Avant-Garde Gallery</h3>
+              <p className="font-body">
+                Visitors can expect to see cutting-edge installations, abstract art, and multimedia
+                projects that push the limits of artistic expression that provoke thought.
+              </p>
+              <Button
+                href="/upcoming"
+                className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
+              >
+                Browse Events
+              </Button>
+            </div>
+            <Card className="hidden md:block group p-3 border-none bg-transparent rounded-[40px]">
               <Card.Img
-                style={{ marginLeft: "135px", height: "300px", width: "600px" }}
-                className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
-                src={ArthouseImage2}
+                className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE h-[300px] w-[1000px] xl:w-[1500px]"
+                src={AvantGardeGalleryImg}
               />
             </Card>
           </div>
-        </div>
 
-        {/* Art House 3 */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: "0px",
-            gap: "20px",
-            marginTop: "45px",
-          }}
-        >
-          <div className="Art-House-3" style={{ maxWidth: "550px" }}>
-            <Card className="cursor-pointer group p-3 border-none bg-transparent rounded-[40px]">
-              <style>
-                {`
-              .multi-line-truncation {
-                display: -webkit-box;
-                -webkit-line-clamp: 2; /* Number of lines */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-            `}
-              </style>
+          {/* Art House 3 */}
+          <div className="flex items-center md:gap-8 xl:gap-32 mt-16 md:mt-4">
+            <Card className="hidden md:block group p-3 border-none bg-transparent rounded-[40px]">
               <Card.Img
-                style={{ height: "300px", width: "600px" }}
-                className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
+                className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE h-[300px] w-[1000px] xl:w-[1500px]"
                 src={TheArtLoft}
               />
             </Card>
+            <div>
+              <h3 className="font-display fs-2">The Art Loft</h3>
+              <p className="font-body">
+                The Art Loft is a hub for contemporary art. The gallery showcases modern paintings,
+                street art, and experimental works. It also hosts rotating exhibitions, artist
+                residencies, and community events that foster artistic collaboration.
+              </p>
+              <Button
+                href="/upcoming"
+                className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
+              >
+                Browse Events
+              </Button>
+            </div>
           </div>
-
-          {/* Text Section */}
-          <div>
-            <h3
-              style={{
-                color: "black",
-                fontFamily: "DM Serif Display",
-                fontSize: "31px",
-                marginLeft: "100px",
-              }}
-            >
-              The Art Loft
-            </h3>
-            <p
-              style={{
-                color: "black",
-                fontFamily: "DM Sans",
-                fontSize: "16px",
-                marginLeft: "100px",
-              }}
-            >
-              The Art Loft is a hub for contemporary art. The gallery showcases modern paintings,{" "}
-              <br />
-              street art, and experimental works. It also hosts rotating exhibitions, <br />
-              artist residencies, and community events that foster artistic collaboration.
-            </p>
-            <Button
-              href="/upcoming"
-              className={`bg-scarlet-melody-BASE hover:bg-scarlet-melody-40% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body `}
-              style={{ marginLeft: "100px" }}
-            >
-              Browse Events
-            </Button>
-          </div>
-        </div>
+        </Container>
       </Container>
       <Footer />
     </div>
