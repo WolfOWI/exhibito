@@ -21,7 +21,7 @@ function Footer() {
   return (
     <div className="bg-canvas-white-BASE border-t-2 border-ink-silhouette-BASE mt-16">
       {/* Footer Contents */}
-      <Container className="lg:flex py-16 justify-content-between lg:items-start">
+      <Container className="flex flex-col lg:flex-row py-16 justify-content-between lg:items-start">
         {/* Left side container */}
         <div className="flex lg:w-[30%] lg:justify-between sm:items-center lg:items-start">
           <Nav>
@@ -81,30 +81,17 @@ function Footer() {
           </div>
         </div>
         {/* Middle container */}
-        <div className="flex lg:w-[30%] lg:justify-center mt-8 lg:mt-0">
-          <Nav className="font-display flex-col">
-            <Nav.Link href="/upcoming" className="text-ink-silhouette-BASE pl-0">
-              Upcoming
-            </Nav.Link>
-            <Nav.Link href="/profile" className="text-ink-silhouette-BASE pl-0">
-              Profile
-            </Nav.Link>
-            <Nav.Link href="/tickets" className="text-ink-silhouette-BASE pl-0">
-              Cart
-            </Nav.Link>
-          </Nav>
-          <Nav className="font-display flex-col">
-            <Nav.Link href="#" className="text-ink-silhouette-BASE pl-0">
-              About Us
-            </Nav.Link>
-            <Nav.Link href="#" className="text-ink-silhouette-BASE pl-0">
-              Contact Us
-            </Nav.Link>
-            <Nav.Link href="#" className="text-ink-silhouette-BASE pl-0">
-              Privacy Policy
-            </Nav.Link>
-          </Nav>
-        </div>
+        <Nav className="font-display text-xl flex mt-8 text-center justify-center lg:flex-col lg:items-center lg:gap-1 lg:text-left lg:w-[30%] lg:mt-0">
+          <Nav.Link href="/upcoming" className="text-ink-silhouette-BASE pl-0">
+            Upcoming
+          </Nav.Link>
+          <Nav.Link href="/profile" className="text-ink-silhouette-BASE pl-0">
+            Profile
+          </Nav.Link>
+          <Nav.Link href="/tickets" className="text-ink-silhouette-BASE pl-0">
+            Cart
+          </Nav.Link>
+        </Nav>
         {/* Right side container */}
         <div className="flex-col lg:w-[30%] text-ink-silhouette-BASE flex-grow-1 mt-8 lg:mt-0">
           <Form.Label className="font-display fs-4" htmlFor="inputMinPrice">
