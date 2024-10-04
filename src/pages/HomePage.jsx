@@ -7,6 +7,7 @@ import "../styles/homepage.css";
 
 // React Hooks
 import { useState, useEffect } from "react";
+import useWindowSize from "../hooks/useWindowSize";
 
 // Import Bootstrap Components
 import { Carousel, Row, Col, Container, Card, Button } from "react-bootstrap";
@@ -27,6 +28,7 @@ import ArthouseImage2 from "../assets/images/Arthouse-2.png";
 // -----------------------------------------------
 
 function HomePage() {
+  const windowSize = useWindowSize(); // Current Window Width
   const [events, setEvents] = useState([]); // Events stored
 
   // On Page Load, get events data from MongoDB and set store in the highlighted events
@@ -45,6 +47,23 @@ function HomePage() {
   const featuredEvents = featuredEventIndices
     .map((index) => events[index])
     .filter((event) => event !== undefined);
+
+  // Determine chunk size based on window width
+  const getChunkSize = () => {
+    if (windowSize.width <= 992) return 1; // 1 card per row on small screens
+    if (windowSize.width <= 1200) return 2; // 2 cards per row on medium devices
+    return 4; // 4 cards per row on larger screens
+  };
+
+  const chunkArray = (array, size) => {
+    const chunkedArr = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunkedArr.push(array.slice(i, i + size));
+    }
+    return chunkedArr;
+  };
+
+  const eventChunks = chunkArray(featuredEvents, getChunkSize()); // Dynamically set chunk size
 
   const renderEventCards = (eventList) => {
     return eventList.map((event, index) => (
@@ -67,20 +86,10 @@ function HomePage() {
     ));
   };
 
-  const chunkArray = (array, size) => {
-    const chunkedArr = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunkedArr.push(array.slice(i, i + size));
-    }
-    return chunkedArr;
-  };
-
-  const eventChunks = chunkArray(featuredEvents, 4);
-
   return (
     <div style={{ backgroundColor: "#f3f1ee" }}>
       <NavigationBar />
-      {/* Hero Image */}
+      {/* Hero Section */}
       <div
         style={{
           backgroundImage: `url(${HeroImage})`,
@@ -109,23 +118,12 @@ function HomePage() {
         </Button>
       </div>
 
+      {/* Home Page Contents */}
       <Container className="mt-6">
-        {/* Highlighted Events Section */}
-
-        {/* Heading Section */}
+        {/* Carousel Title */}
         <div className="Highlighted-Events-Section">
           <div className="flex justify-between w-full">
-            <h1
-              style={{
-                color: "black",
-                fontFamily: "DM Serif Display",
-                fontSize: "39px",
-                float: "left",
-                marginBottom: "45px",
-              }}
-            >
-              Highlighted Events
-            </h1>
+            <h1 className="text-ink-silhouette-BASE font-display">Highlighted Events</h1>
             <Button
               href="/upcoming"
               className={`bg-transparent hover:bg-scarlet-melody-20% border-2 border-scarlet-melody-BASE rounded-full px-4 font-body text-scarlet-melody-BASE h-fit`}
@@ -176,7 +174,7 @@ function HomePage() {
             `}
               </style>
               <Card.Img
-                style={{height: "300px", width: "600px"}}
+                style={{ height: "300px", width: "600px" }}
                 className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
                 src={SpectrumStudios}
               />
@@ -246,7 +244,7 @@ function HomePage() {
             >
               Visitors can expect to see cutting-edge installations, abstract art, <br />
               and multimedia projects that push the limits of artistic expression <br />
-               that provoke thought.
+              that provoke thought.
             </p>
             <Button
               href="/upcoming"
@@ -302,7 +300,7 @@ function HomePage() {
             `}
               </style>
               <Card.Img
-                style={{ height: "300px", width: "600px"}}
+                style={{ height: "300px", width: "600px" }}
                 className="h-90 object-cover rounded-tl-[80px] rounded-tr-none rounded-bl-none rounded-br-[80px] border-4 border-scarlet-melody-BASE group-hover:border-sapphire-whisper-BASE bg-scarlet-melody-BASE group-hover:bg-sapphire-whisper-BASE"
                 src={TheArtLoft}
               />
@@ -329,9 +327,10 @@ function HomePage() {
                 marginLeft: "100px",
               }}
             >
-              The Art Loft is a hub for contemporary art. The gallery showcases modern paintings, <br />
-               street art, and experimental works. It also hosts rotating exhibitions, <br />
-               artist residencies, and community events that foster artistic collaboration.
+              The Art Loft is a hub for contemporary art. The gallery showcases modern paintings,{" "}
+              <br />
+              street art, and experimental works. It also hosts rotating exhibitions, <br />
+              artist residencies, and community events that foster artistic collaboration.
             </p>
             <Button
               href="/upcoming"

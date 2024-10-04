@@ -114,7 +114,7 @@ function UserProfilePage() {
           <div className="p-0">
             {/* Standard */}
             {user.userType === "standard" && (
-              <img src={UserImage} alt="user icon" className="w-48"></img>
+              <img src={UserImage} alt="user icon" className="w-48 mr-8"></img>
             )}
             {/* House */}
             {user.userType === "house" && (
