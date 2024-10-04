@@ -118,7 +118,7 @@ function UserProfilePage() {
             )}
             {/* House */}
             {user.userType === "house" && (
-              <img src={HouseImage} alt="house user icon" className="w-48"></img>
+              <img src={HouseImage} alt="house user icon" className="w-48 mr-8"></img>
             )}
             {/* Admin */}
             {user.userType === "admin" && (
