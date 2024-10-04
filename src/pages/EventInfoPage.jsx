@@ -43,10 +43,11 @@ function EventInfoPage() {
     isFlagged: false,
     createdDate: "",
     createdTime: "",
-  }); 
+  });
 
   // Scroll to top when page loads
-  useScrollToTop();
+  // TODO TURN BACK ON!
+  // useScrollToTop();
 
   // When eventId changes
   useEffect(() => {
@@ -82,7 +83,7 @@ function EventInfoPage() {
 
   // Creating a new comment
   function createComment() {
-    // If logged in user does not exist, stop the comment-creation process
+    // If logged in user exists
     if (!user) return;
 
     const commentData = {
@@ -97,6 +98,12 @@ function EventInfoPage() {
 
     addNewComment(commentData).then(() => {
       setRefreshComments((prev) => !prev); // Toggle between false & true
+
+      // Reset the comment after successful submission
+      setNewComment({
+        ...newComment,
+        text: "",
+      });
     });
   }
 
@@ -127,6 +134,7 @@ function EventInfoPage() {
   return (
     <div>
       <NavigationBar />
+      {/* Event Info */}
       <div className="container mt-5">
         <div className="event-image">
           <img src={specificEvent.thumbnail} alt="imagery of event" className="event-img"></img>
@@ -157,16 +165,18 @@ function EventInfoPage() {
         {isHouse ? "" : <PrimaryBtn label="Add to Cart" onClick={handleAddtoCart} />}
       </div>
 
+      {/* Reviews */}
       <div className="container">
-        <h2 className="font-display mt-4">Previous Comments</h2>
-        <div className="row mt-2">
+        <h2 className="font-display mt-8">Reviews</h2>
+        <div className="row">
           <div>
             <CommentsCard eventId={eventId} refreshComments={refreshComments} />
           </div>
         </div>
       </div>
 
-      <div className="container mt-3">
+      {/* New Review */}
+      <div className="container mt-8">
         <h2 className="font-display">Leave a Review</h2>
         <NewComment
           onPostClick={createComment}
@@ -177,6 +187,7 @@ function EventInfoPage() {
 
       <Footer />
 
+      {/* Add to Cart Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title className="font-display">Added to Cart</Modal.Title>

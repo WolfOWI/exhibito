@@ -14,13 +14,13 @@ function NewComment({ onPostClick, newComment, setNewComment }) {
   const handlePostReviewBtnClick = (e) => {
     e.preventDefault();
     onPostClick();
-  }; 
+  };
 
   return (
-    <Form>
-      <div className="row flex items-end">
-        <div className="w-[60%] md:w-[80%]">
-          <Form.Label className="font-body">Leave a Comment</Form.Label>
+    <Form className="flex flex-col items-start">
+      <div className="flex flex-col items-end w-full md:w-fit">
+        <div className="w-full md:min-w-[700px] max-w-[1000px]">
+          <Form.Label className="font-body">Tell us about your experience.</Form.Label>
           <Form.Control
             type="text"
             id="text"
@@ -29,9 +29,11 @@ function NewComment({ onPostClick, newComment, setNewComment }) {
             className="border-2 border-canvas-white-60% h-32"
           />
         </div>
-        <div className="w-[40%] md:w-[20%]">
-          <PrimaryBtn label="Post Review" onClick={(e) => handlePostReviewBtnClick(e)} />
-        </div>
+        <PrimaryBtn
+          className="w-full mt-2 md:mt-0 md:w-fit"
+          label="Post Review"
+          onClick={(e) => handlePostReviewBtnClick(e)}
+        />
       </div>
     </Form>
   );
