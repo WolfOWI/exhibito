@@ -8,7 +8,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Configure CORS
+const allowedOrigins = ["https://d3qp7ib6lsy6o7.cloudfront.net", "http://localhost:3000"];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl requests)
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Enable credentials (if needed)
+  })
+);
+
 app.use(express.json());
 
 // Connect to MongoDB with mongoose
@@ -53,5 +71,5 @@ app.use("/tickets", ticketRoutes);
 // ----------------------------------------------
 
 app.listen(PORT, () => {
-  console.log(`Server running!`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
