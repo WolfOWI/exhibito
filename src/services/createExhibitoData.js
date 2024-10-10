@@ -1,10 +1,13 @@
 // GET New Data for the Exhibito Database on MongoDB Atlas
 
+// Get the BASE_URL from environment variables
+const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+
 // EVENTS
 // -------------------------------------
 // Create a new event
 export function addNewEvent(eventData) {
-  return fetch("http://localhost:3001/events/addEvent", {
+  return fetch(`${baseUrl}/events/addEvent`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +23,7 @@ export function addNewEvent(eventData) {
 // -------------------------------------
 // Create a new comment
 export function addNewComment(commentData) {
-  return fetch("http://localhost:3001/comments/addComment", {
+  return fetch(`${baseUrl}/comments/addComment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +40,7 @@ export function addNewComment(commentData) {
 // -------------------------------------
 // Create a new ticket
 export function addNewTicket(ticketData) {
-  return fetch("http://localhost:3001/tickets/addTicket", {
+  return fetch(`${baseUrl}/tickets/addTicket`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

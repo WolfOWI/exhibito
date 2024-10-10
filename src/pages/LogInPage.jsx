@@ -10,6 +10,9 @@ import SecondaryBtn from "../components/buttons/SecondaryBtn";
 import { Form } from "react-bootstrap";
 
 function LogInPage() {
+  // Get the BASE_URL from environment variables
+  const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -27,7 +30,7 @@ function LogInPage() {
     const { email, password } = formData;
 
     try {
-      const response = await axios.post("http://localhost:3001/users/login", {
+      const response = await axios.post(`${baseUrl}/users/login`, {
         email,
         password,
       });

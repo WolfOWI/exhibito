@@ -9,6 +9,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 
 function SignUpPage() {
+  // Get the BASE_URL from environment variables
+  const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -46,7 +49,7 @@ function SignUpPage() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/users/register", {
+      const response = await axios.post(`${baseUrl}/users/register`, {
         username,
         email,
         mobile,

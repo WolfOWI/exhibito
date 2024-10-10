@@ -1,10 +1,13 @@
 // GET Data from Exhibito Database on MongoDB Atlas
 
+// Get the BASE_URL from environment variables
+const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+
 // USERS
 // -------------------------------------
 // Get array of all users
 export function getAllUsers() {
-  return fetch("http://localhost:3001/users")
+  return fetch(`${baseUrl}/users`)
     .then((res) => {
       return res.json();
     })
@@ -15,7 +18,7 @@ export function getAllUsers() {
 
 // Get specific user by ID
 export function getUserById(userId) {
-  return fetch(`http://localhost:3001/users/${userId}`)
+  return fetch(`${baseUrl}/users/${userId}`)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -34,7 +37,7 @@ export function getUserById(userId) {
 // -------------------------------------
 // Get array of all events
 export function getAllEvents() {
-  return fetch("http://localhost:3001/events")
+  return fetch(`${baseUrl}/events`)
     .then((res) => {
       return res.json();
     })
@@ -45,7 +48,7 @@ export function getAllEvents() {
 
 // Get event details by ID
 export function getEventById(eventId) {
-  return fetch(`http://localhost:3001/events/${eventId}`)
+  return fetch(`${baseUrl}/events/${eventId}`)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -62,7 +65,7 @@ export function getEventById(eventId) {
 // -------------------------------------
 // Get array of all comments
 export function getAllComments() {
-  return fetch("http://localhost:3001/comments")
+  return fetch(`${baseUrl}/comments`)
     .then((res) => {
       return res.json();
     })
@@ -76,7 +79,7 @@ export function getAllComments() {
 // -------------------------------------
 // Get specific art house by ID
 export function getHouseById(houseId) {
-  return fetch(`http://localhost:3001/houses/${houseId}`)
+  return fetch(`${baseUrl}/houses/${houseId}`)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -93,7 +96,7 @@ export function getHouseById(houseId) {
 // -------------------------------------
 // Get tickets by user ID and status
 export function getTicketsByStatus(userId, status) {
-  return fetch(`http://localhost:3001/tickets?userId=${userId}&status=${status}`)
+  return fetch(`${baseUrl}/tickets?userId=${userId}&status=${status}`)
     .then((res) => {
       if (res.ok) {
         return res.json();
