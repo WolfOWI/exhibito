@@ -8,25 +8,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Configure CORS
-const allowedOrigins = ["https://d3qp7ib6lsy6o7.cloudfront.net", "http://localhost:3000"];
-
+// Configure CORS to allow all origins
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl requests)
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "*", // Allow any origin
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization", "x-access-token"], // Allowed headers
-    exposedHeaders: ["Authorization"], // Expose Authorization header to the client
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Allowed headers
     credentials: true, // Enable credentials (if needed)
-    preflightContinue: false, // Let CORS handle the OPTIONS requests
-    optionsSuccessStatus: 204, // Response status for successful OPTIONS requests
+    preflightContinue: true, // Handle OPTIONS preflight
   })
 );
 
