@@ -22,8 +22,11 @@ app.use(
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    allowedHeaders: ["Content-Type", "Authorization", "x-access-token"], // Allowed headers
+    exposedHeaders: ["Authorization"], // Expose Authorization header to the client
     credentials: true, // Enable credentials (if needed)
+    preflightContinue: false, // Let CORS handle the OPTIONS requests
+    optionsSuccessStatus: 204, // Response status for successful OPTIONS requests
   })
 );
 
