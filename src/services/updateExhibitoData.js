@@ -24,6 +24,16 @@ export function unflagCommentById(commentId) {
     .then((data) => console.log(data))
     .catch((error) => console.error("Error:", error));
 }
+
+// Flag a comment (Update isFlagged to true)
+export function flagCommentById(commentId) {
+  return fetch(`/comments/${commentId}/flag`, {
+    method: "PUT",
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
+}
 // -------------------------------------
 
 // TICKETS

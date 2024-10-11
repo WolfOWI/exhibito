@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { getUserById, getCommentsByEventId } from "../../services/getExhibitoData";
+import { flagCommentById } from "../../services/updateExhibitoData";
 import axios from "axios";
 
 function CommentsCard({ eventId, refreshComments }) {
@@ -63,10 +64,8 @@ function CommentsCard({ eventId, refreshComments }) {
   // Function to handle flagging a comment
   const handleFlagComment = async (commentId) => {
     try {
-      // Make an API call to update the isFlagged state of the comment
-      await axios.put(`/comments/${commentId}/flag`);
-      // Refresh the comments after flagging
-      getTheComments();
+      await flagCommentById(commentId);
+      getTheComments(); // Refresh the comments after flagging
     } catch (error) {
       console.error("Error flagging the comment:", error);
     }
