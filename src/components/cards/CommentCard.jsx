@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { getUserById, getCommentsByEventId } from "../../services/getExhibitoData";
 import { flagCommentById } from "../../services/updateExhibitoData";
-import axios from "axios";
 
 function CommentsCard({ eventId, refreshComments }) {
   const [comments, setComments] = useState([]);
@@ -27,7 +26,6 @@ function CommentsCard({ eventId, refreshComments }) {
   const getTheComments = useCallback(async () => {
     try {
       const response = await getCommentsByEventId(eventId);
-      console.log("Response from comments API:", response);
 
       // Filtering safe comments
       const safeComments = response.filter((comment) => !comment.isFlagged);
@@ -46,20 +44,9 @@ function CommentsCard({ eventId, refreshComments }) {
   // Fetch comments whenever the eventId or refreshComments changes
   useEffect(() => {
     if (eventId) {
-      console.log("getTheComments()");
       getTheComments();
     }
   }, [eventId, refreshComments, getTheComments]);
-
-  // TODO Delete Later
-  useEffect(() => {
-    console.log("All Comments");
-    console.log(comments);
-  }, [comments]);
-  useEffect(() => {
-    console.log("Filtered Comments");
-    console.log(fComments);
-  }, [fComments]);
 
   // Function to handle flagging a comment
   const handleFlagComment = async (commentId) => {

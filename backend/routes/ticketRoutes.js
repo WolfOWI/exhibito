@@ -5,11 +5,15 @@ const Ticket = require("../models/Ticket");
 // GET
 // -------------------------------------
 // GET tickets by user ID and status with populated event details
-router.get("/", async (req, res) => {
-  const { userId, status } = req.query;
+router.get("/user/:userId/status/:status", async (req, res) => {
+  const { userId, status } = req.params;
   try {
     const tickets = await Ticket.find({ userId, status });
-    res.json(tickets);
+    if (tickets.length > 0) {
+      res.json(tickets);
+    } else {
+      res.status(404).send("No tickets found for this user and status");
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

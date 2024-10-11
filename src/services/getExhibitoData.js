@@ -112,7 +112,7 @@ export function getHouseById(houseId) {
 // -------------------------------------
 // Get tickets by user ID and status
 export function getTicketsByStatus(userId, status) {
-  return fetch(`${baseUrl}/tickets?userId=${userId}&status=${status}`)
+  return fetch(`${baseUrl}/tickets/user/${userId}/status/${status}`)
     .then((res) => {
       if (res.ok) {
         return res.json();

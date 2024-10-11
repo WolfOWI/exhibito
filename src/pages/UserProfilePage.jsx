@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
