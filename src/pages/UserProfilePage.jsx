@@ -3,6 +3,7 @@ import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import "../styles/UserProfile.css";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
+import AdminNav from "../components/AdminNavbar";
 import BookedTicket from "../components/cards/BookedTicket";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
@@ -94,6 +95,7 @@ function UserProfilePage() {
   return (
     <div>
       <NavigationBar />
+      {user.userType === "admin" && <AdminNav />}
       <div className="container mt-4">
         {/* SCREEN HEADING */}
         {/* Standard */}
