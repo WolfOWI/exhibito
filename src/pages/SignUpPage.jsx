@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 
 function SignUpPage() {
   // Get the BASE_URL from environment variables
-  const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
   const [formData, setFormData] = useState({
     username: "",

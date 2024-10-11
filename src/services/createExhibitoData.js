@@ -1,7 +1,7 @@
 // GET New Data for the Exhibito Database on MongoDB Atlas
 
 // Get the BASE_URL from environment variables
-const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 // EVENTS
 // -------------------------------------
