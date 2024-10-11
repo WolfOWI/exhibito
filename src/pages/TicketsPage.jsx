@@ -51,6 +51,16 @@ function TicketsPage() {
     fetchCartTickets();
   }, []);
 
+  // TODO Delete Later
+  useEffect(() => {
+    console.log("cartTickets");
+    console.log(cartTickets);
+  }, [cartTickets]);
+  useEffect(() => {
+    console.log("cartedEvents");
+    console.log(cartedEvents);
+  }, [cartedEvents]);
+
   const handleCheckOut = async () => {
     try {
       const promises = cartTickets.map((ticket) => updateTicketStatus(ticket._id, "booked"));

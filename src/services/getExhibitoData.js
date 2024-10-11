@@ -115,7 +115,9 @@ export function getTicketsByStatus(userId, status) {
   return fetch(`${baseUrl}/tickets/user/${userId}/status/${status}`)
     .then((res) => {
       if (res.ok) {
-        return res.json();
+        let response = res.json();
+        console.log(response);
+        return response;
       }
       throw new Error("Failed to fetch tickets.");
     })
