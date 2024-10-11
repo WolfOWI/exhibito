@@ -1,10 +1,13 @@
 // UPDATE Data from Exhibito Database on MongoDB Atlas
 
+// Get the BASE_URL from environment variables
+const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+
 // EVENTS
 // -------------------------------------
 // Approve an event (Update status to "Approved")
 export function approveEventById(eventId) {
-  return fetch(`/events/${eventId}/approve`, {
+  return fetch(`${baseUrl}/events/${eventId}/approve`, {
     method: "PUT",
   })
     .then((response) => response.json())
@@ -17,7 +20,7 @@ export function approveEventById(eventId) {
 // -------------------------------------
 // Unflag a comment (Update isFlagged to false)
 export function unflagCommentById(commentId) {
-  return fetch(`/comments/${commentId}/unflag`, {
+  return fetch(`${baseUrl}/comments/${commentId}/unflag`, {
     method: "PUT",
   })
     .then((response) => {
@@ -35,7 +38,7 @@ export function unflagCommentById(commentId) {
 
 // Flag a comment (Update isFlagged to true)
 export function flagCommentById(commentId) {
-  return fetch(`/comments/${commentId}/flag`, {
+  return fetch(`${baseUrl}/comments/${commentId}/flag`, {
     method: "PUT",
   })
     .then((response) => {
@@ -57,7 +60,7 @@ export function flagCommentById(commentId) {
 // -------------------------------------
 // Update the status of a ticket by ID
 export function updateTicketStatus(ticketId, status) {
-  return fetch(`/tickets/${ticketId}/updateStatus/${status}`, {
+  return fetch(`${baseUrl}/tickets/${ticketId}/updateStatus/${status}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
