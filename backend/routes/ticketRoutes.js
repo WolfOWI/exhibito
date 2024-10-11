@@ -39,9 +39,9 @@ router.post("/addTicket", async (req, res) => {
 // UPDATE
 // -------------------------------------
 // Update ticket status
-router.put("/:id/updateStatus", async (req, res) => {
+router.put("/:id/updateStatus/:status", async (req, res) => {
   try {
-    const { status } = req.body;
+    const { status } = req.params; // Get status from the URL params
     const ticket = await Ticket.findByIdAndUpdate(req.params.id, { status }, { new: true });
     if (!ticket) {
       return res.status(404).send("Ticket not found");

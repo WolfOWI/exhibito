@@ -57,15 +57,22 @@ export function flagCommentById(commentId) {
 // -------------------------------------
 // Update the status of a ticket by ID
 export function updateTicketStatus(ticketId, status) {
-  return fetch(`/tickets/${ticketId}/updateStatus`, {
+  return fetch(`/tickets/${ticketId}/updateStatus/${status}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ status }),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Error! Status: ${response.status}`);
+      }
+      // Check if response has content to parse as JSON
+      return response.text().then((text) => {
+        return text ? JSON.parse(text) : {};
+      });
+    })
     .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error updating ticket status:", error));
 }
 // -------------------------------------
