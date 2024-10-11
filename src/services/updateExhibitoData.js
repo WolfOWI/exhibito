@@ -20,9 +20,17 @@ export function unflagCommentById(commentId) {
   return fetch(`/comments/${commentId}/unflag`, {
     method: "PUT",
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Error! Status: ${response.status}`);
+      }
+      // Check if response has content to parse as JSON
+      return response.text().then((text) => {
+        return text ? JSON.parse(text) : {};
+      });
+    })
     .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error unflagging comment:", error));
 }
 
 // Flag a comment (Update isFlagged to true)
@@ -30,10 +38,19 @@ export function flagCommentById(commentId) {
   return fetch(`/comments/${commentId}/flag`, {
     method: "PUT",
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Error! Status: ${response.status}`);
+      }
+      // Check if response has content to parse as JSON
+      return response.text().then((text) => {
+        return text ? JSON.parse(text) : {};
+      });
+    })
     .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error flagging comment:", error));
 }
+
 // -------------------------------------
 
 // TICKETS
