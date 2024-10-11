@@ -23,6 +23,8 @@ function CommentsCard({ eventId, refreshComments }) {
   const getTheComments = async () => {
     try {
       const response = await axios.get(`/comments?eventId=${eventId}`);
+      const commentsData = Array.isArray(response.data) ? response.data : []; // Fallback to an empty array
+      console.log("Response from comments API:", commentsData); // Log the response
 
       // Filtering the safe comments
       const safeComments = response.data.filter((comment) => !comment.isFlagged);
