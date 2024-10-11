@@ -73,6 +73,18 @@ export function getAllComments() {
       throw err;
     });
 }
+
+// Get all comments by event Id
+export function getCommentsByEventId(eventId) {
+  return fetch(`${baseUrl}/comments?eventId=${eventId}`)
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+
 // -------------------------------------
 
 // HOUSES

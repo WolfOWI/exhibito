@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { getUserById } from "../../services/getExhibitoData";
+import { getUserById, getCommentsByEventId } from "../../services/getExhibitoData";
 import axios from "axios";
 
 function CommentsCard({ eventId, refreshComments }) {
@@ -10,7 +10,7 @@ function CommentsCard({ eventId, refreshComments }) {
   // Fetch user data for comments and cache it to avoid re-fetching the same user
   const fetchUserData = useCallback(
     async (userId) => {
-      if (users[userId]) return; // If user data already exists, skip fetching
+      if (users[userId]) return;
 
       try {
         const userData = await getUserById(userId);
@@ -25,11 +25,11 @@ function CommentsCard({ eventId, refreshComments }) {
   // Fetch comments and user data
   const getTheComments = useCallback(async () => {
     try {
-      const response = await axios.get(`/comments?eventId=${eventId}`);
+      const response = await getCommentsByEventId(eventId);
       console.log("Response from comments API:", response);
 
       // Filtering safe comments
-      const safeComments = response.data.filter((comment) => !comment.isFlagged);
+      const safeComments = response.filter((comment) => !comment.isFlagged);
       setFComments(safeComments);
 
       // Fetch user data for each comment and cache it
@@ -45,6 +45,7 @@ function CommentsCard({ eventId, refreshComments }) {
   // Fetch comments whenever the eventId or refreshComments changes
   useEffect(() => {
     if (eventId) {
+      console.log("getTheComments()");
       getTheComments();
     }
   }, [eventId, refreshComments, getTheComments]);
