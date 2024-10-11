@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { getUserById } from "../../services/getExhibitoData";
 import axios from "axios";
 
@@ -7,46 +7,57 @@ function CommentsCard({ eventId, refreshComments }) {
   const [fComments, setFComments] = useState([]); // Filtered comments (Safe only)
   const [users, setUsers] = useState({}); // Users of the comments
 
-  // Fetch user data of comments and set to state
-  const fetchUserData = async (userId) => {
-    if (users[userId]) return; // Return if user data is already fetched
+  // Fetch user data for comments and cache it to avoid re-fetching the same user
+  const fetchUserData = useCallback(
+    async (userId) => {
+      if (users[userId]) return; // If user data already exists, skip fetching
 
-    try {
-      const userData = await getUserById(userId);
-      setUsers((prevUsers) => ({ ...prevUsers, [userId]: userData }));
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+      try {
+        const userData = await getUserById(userId);
+        setUsers((prevUsers) => ({ ...prevUsers, [userId]: userData }));
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    },
+    [users]
+  );
 
-  // Refresh the comments
-  const getTheComments = async () => {
+  // Fetch comments and user data
+  const getTheComments = useCallback(async () => {
     try {
       const response = await axios.get(`/comments?eventId=${eventId}`);
-      const commentsData = Array.isArray(response.data) ? response.data : []; // Fallback to an empty array
-      console.log("Response from comments API:", commentsData); // Log the response
+      console.log("Response from comments API:", response);
 
-      // Filtering the safe comments
+      // Filtering safe comments
       const safeComments = response.data.filter((comment) => !comment.isFlagged);
       setFComments(safeComments);
 
-      // Fetch user data for each comment and store it
-      const userPromises = safeComments.map((comment) => fetchUserData(comment.userId));
-      await Promise.all(userPromises);
+      // Fetch user data for each comment and cache it
+      safeComments.forEach((comment) => fetchUserData(comment.userId));
 
-      // All comments
+      // Set all comments
       setComments(response.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
-  };
+  }, [eventId, fetchUserData]);
 
-  // When the eventID changes, get the comments for that event
+  // Fetch comments whenever the eventId or refreshComments changes
   useEffect(() => {
     if (eventId) {
       getTheComments();
     }
-  }, [eventId, refreshComments]);
+  }, [eventId, refreshComments, getTheComments]);
+
+  // TODO Delete Later
+  useEffect(() => {
+    console.log("All Comments");
+    console.log(comments);
+  }, [comments]);
+  useEffect(() => {
+    console.log("Filtered Comments");
+    console.log(fComments);
+  }, [fComments]);
 
   // Function to handle flagging a comment
   const handleFlagComment = async (commentId) => {
