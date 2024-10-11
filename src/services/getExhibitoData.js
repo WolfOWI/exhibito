@@ -74,13 +74,17 @@ export function getAllComments() {
     });
 }
 
-// Get all comments by event Id
+// Get all comments by event ID
 export function getCommentsByEventId(eventId) {
-  return fetch(`${baseUrl}/comments?eventId=${eventId}`)
+  return fetch(`${baseUrl}/comments/event/${eventId}`)
     .then((res) => {
-      return res.json();
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error(`Failed to fetch comments for event ID: ${eventId}`);
     })
     .catch((err) => {
+      console.error(`Error fetching comments for event ID ${eventId}:`, err);
       throw err;
     });
 }

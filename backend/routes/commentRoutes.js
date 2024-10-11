@@ -1,22 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/Comment");
-const mongoose = require("mongoose");
 
 // GET
 // -------------------------------------
-// Get all comments or filter by eventId
+// Get all comments
 router.get("/", async (req, res) => {
   try {
-    const { eventId } = req.query;
-
-    let query = {};
-    if (eventId) {
-      query.eventId = new mongoose.Types.ObjectId(eventId);
-    }
-
-    const comments = await Comment.find(query);
+    const comments = await Comment.find();
     res.json(comments);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get all comments by event ID
+router.get("/event/:eventId", async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const comments = await Comment.find({ eventId });
+    if (comments.length > 0) {
+      res.json(comments);
+    } else {
+      res.status(404).send("No comments found for this event");
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

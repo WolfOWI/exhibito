@@ -36,7 +36,7 @@ function CommentsCard({ eventId, refreshComments }) {
       safeComments.forEach((comment) => fetchUserData(comment.userId));
 
       // Set all comments
-      setComments(response.data);
+      setComments(response);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
