@@ -1,20 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/Comment");
+const mongoose = require("mongoose");
 
 // GET
 // -------------------------------------
 // Get all comments or filter by eventId
 router.get("/", async (req, res) => {
   try {
+    console.log("Received eventId:", req.query.eventId);
     const { eventId } = req.query;
-    const query = eventId ? { eventId } : {};
+    const query = eventId ? { eventId: mongoose.Types.ObjectId(eventId) } : {};
     const comments = await Comment.find(query);
     res.json(comments);
   } catch (err) {
+    console.error("Error in /comments route:", err);
     res.status(500).json({ message: err.message });
   }
 });
+
 // -------------------------------------
 
 // CREATE
