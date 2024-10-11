@@ -30,18 +30,19 @@ function TicketsPage() {
           const tickets = await getTicketsByStatus(userId, "cart");
           setCartTickets(tickets);
 
-          const eventPromises = tickets.map((ticket) => getEventById(ticket.eventId));
+          if (tickets.length > 0) {
+            const eventPromises = tickets.map((ticket) => getEventById(ticket.eventId));
+            const events = await Promise.all(eventPromises);
+            setCartedEvents(events);
 
-          const events = await Promise.all(eventPromises);
-          setCartedEvents(events);
-
-          console.log(events);
-          // Calculate the total cost
-          const cost = events.reduce((acc, event) => {
-            // Check if eventId and ticketPrice exist
-            return acc + event.ticketPrice;
-          }, 0);
-          setTotalCost(cost);
+            // Calculate the total cost
+            const cost = events.reduce((acc, event) => acc + event.ticketPrice, 0);
+            setTotalCost(cost);
+          } else {
+            // No tickets in the cart
+            setCartedEvents([]);
+            setTotalCost(0);
+          }
         } catch (error) {
           console.error("Error fetching cart tickets:", error);
         }
@@ -51,29 +52,18 @@ function TicketsPage() {
     fetchCartTickets();
   }, []);
 
-  // TODO Delete Later
-  useEffect(() => {
-    console.log("cartTickets");
-    console.log(cartTickets);
-  }, [cartTickets]);
-  useEffect(() => {
-    console.log("cartedEvents");
-    console.log(cartedEvents);
-  }, [cartedEvents]);
-
   const handleCheckOut = async () => {
     try {
+      // Update the status of each ticket to "booked"
       const promises = cartTickets.map((ticket) => updateTicketStatus(ticket._id, "booked"));
       await Promise.all(promises);
+      // Update cart tickets state to reflect the new status
+      setCartTickets([]);
+      setCartedEvents([]);
+      setTotalCost(0);
+
+      // Show success modal
       setShowModal(true);
-      // Optionally, refetch the cart tickets to update the UI
-      const token = sessionStorage.getItem("token");
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.userId;
-        const tickets = await getTicketsByStatus(userId, "cart");
-        setCartTickets(tickets);
-      }
     } catch (error) {
       console.error("Error during check out:", error);
       alert("Failed to book tickets. Please try again.");

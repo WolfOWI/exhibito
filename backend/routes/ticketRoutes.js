@@ -9,11 +9,7 @@ router.get("/user/:userId/status/:status", async (req, res) => {
   const { userId, status } = req.params;
   try {
     const tickets = await Ticket.find({ userId, status });
-    if (tickets.length > 0) {
-      res.json(tickets);
-    } else {
-      res.status(404).send("No tickets found for this user and status");
-    }
+    res.status(200).json(tickets);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

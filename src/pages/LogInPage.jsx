@@ -13,6 +13,9 @@ function LogInPage() {
   // Get the BASE_URL from environment variables
   const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
+  // console.log(baseUrl);
+  // console.log("Environment Variables:", process.env.REACT_APP_BASE_URL);
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
