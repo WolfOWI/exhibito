@@ -84,15 +84,16 @@ Exhibito is a dynamic platform dedicated to connecting art enthusiasts and artis
 
 ### Built With
 
+- [MongoDB](https://www.mongodb.com/)
+- [Express](https://expressjs.com/)
 - [React.js](https://react.dev/)
 - [Node.js](https://nodejs.org/en)
-- [Express](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
 - [Axios](https://axios-http.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [React Bootstrap](https://react-bootstrap.netlify.app/)
 - [React Router](https://reactrouter.com/en/main)
 - [JWT](https://jwt.io/)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
 - [CORS](https://www.npmjs.com/package/cors)
 
 ## Getting Started
