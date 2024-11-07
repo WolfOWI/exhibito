@@ -26,7 +26,9 @@
       <a href="https://github.com/WolfOWI/exhibito"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-   <a href="https://youtu.be/Nwe2vqvC288">View Demo</a>
+    <a href="https://main.d3vravecqxapoe.amplifyapp.com">Visit Site</a>
+   .
+   <a href="https://youtu.be/Nwe2vqvC288">Video Demo</a>
     ·
     <a href="https://github.com/WolfOWI/exhibito/issues">Report Bug</a>
     ·
@@ -63,6 +65,7 @@
 - [Final Outcome](#final-outcome)
   - [Mockups](#mockups)
   - [Video Demonstration](#video-demonstration)
+  - [Deployed Link](#deployed-link)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Authors](#authors)
@@ -78,9 +81,10 @@
 
 ![ExhibitoLogo](./src/assets/mock-ups/Project%20Header.png)
 
-### Project Description
+### Description
 
 Exhibito is a dynamic platform dedicated to connecting art enthusiasts and artists within a vibrant online community, offering exclusive access to diverse art exhibitions, events, and experiences.
+[Visit Exhibito](https://main.d3vravecqxapoe.amplifyapp.com/)
 
 ### Built With
 
@@ -310,6 +314,12 @@ The `Development Process` outlines the technical implementations and functionali
 To see a run through of the application, click below:
 
 [View Demonstration](https://youtu.be/Nwe2vqvC288)
+
+### Deployed Link
+
+To test the website out yourself, visit this URL:
+
+[Exhibito Deployment](https://main.d3vravecqxapoe.amplifyapp.com/) 
 
 <!-- ROADMAP -->
 
