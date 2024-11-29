@@ -26,7 +26,7 @@
       <a href="https://github.com/WolfOWI/exhibito"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-    <a href="https://main.d3vravecqxapoe.amplifyapp.com">Visit Site</a>
+    <a href="https://main.d3vravecqxapoe.amplifyapp.com">Visit Site OFFLINE</a>
    .
    <a href="https://youtu.be/Nwe2vqvC288">Video Demo</a>
     ·
@@ -84,7 +84,7 @@
 ### Description
 
 Exhibito is a dynamic platform dedicated to connecting art enthusiasts and artists within a vibrant online community, offering exclusive access to diverse art exhibitions, events, and experiences.
-[Visit Exhibito](https://main.d3vravecqxapoe.amplifyapp.com/)
+[Exhibito OFFLINE](https://main.d3vravecqxapoe.amplifyapp.com/)
 
 ### Built With
 
@@ -317,7 +317,7 @@ To see a run through of the application, click below:
 
 ### Deployed Link
 
-To test the website out yourself, visit this URL:
+Unfortunately, the website has been set to offline to save costs.
 
 [Exhibito Deployment](https://main.d3vravecqxapoe.amplifyapp.com/) 
 
